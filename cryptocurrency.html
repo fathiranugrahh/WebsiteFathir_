@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptocurrency & Blockchain | My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="topic-pages.css">
+    <link rel="stylesheet" href="cryptocurrency-style.css">
+    <link rel="stylesheet" href="comments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Topic Header -->
+            <header class="topic-header" id="crypto-header">
+                <div class="topic-title-container">
+                    <h1 class="topic-title">Cryptocurrency & Blockchain</h1>
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <span>Cryptocurrency & Blockchain</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Topic Content Section -->
+            <section class="topic-content-section">
+                <div class="topic-container">
+                    <!-- Sidebar Navigation -->
+                    <aside class="topic-sidebar">
+                        <nav class="sidebar-nav">
+                            <ul>
+                                <li class="active"><a href="#intro">Introduction to Crypto</a></li>
+                                <li><a href="#blockchain">Blockchain Technology</a></li>
+                                <li><a href="#defi">DeFi & Smart Contracts</a></li>
+                                <li><a href="#nfts">NFTs & Digital Assets</a></li>
+                                <li><a href="#market">Market Analysis</a></li>
+                                <li><a href="#future">Future of Crypto</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <!-- Comment Toggle Button -->
+                        <div class="comment-toggle-container">
+                            <button class="comment-toggle-btn" onclick="toggleComments()">
+                                <i class="fas fa-comments"></i>
+                                <span>Comments</span>
+                                <span class="comment-count" id="total-comments">0</span>
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <main class="topic-main-content">
+                        <article id="intro" class="topic-article active">
+                            <h2>Introduction to Cryptocurrency</h2>
+                            <p>Cryptocurrency represents a revolutionary form of digital money that operates outside the traditional banking system. Based on blockchain technology, these digital assets are secured by cryptography, making them nearly impossible to counterfeit or double-spend. Since the introduction of Bitcoin in 2009, the cryptocurrency ecosystem has expanded dramatically.</p>
+                            
+                            <p>My interest in cryptocurrency began when I recognized the potential for these technologies to transform our financial systems. Beyond their value as speculative investments, cryptocurrencies offer a vision of borderless, permission-less value transfer, enabling new economic models and challenging long-standing financial paradigms.</p>
+                            
+                            <p>The broader cryptocurrency space encompasses thousands of digital assets with differing purposes, from decentralized digital currencies like Bitcoin, to smart contract platforms like Ethereum, to specialized tokens designed for specific use cases in gaming, finance, and digital identity.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Cryptocurrency Ecosystem">
+                                <caption>The complex ecosystem of cryptocurrency projects, categories, and their interconnections</caption>
+                            </div>
+                            
+                            <p>Throughout this section, I analyze the various dimensions of cryptocurrency, examining not just the technical fundamentals but also the socioeconomic implications of a shift toward decentralized financial systems. This exploration balances technical rigor with accessibility, aiming to clarify a complex topic that's often clouded by hyperbole and misunderstanding.</p>
+                        </article>
+                        
+                        <article id="blockchain" class="topic-article">
+                            <h2>Blockchain Technology</h2>
+                            <p>Blockchain technology serves as the foundational infrastructure for cryptocurrencies, representing a revolutionary approach to data management and consensus. At its core, a blockchain is a distributed ledger that records transactions across multiple computers in a way that ensures security, transparency, and immutability.</p>
+                            
+                            <p>The innovation of blockchain lies in its ability to establish trust without centralized authority. Through cryptographic verification and consensus mechanisms like Proof of Work and Proof of Stake, blockchain networks create a shared source of truth that participants can verify independently. This fundamental shift in how we establish trust has implications far beyond digital currencies.</p>
+                            
+                            <p>The evolution of blockchain technology has produced distinct generations of platforms, each expanding the possibilities: Bitcoin introduced peer-to-peer electronic cash, Ethereum pioneered programmable smart contracts, and newer platforms like Solana and Polkadot are addressing scalability and interoperability challenges that earlier networks face.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Blockchain Architecture">
+                                <caption>Simplified diagram of blockchain architecture showing blocks, transactions, and cryptographic connections</caption>
+                            </div>
+                            
+                            <p>While the technology continues to mature, blockchain has demonstrated promising applications beyond cryptocurrency, including supply chain tracking, digital identity systems, voting mechanisms, and cross-border payments. These use cases leverage the transparency, immutability, and decentralization that make blockchain a potentially transformative technology for numerous industries.</p>
+                        </article>
+                        
+                        <article id="defi" class="topic-article">
+                            <h2>DeFi & Smart Contracts</h2>
+                            <p>Decentralized Finance (DeFi) represents one of the most significant applications of blockchain technology, creating an open, permissionless alternative to traditional financial services. Built primarily on smart contract platforms like Ethereum, DeFi applications enable lending, borrowing, trading, and asset management without traditional intermediaries.</p>
+                            
+                            <p>Smart contracts form the backbone of the DeFi ecosystem. These self-executing pieces of code automatically enforce the terms of an agreement when predetermined conditions are met. Unlike traditional contracts that require trusted third parties for enforcement, smart contracts leverage the immutability and transparency of blockchain to create trustless financial protocols.</p>
+                            
+                            <p>The composability of DeFi protocols—often described as "money legos"—allows developers to build increasingly complex financial applications by combining existing components. This interoperability has fueled rapid innovation but also creates systemic risks when vulnerabilities in one protocol can cascade through interconnected systems.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="DeFi Ecosystem">
+                                <caption>Visualization of major DeFi protocols and their interconnections across the ecosystem</caption>
+                            </div>
+                            
+                            <p>While DeFi offers unprecedented financial access and opportunities for innovation, it also presents significant challenges regarding security, scalability, regulatory compliance, and user experience. Addressing these challenges while preserving the core benefits of decentralization represents one of the most fascinating areas of development in the cryptocurrency space.</p>
+                        </article>
+                        
+                        <article id="nfts" class="topic-article">
+                            <h2>NFTs & Digital Assets</h2>
+                            <p>Non-Fungible Tokens (NFTs) have emerged as a powerful mechanism for representing ownership of unique digital and physical assets on the blockchain. Unlike cryptocurrencies, where each token is identical to others of its kind, NFTs contain distinctive information that makes each token irreplaceable and impossible to exchange on a like-for-like basis.</p>
+                            
+                            <p>The explosion of interest in NFTs has transformed numerous industries, most visibly digital art and collectibles. By enabling verifiable scarcity and provenance for digital assets, NFTs have created new economic models for creators, allowing them to monetize digital works in ways previously impossible and receive ongoing royalties from secondary sales.</p>
+                            
+                            <p>Beyond the headline-grabbing art sales, NFTs are finding utility across diverse domains including gaming (for in-game assets), virtual real estate, music, identity verification, event ticketing, and supply chain tracking. In each case, the technology enables new models of ownership, authentication, and value transfer.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="NFT Applications">
+                                <caption>Overview of NFT applications across industries from art to gaming to real estate</caption>
+                            </div>
+                            
+                            <p>While the NFT market has experienced significant volatility, the underlying technology continues to mature and find more substantive applications. The evolution of NFTs toward greater utility, improved energy efficiency, and enhanced user experiences suggests a future where digital asset ownership becomes increasingly integrated into our economic and social systems.</p>
+                        </article>
+                        
+                        <article id="market" class="topic-article">
+                            <h2>Market Analysis</h2>
+                            <p>The cryptocurrency market presents a unique financial landscape characterized by extreme volatility, rapid innovation, and complex market dynamics. With a global 24/7 trading infrastructure and relatively low barriers to entry, crypto markets have attracted diverse participants from retail investors to institutional players.</p>
+                            
+                            <p>Market analysis in the cryptocurrency space requires integrating traditional financial metrics with new frameworks tailored to this emergent asset class. On-chain analysis examines blockchain data to derive insights about network activity, wallet behaviors, and token flows. Technical analysis studies price patterns and trading volumes to identify potential market trends. Fundamental analysis evaluates the underlying value proposition, technological innovation, and adoption metrics of specific projects.</p>
+                            
+                            <p>The cryptocurrency market exhibits distinctive cyclical patterns, including the famous "Bitcoin halving" cycles that occur approximately every four years when the mining reward is reduced by half. These cycles, along with broader technological adoption curves, regulatory developments, and macroeconomic factors, have created identifiable market phases from accumulation to euphoria to capitulation.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Crypto Market Cycles">
+                                <caption>Illustration of cryptocurrency market cycles and key indicators for market phase identification</caption>
+                            </div>
+                            
+                            <p>While price speculation dominates much of the discourse around cryptocurrencies, meaningful market analysis looks beyond short-term price movements to assess value accrual mechanisms, network effects, regulatory environments, and technological developments that may drive long-term outcomes in this rapidly evolving sector.</p>
+                        </article>
+                        
+                        <article id="future" class="topic-article">
+                            <h2>Future of Crypto</h2>
+                            <p>The future of cryptocurrency and blockchain technology stands at an inflection point, balancing transformative potential against significant technological, regulatory, and adoption challenges. Several key trends are shaping the trajectory of this space as it continues to evolve and mature.</p>
+                            
+                            <p>Institutional adoption represents one of the most significant shifts in the cryptocurrency landscape. Major financial institutions, corporations, and even governments are exploring blockchain applications, from Bitcoin treasury reserves to central bank digital currencies (CBDCs). This mainstream integration brings both legitimacy and new demands for compliance, security, and stability.</p>
+                            
+                            <p>Technological development continues at a rapid pace, with significant research addressing blockchain's core challenges of scalability, interoperability, privacy, and energy efficiency. Layer-2 solutions, next-generation consensus mechanisms, zero-knowledge proofs, and cross-chain bridges are among the innovations pushing the boundaries of what's possible with decentralized technology.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Future Blockchain Applications">
+                                <caption>Visualization of emerging blockchain applications and their potential societal impact</caption>
+                            </div>
+                            
+                            <p>The regulatory landscape for cryptocurrencies continues to evolve globally, with increasing clarity in some jurisdictions and ongoing uncertainty in others. Finding the balance between consumer protection and innovation-friendly policies remains a challenge for regulators, while the industry itself is developing more sophisticated self-regulatory frameworks and compliance solutions.</p>
+                            
+                            <p>Perhaps most importantly, the future of cryptocurrency will be determined by its ability to solve real-world problems and create tangible value beyond speculation. Whether through financial inclusion for the unbanked, more efficient cross-border payments, democratized access to investment opportunities, or novel forms of organization and governance, the long-term success of this technology depends on its practical utility in addressing genuine human needs.</p>
+                        </article>
+                        
+                        <!-- Comments Section -->
+                        <div class="comments-section" id="comments-section">
+                            <div class="comments-header">
+                                <h3><i class="fas fa-comments"></i> Discussion</h3>
+                                <p>Share your thoughts and engage with the content</p>
+                            </div>
+                            
+                            <!-- Comment Form -->
+                            <div class="comment-form-container">
+                                <form class="comment-form" id="comment-form">
+                                    <div class="form-group">
+                                        <div class="name-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="anonymous-toggle">
+                                                <span class="slider"></span>
+                                            </label>
+                                            <span class="toggle-label">Comment anonymously</span>
+                                        </div>
+                                        
+                                        <div class="name-input" id="name-input">
+                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="submit-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Comments List -->
+                            <div class="comments-list" id="comments-list">
+                                <!-- Comments will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <p>&copy; 2025 Fathir. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="topic-script.js"></script>
+    <script src="comments.js"></script>
+</body>
+</html>

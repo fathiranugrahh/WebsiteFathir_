@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence | My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="topic-pages.css">
+    <link rel="stylesheet" href="comments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Topic Header -->
+            <header class="topic-header" id="ai-header">
+                <div class="topic-title-container">
+                    <h1 class="topic-title">Artificial Intelligence</h1>
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <span>Artificial Intelligence</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Topic Content Section -->
+            <section class="topic-content-section">
+                <div class="topic-container">
+                    <!-- Sidebar Navigation -->
+                    <aside class="topic-sidebar">
+                        <nav class="sidebar-nav">
+                            <ul>
+                                <li class="active"><a href="#intro">Introduction to AI</a></li>
+                                <li><a href="#ml">Machine Learning</a></li>
+                                <li><a href="#nlp">Natural Language Processing</a></li>
+                                <li><a href="#cv">Computer Vision</a></li>
+                                <li><a href="#ethics">AI Ethics</a></li>
+                                <li><a href="#future">Future of AI</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <!-- Comment Toggle Button -->
+                        <div class="comment-toggle-container">
+                            <button class="comment-toggle-btn" onclick="toggleComments()">
+                                <i class="fas fa-comments"></i>
+                                <span>Comments</span>
+                                <span class="comment-count" id="total-comments">0</span>
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <main class="topic-main-content">
+                        <article id="intro" class="topic-article active">
+                            <h2>Introduction to AI</h2>
+                            <p>Artificial Intelligence represents one of the most transformative technologies of our era. As computing power continues to increase and algorithms become more sophisticated, AI systems are becoming increasingly integrated into our daily lives, reshaping industries and challenging our understanding of what machines can accomplish.</p>
+                            
+                            <p>The field of AI encompasses a range of approaches and techniques that enable computers to perform tasks that typically require human intelligence. These include learning from experience, recognizing patterns, understanding natural language, and making decisions in complex environments with uncertainty.</p>
+                            
+                            <p>My fascination with AI stems from its interdisciplinary nature, drawing from computer science, mathematics, linguistics, psychology, and philosophy. This convergence of disciplines creates a rich field of study with profound implications for the future of humanity.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="AI Concept Visualization">
+                                <caption>Visual representation of AI concepts and their interconnections</caption>
+                            </div>
+                            
+                            <p>Throughout this section, I explore various aspects of artificial intelligence, from technical foundations to philosophical considerations about consciousness and the nature of intelligence itself. I approach these topics both as a practitioner working with AI technologies and as a thoughtful observer contemplating their broader implications for society.</p>
+                        </article>
+                        
+                        <article id="ml" class="topic-article">
+                            <h2>Machine Learning</h2>
+                            <p>Machine Learning represents the cornerstone of modern AI development, focusing on systems that can learn from data without being explicitly programmed. This paradigm shift has enabled remarkable advances in pattern recognition, prediction, and automation.</p>
+                            
+                            <p>The basic workflow of machine learning involves collecting data, training a model on that data, and then using the trained model to make predictions or decisions about new data. This seemingly straightforward process has been refined through decades of research into sophisticated approaches that can tackle increasingly complex problems.</p>
+                            
+                            <p>Key areas of machine learning include supervised learning (learning from labeled examples), unsupervised learning (finding patterns in unlabeled data), and reinforcement learning (learning through trial and error interaction with an environment). Each approach has its strengths and applications, from image classification to strategic decision-making.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Machine Learning Pipeline">
+                                <caption>A typical machine learning pipeline from data collection to model deployment</caption>
+                            </div>
+                            
+                            <p>Deep learning, a subset of machine learning based on artificial neural networks, has driven many recent breakthroughs. These systems, inspired by the structure of the human brain, have demonstrated remarkable capabilities in areas like language translation, image recognition, and game playing, sometimes exceeding human performance.</p>
+                        </article>
+                        
+                        <article id="nlp" class="topic-article">
+                            <h2>Natural Language Processing</h2>
+                            <p>Natural Language Processing (NLP) focuses on enabling computers to understand, interpret, and generate human language. This field sits at the intersection of linguistics, computer science, and artificial intelligence, working to bridge the gap between human communication and digital data processing.</p>
+                            
+                            <p>Recent advances in NLP, particularly through transformer-based architectures like BERT, GPT, and T5, have revolutionized how machines process language. These models, trained on vast corpora of text, have demonstrated unprecedented capabilities in tasks ranging from translation and summarization to question answering and creative writing.</p>
+                            
+                            <p>The challenges of NLP stem from the inherent complexity of human language: its ambiguity, contextual dependencies, cultural nuances, and constant evolution. Addressing these challenges requires models that can capture not just the statistical patterns of language but also its semantic and pragmatic dimensions.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="NLP Architecture">
+                                <caption>Architecture of modern NLP systems showing the processing pipeline</caption>
+                            </div>
+                            
+                            <p>My work in NLP has explored both technical innovations in model architecture and thoughtful applications that consider the social impact of language technologies. I'm particularly interested in how these systems can augment human capabilities while addressing concerns about bias, misinformation, and privacy.</p>
+                        </article>
+                        
+                        <article id="cv" class="topic-article">
+                            <h2>Computer Vision</h2>
+                            <p>Computer Vision enables machines to interpret and make decisions based on visual information, mirroring the human visual system's ability to understand the world through images and video. This field has seen remarkable progress with the advent of deep learning techniques.</p>
+                            
+                            <p>Modern computer vision systems can perform tasks ranging from basic image classification to complex scene understanding, object detection, image generation, and real-time video analysis. These capabilities are transforming industries from healthcare and manufacturing to retail and entertainment.</p>
+                            
+                            <p>Convolutional Neural Networks (CNNs) have been the primary architectural innovation driving advances in computer vision. These networks, inspired by the organization of the animal visual cortex, are particularly adept at identifying patterns in visual data through specialized filters that detect features at different levels of abstraction.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Computer Vision Example">
+                                <caption>Object detection and semantic segmentation in a complex visual scene</caption>
+                            </div>
+                            
+                            <p>Recent developments in generative models have expanded the field beyond analysis to synthesis, with techniques like GANs and diffusion models enabling the creation of realistic images from text descriptions or other images. These generative capabilities raise fascinating questions about creativity, authenticity, and the future of visual media.</p>
+                        </article>
+                        
+                        <article id="ethics" class="topic-article">
+                            <h2>AI Ethics</h2>
+                            <p>As AI systems become more powerful and ubiquitous, the ethical dimensions of their development and deployment grow increasingly important. AI ethics encompasses issues of fairness, accountability, transparency, privacy, and the broader societal impact of artificial intelligence.</p>
+                            
+                            <p>Algorithmic bias represents one of the central challenges in AI ethics. When systems are trained on data that reflects historical inequities or contains implicit biases, they risk perpetuating or amplifying these biases in their outputs. Addressing this requires not just technical solutions but also diverse perspectives in the development process.</p>
+                            
+                            <p>Transparency and explainability present another crucial dimension of AI ethics. As AI systems make decisions that affect people's lives—from loan approvals to medical diagnoses—there's a growing recognition of the importance of understanding how these decisions are reached and ensuring they can be questioned and corrected when necessary.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="AI Ethics Framework">
+                                <caption>Conceptual framework for responsible AI development and governance</caption>
+                            </div>
+                            
+                            <p>The governance of AI technologies presents complex challenges that span technical, legal, economic, and social domains. Finding the right balance between innovation and regulation, between leveraging AI's benefits and mitigating its risks, requires thoughtful collaboration across disciplines, sectors, and national boundaries.</p>
+                        </article>
+                        
+                        <article id="future" class="topic-article">
+                            <h2>Future of AI</h2>
+                            <p>Predicting the future of artificial intelligence involves navigating between extraordinary possibilities and significant uncertainties. AI technologies continue to advance at a remarkable pace, opening new frontiers in human-machine collaboration and autonomous systems.</p>
+                            
+                            <p>Several key trends are shaping AI's evolution: the increase in model scale and computational resources, the integration of multiple modalities (text, image, audio, video), the development of more sample-efficient learning techniques, and the growing focus on aligning AI systems with human values and intentions.</p>
+                            
+                            <p>The concept of artificial general intelligence (AGI)—AI systems with the breadth and flexibility of human cognition—remains both a long-term research goal and a source of speculation about transformative impacts. Whether and when such systems might emerge remains an open question, but their development would raise profound questions about control, safety, and the nature of intelligence itself.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Future AI Concepts">
+                                <caption>Conceptual visualization of future AI capabilities and applications</caption>
+                            </div>
+                            
+                            <p>Beyond technical developments, the future of AI will be shaped by how societies choose to develop, deploy, and govern these technologies. The decisions made in the coming years about research priorities, regulatory frameworks, and international cooperation will play a crucial role in determining whether AI serves as a tool for broad human flourishing or exacerbates existing challenges and inequalities.</p>
+                        </article>
+                        
+                        <!-- Comments Section -->
+                        <div class="comments-section" id="comments-section">
+                            <div class="comments-header">
+                                <h3><i class="fas fa-comments"></i> Discussion</h3>
+                                <p>Share your thoughts and engage with the content</p>
+                            </div>
+                            
+                            <!-- Comment Form -->
+                            <div class="comment-form-container">
+                                <form class="comment-form" id="comment-form">
+                                    <div class="form-group">
+                                        <div class="name-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="anonymous-toggle">
+                                                <span class="slider"></span>
+                                            </label>
+                                            <span class="toggle-label">Comment anonymously</span>
+                                        </div>
+                                        
+                                        <div class="name-input" id="name-input">
+                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="submit-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Comments List -->
+                            <div class="comments-list" id="comments-list">
+                                <!-- Comments will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <p>&copy; 2025 Fathir. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="topic-script.js"></script>
+    <script src="comments.js"></script>
+</body>
+</html>
