@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Coding | My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="topic-pages.css">
+    <link rel="stylesheet" href="comments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Creative Coding Header Background */
+        #creative-coding-header {
+            background: linear-gradient(to right, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.8)), 
+                        url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        #creative-coding-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 127, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
+            z-index: 1;
+        }
+
+        #creative-coding-header + .topic-content-section .topic-sidebar {
+            border-left-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .sidebar-nav li.active a {
+            background-color: rgba(0, 255, 127, 0.1);
+            color: #00ff7f;
+            border-left-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .topic-article h2 {
+            color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .topic-article h2::after {
+            background: linear-gradient(to right, #00ff7f, #00d9ff);
+        }
+
+        #creative-coding-header + .topic-content-section .topic-title {
+            background: linear-gradient(to right, #00ff7f, #00d9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Creative Coding specific comment styles */
+        #creative-coding-header + .topic-content-section .comment-toggle-btn {
+            background: linear-gradient(135deg, rgba(0, 255, 127, 0.1), rgba(0, 217, 255, 0.1));
+            border-color: rgba(0, 255, 127, 0.3);
+        }
+
+        #creative-coding-header + .topic-content-section .comment-toggle-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(0, 217, 255, 0.2));
+            border-color: rgba(0, 255, 127, 0.5);
+        }
+
+        #creative-coding-header + .topic-content-section .comment-toggle-btn i {
+            color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .comment-count {
+            background-color: rgba(0, 255, 127, 0.2);
+        }
+
+        #creative-coding-header + .topic-content-section .comments-header h3 {
+            color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .comment-form-container {
+            border-left-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section input:checked + .slider {
+            background-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .name-input input:focus,
+        #creative-coding-header + .topic-content-section #comment-text:focus,
+        #creative-coding-header + .topic-content-section .reply-form textarea:focus,
+        #creative-coding-header + .topic-content-section .reply-form .name-input input:focus {
+            border-color: #00ff7f;
+            box-shadow: 0 0 0 3px rgba(0, 255, 127, 0.1);
+        }
+
+        #creative-coding-header + .topic-content-section .submit-btn {
+            background: linear-gradient(135deg, #00ff7f, #00d9ff);
+        }
+
+        #creative-coding-header + .topic-content-section .submit-btn:hover {
+            box-shadow: 0 5px 15px rgba(0, 255, 127, 0.3);
+        }
+
+        #creative-coding-header + .topic-content-section .comment-item:hover {
+            border-left-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .comment-reply:hover {
+            border-left-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .author-avatar {
+            background: linear-gradient(135deg, #00ff7f, #00d9ff);
+        }
+
+        #creative-coding-header + .topic-content-section .reply-btn {
+            background: rgba(0, 255, 127, 0.1);
+            border-color: rgba(0, 255, 127, 0.3);
+            color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .reply-btn:hover {
+            background: rgba(0, 255, 127, 0.2);
+            border-color: rgba(0, 255, 127, 0.5);
+        }
+
+        #creative-coding-header + .topic-content-section .reply-form-container {
+            border-left-color: #00ff7f;
+        }
+
+        #creative-coding-header + .topic-content-section .comments-empty i {
+            color: rgba(0, 255, 127, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Topic Header -->
+            <header class="topic-header" id="creative-coding-header">
+                <div class="topic-title-container">
+                    <h1 class="topic-title">Creative Coding</h1>
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <span>Creative Coding</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Topic Content Section -->
+            <section class="topic-content-section">
+                <div class="topic-container">
+                    <!-- Sidebar Navigation -->
+                    <aside class="topic-sidebar">
+                        <nav class="sidebar-nav">
+                            <ul>
+                                <li class="active"><a href="#intro">Art Meets Code</a></li>
+                                <li><a href="#generative">Generative Art</a></li>
+                                <li><a href="#interactive">Interactive Media</a></li>
+                                <li><a href="#visualization">Data Visualization</a></li>
+                                <li><a href="#tools">Tools & Frameworks</a></li>
+                                <li><a href="#inspiration">Creative Process</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <!-- Comment Toggle Button -->
+                        <div class="comment-toggle-container">
+                            <button class="comment-toggle-btn" onclick="toggleComments()">
+                                <i class="fas fa-comments"></i>
+                                <span>Comments</span>
+                                <span class="comment-count" id="total-comments">0</span>
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <main class="topic-main-content">
+                        <article id="intro" class="topic-article active">
+                            <h2>Art Meets Code</h2>
+                            <p>Creative coding represents the intersection where artistic expression meets computational thinking, transforming algorithms into aesthetic experiences. This discipline challenges the traditional boundaries between art and technology, using code as a creative medium to generate visual art, interactive installations, and immersive experiences.</p>
+                            
+                            <p>The beauty of creative coding lies in its ability to make the abstract tangible. Mathematical concepts like fractals, noise functions, and procedural systems become visual narratives. What starts as lines of code transforms into dynamic, living artworks that can respond, evolve, and surprise even their creators.</p>
+                            
+                            <p>My journey into creative coding began with curiosity about how digital art is made and evolved into a deep appreciation for the unique aesthetic possibilities that emerge when creativity is constrained and channeled through computational logic. The process teaches patience, experimentation, and the beauty of controlled randomness.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Creative Coding Art Examples">
+                                <caption>Examples of generative art and creative coding projects showcasing algorithmic beauty</caption>
+                            </div>
+                            
+                            <p>Creative coding is democratizing art creation by providing tools that allow anyone to experiment with complex visual systems. The community around creative coding is vibrant and collaborative, sharing techniques, inspiring each other, and pushing the boundaries of what's possible when art and computation converge.</p>
+                        </article>
+                        
+                        <article id="generative" class="topic-article">
+                            <h2>Generative Art</h2>
+                            <p>Generative art represents perhaps the purest form of creative coding, where artists create systems and algorithms that generate artwork autonomously. Instead of directly creating the final piece, the artist designs the rules, parameters, and constraints that guide the creative process, allowing the computer to explore variations and possibilities.</p>
+                            
+                            <p>The fascination with generative art stems from its ability to produce infinite variations from finite rules. A single algorithm can create thousands of unique pieces, each following the same underlying logic but expressing different visual outcomes. This approach mirrors natural processes like crystal formation, plant growth, and fluid dynamics.</p>
+                            
+                            <p>Key techniques in generative art include procedural noise (Perlin noise, simplex noise), L-systems for organic growth patterns, cellular automata for emergent behaviors, and particle systems for dynamic simulations. These mathematical foundations become the building blocks for complex visual narratives.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Generative Art Process">
+                                <caption>The process of creating generative art from algorithm to final visual output</caption>
+                            </div>
+                            
+                            <p>Modern generative art often incorporates machine learning techniques, using neural networks to generate new artworks based on training data. This fusion of traditional algorithmic approaches with AI creates new possibilities for artistic expression, raising questions about authorship, creativity, and the nature of art itself.</p>
+                        </article>
+                        
+                        <article id="interactive" class="topic-article">
+                            <h2>Interactive Media</h2>
+                            <p>Interactive media in creative coding transforms passive viewers into active participants, creating responsive environments that react to user input, environmental data, or real-time information. These systems blur the line between artwork and interface, creating experiences that are unique to each interaction.</p>
+                            
+                            <p>The challenge of interactive media lies in designing systems that are both technically robust and artistically meaningful. The interaction itself becomes part of the artistic statement, requiring careful consideration of how user agency affects the aesthetic experience and narrative flow.</p>
+                            
+                            <p>Common input methods include mouse and keyboard interaction, touch and gesture recognition, computer vision for movement tracking, microphone input for sound responsiveness, and sensor data from environmental conditions. Each input method opens different possibilities for creative expression and user engagement.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Interactive Media Installation">
+                                <caption>Interactive media installation responding to user presence and movement</caption>
+                            </div>
+                            
+                            <p>Web-based interactive media has become increasingly sophisticated with modern browser capabilities, WebGL for 3D graphics, Web Audio API for real-time sound processing, and WebRTC for camera and microphone access. These technologies enable complex interactive experiences that can reach global audiences through web browsers.</p>
+                        </article>
+                        
+                        <article id="visualization" class="topic-article">
+                            <h2>Data Visualization</h2>
+                            <p>Data visualization in creative coding goes beyond traditional charts and graphs to create compelling visual narratives that make complex information accessible and engaging. This field combines statistical rigor with aesthetic sensibility to reveal patterns, trends, and stories hidden within data.</p>
+                            
+                            <p>Creative data visualization often challenges conventional presentation methods, using artistic approaches to represent information in ways that are both informative and emotionally resonant. The goal is to create visualizations that not only communicate data accurately but also inspire curiosity and understanding.</p>
+                            
+                            <p>Effective data visualization requires understanding both the data being represented and the audience consuming it. This involves choosing appropriate visual encodings, considering color theory and accessibility, designing clear hierarchies, and creating smooth animations that guide the viewer's attention through complex information spaces.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Creative Data Visualization">
+                                <caption>Creative approaches to data visualization blending information design with artistic expression</caption>
+                            </div>
+                            
+                            <p>Modern data visualization tools enable real-time updates, interactive exploration, and multi-dimensional representations. Techniques like particle systems for showing data flows, network diagrams for relationship visualization, and procedural generation for handling large datasets create new possibilities for understanding complex information through visual means.</p>
+                        </article>
+                        
+                        <article id="tools" class="topic-article">
+                            <h2>Tools & Frameworks</h2>
+                            <p>The creative coding ecosystem offers a rich variety of tools and frameworks, each with its own strengths and aesthetic possibilities. Choosing the right tool depends on the project goals, technical requirements, and personal preferences, but mastering multiple platforms opens up different creative pathways.</p>
+                            
+                            <p>Processing and p5.js remain foundational tools in creative coding, offering accessible entry points with extensive documentation and community support. These platforms prioritize ease of use and rapid prototyping, making them ideal for learning and experimentation while still being powerful enough for professional work.</p>
+                            
+                            <p>For more complex projects, frameworks like openFrameworks, Cinder, and Unity provide deeper system access and performance optimization. Web-based tools like Three.js, D3.js, and Paper.js enable browser-based creative coding with increasing sophistication and performance capabilities.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Creative Coding Tools">
+                                <caption>Overview of popular creative coding tools and frameworks with their strengths</caption>
+                            </div>
+                            
+                            <p>Emerging tools are incorporating AI assistance, visual programming interfaces, and cloud-based collaboration features. The trend toward more accessible tools democratizes creative coding while advanced frameworks continue to push technical boundaries, ensuring that creators at all levels can find appropriate tools for their vision.</p>
+                        </article>
+                        
+                        <article id="inspiration" class="topic-article">
+                            <h2>Creative Process</h2>
+                            <p>The creative process in coding-based art is unique, combining the iterative nature of programming with the intuitive aspects of artistic creation. This process involves cycles of experimentation, debugging, refinement, and serendipitous discovery that often lead to unexpected and beautiful results.</p>
+                            
+                            <p>Inspiration for creative coding projects can come from many sources: natural patterns like cellular structures or weather systems, mathematical concepts like fractals or topology, cultural artifacts, music and sound, or abstract concepts like time and memory. The key is translating these inspirations into computational systems that can generate meaningful visual experiences.</p>
+                            
+                            <p>The iterative nature of creative coding means that projects often evolve significantly from their initial conception. What starts as a simple sketch might develop into a complex interactive system, or a technical experiment might reveal unexpected aesthetic possibilities that become the focus of the final work.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Creative Coding Process">
+                                <caption>The iterative creative process in coding art from initial concept to final implementation</caption>
+                            </div>
+                            
+                            <p>Documentation and sharing are integral parts of the creative coding process. The community values transparency about techniques and processes, leading to a culture of learning and collaboration. This openness accelerates innovation and helps newcomers learn from experienced practitioners, continuing the cycle of creative and technical advancement.</p>
+                        </article>
+                        
+                        <!-- Comments Section -->
+                        <div class="comments-section" id="comments-section">
+                            <div class="comments-header">
+                                <h3><i class="fas fa-comments"></i> Discussion</h3>
+                                <p>Share your thoughts and engage with the content</p>
+                            </div>
+                            
+                            <!-- Comment Form -->
+                            <div class="comment-form-container">
+                                <form class="comment-form" id="comment-form">
+                                    <div class="form-group">
+                                        <div class="name-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="anonymous-toggle">
+                                                <span class="slider"></span>
+                                            </label>
+                                            <span class="toggle-label">Comment anonymously</span>
+                                        </div>
+                                        
+                                        <div class="name-input" id="name-input">
+                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="submit-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Comments List -->
+                            <div class="comments-list" id="comments-list">
+                                <!-- Comments will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <p>&copy; 2025 Fathir. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="topic-script.js"></script>
+    <script src="comments.js"></script>
+</body>
+</html>
