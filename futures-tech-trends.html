@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Tech Trends | My Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="topic-pages.css">
+    <link rel="stylesheet" href="comments.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+/* Future Tech Header Background */
+        #future-tech-header {
+            background: linear-gradient(to right, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.8)), 
+                        url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        #future-tech-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(157, 78, 221, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
+            z-index: 1;
+        }
+
+        #future-tech-header + .topic-content-section .topic-sidebar {
+            border-left-color: #9d4edd;
+        }
+
+        #future-tech-header + .topic-content-section .sidebar-nav li.active a {
+            background-color: rgba(157, 78, 221, 0.1);
+            color: #9d4edd;
+            border-left-color: #9d4edd;
+        }
+
+        #future-tech-header + .topic-content-section .topic-article h2 {
+            color: #9d4edd;
+        }
+
+        #future-tech-header + .topic-content-section .topic-article h2::after {
+            background: linear-gradient(to right, #9d4edd, #c77dff);
+        }
+
+        #future-tech-header + .topic-content-section .topic-title {
+            background: linear-gradient(to right, #9d4edd, #c77dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Topic Header -->
+            <header class="topic-header" id="future-tech-header">
+                <div class="topic-title-container">
+                    <h1 class="topic-title">Future Tech Trends</h1>
+                    <div class="breadcrumb">
+                        <a href="index.html">Home</a> <span>/</span> <span>Future Tech Trends</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Topic Content Section -->
+            <section class="topic-content-section">
+                <div class="topic-container">
+                    <!-- Sidebar Navigation -->
+                    <aside class="topic-sidebar">
+                        <nav class="sidebar-nav">
+                            <ul>
+                                <li class="active"><a href="#intro">The Tech Horizon</a></li>
+                                <li><a href="#quantum">Quantum Computing</a></li>
+                                <li><a href="#ar-vr">AR/VR & Metaverse</a></li>
+                                <li><a href="#biotech">Biotechnology</a></li>
+                                <li><a href="#sustainable">Sustainable Tech</a></li>
+                                <li><a href="#predictions">Future Predictions</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <!-- Comment Toggle Button -->
+                        <div class="comment-toggle-container">
+                            <button class="comment-toggle-btn" onclick="toggleComments()">
+                                <i class="fas fa-comments"></i>
+                                <span>Comments</span>
+                                <span class="comment-count" id="total-comments">0</span>
+                            </button>
+                        </div>
+                    </aside>
+
+                    <!-- Main Content Area -->
+                    <main class="topic-main-content">
+                        <article id="intro" class="topic-article active">
+                            <h2>The Tech Horizon</h2>
+                            <p>The technological landscape is evolving at an unprecedented pace, reshaping how we work, communicate, and perceive reality itself. As we stand at the threshold of the next digital revolution, emerging technologies promise to transform society in ways we're only beginning to understand.</p>
+                            
+                            <p>From quantum computers that could solve problems considered impossible today, to biotechnology that blurs the line between digital and biological systems, the future holds extraordinary possibilities. These innovations aren't just incremental improvements—they represent fundamental shifts in the capabilities of human civilization.</p>
+                            
+                            <p>My exploration of future tech trends focuses on understanding not just what's technically possible, but how these technologies will integrate into our daily lives, reshape industries, and address global challenges. The convergence of multiple technological domains creates opportunities for solutions we haven't yet imagined.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Future Technology Concepts">
+                                <caption>Conceptual visualization of emerging technologies converging to shape our future</caption>
+                            </div>
+                            
+                            <p>The most exciting aspect of studying future tech trends is recognizing patterns that suggest where breakthrough innovations might emerge. By understanding the trajectory of current research and development, we can better prepare for a future that will likely be more transformed than we expect, yet perhaps different from what we specifically predict.</p>
+                        </article>
+                        
+                        <article id="quantum" class="topic-article">
+                            <h2>Quantum Computing</h2>
+                            <p>Quantum computing represents one of the most revolutionary technological developments of our time, promising to solve certain types of problems exponentially faster than classical computers. This technology harnesses the strange properties of quantum mechanics to perform calculations in fundamentally new ways.</p>
+                            
+                            <p>Unlike classical bits that exist in states of 0 or 1, quantum bits (qubits) can exist in superposition, being both 0 and 1 simultaneously until measured. This, combined with quantum entanglement and interference, allows quantum computers to explore multiple solution paths simultaneously for certain types of problems.</p>
+                            
+                            <p>The potential applications are staggering: drug discovery through molecular simulation, optimization of logistics networks, cryptography and security, financial modeling, and artificial intelligence acceleration. However, current quantum computers are still fragile, requiring extreme conditions to maintain quantum states.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Quantum Computing Visualization">
+                                <caption>Visual representation of quantum computing principles and quantum circuits</caption>
+                            </div>
+                            
+                            <p>The race toward "quantum advantage"—where quantum computers outperform classical computers on practical problems—is intensifying. Major tech companies and research institutions are investing billions, while startups explore novel approaches to quantum hardware and algorithms. The eventual breakthrough could reshape entire industries overnight.</p>
+                        </article>
+                        
+                        <article id="ar-vr" class="topic-article">
+                            <h2>AR/VR & Metaverse</h2>
+                            <p>Augmented Reality (AR) and Virtual Reality (VR) technologies are converging to create immersive digital experiences that blend the physical and virtual worlds. These technologies are evolving from entertainment novelties to essential tools for work, education, and social interaction.</p>
+                            
+                            <p>AR overlays digital information onto the real world, enhancing our perception and interaction with our environment. From navigation assistance to industrial maintenance, AR applications are becoming increasingly sophisticated and practical. Smart glasses and AR contact lenses represent the next frontier in seamless digital integration.</p>
+                            
+                            <p>VR creates fully immersive digital environments that can transport users to entirely different realities. Beyond gaming, VR is revolutionizing fields like medical training, therapy, remote collaboration, and education. The technology's ability to create presence—the feeling of actually being in a virtual space—opens unprecedented possibilities for human experience.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="AR/VR Applications">
+                                <caption>Diverse applications of AR and VR technologies across different industries</caption>
+                            </div>
+                            
+                            <p>The concept of the metaverse—persistent, shared virtual worlds where people can work, play, and socialize—represents the ultimate convergence of these technologies. While still in early stages, the metaverse could fundamentally change how we think about physical location, social interaction, and digital ownership through innovations like NFTs and virtual economies.</p>
+                        </article>
+                        
+                        <article id="biotech" class="topic-article">
+                            <h2>Biotechnology</h2>
+                            <p>Biotechnology is entering a new era where the boundaries between digital technology and biological systems are increasingly blurred. Advances in genetic engineering, synthetic biology, and computational biology are creating possibilities that were pure science fiction just decades ago.</p>
+                            
+                            <p>CRISPR gene editing technology has democratized genetic modification, allowing precise changes to DNA sequences. This capability is being applied to treat genetic diseases, enhance crop yields, and even attempt to reverse aging processes. The recent development of base editing and prime editing techniques offers even greater precision and safety.</p>
+                            
+                            <p>Synthetic biology takes this further by engineering entirely new biological systems and organisms. Scientists are creating bacteria that produce pharmaceuticals, algae that generate biofuels, and even biological computers that process information using DNA. These engineered biological systems could provide sustainable solutions to major global challenges.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Biotechnology Innovation">
+                                <caption>Visualization of genetic engineering and synthetic biology applications</caption>
+                            </div>
+                            
+                            <p>The integration of AI with biotechnology is accelerating discovery and development. Machine learning algorithms can predict protein structures, identify drug targets, and design new biological systems. This convergence of digital and biological technologies may lead to the emergence of truly programmable biology, where living systems can be designed and controlled like software.</p>
+                        </article>
+                        
+                        <article id="sustainable" class="topic-article">
+                            <h2>Sustainable Tech</h2>
+                            <p>Sustainable technology is no longer just an environmental concern—it's becoming a driving force for innovation and economic growth. As climate change pressures mount and resources become scarcer, breakthrough technologies are emerging to create a more sustainable future while maintaining technological progress.</p>
+                            
+                            <p>Renewable energy technologies continue to advance rapidly, with solar panel efficiency increasing and costs plummeting. Next-generation technologies like perovskite solar cells, floating wind farms, and advanced energy storage systems are making renewable energy more viable and reliable than ever before.</p>
+                            
+                            <p>Carbon capture and utilization technologies are moving beyond simply storing CO2 to actually converting it into useful products. Direct air capture systems, artificial photosynthesis, and carbon-to-fuel technologies could turn atmospheric carbon dioxide from a waste product into a valuable resource.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Sustainable Technology Solutions">
+                                <caption>Clean energy systems and sustainable technology innovations</caption>
+                            </div>
+                            
+                            <p>Circular economy technologies are redesigning how we produce and consume. Advanced recycling systems, biodegradable materials, and products designed for disassembly are reducing waste and resource consumption. Digital technologies like IoT sensors and blockchain are enabling better tracking and optimization of resource flows throughout supply chains.</p>
+                        </article>
+                        
+                        <article id="predictions" class="topic-article">
+                            <h2>Future Predictions</h2>
+                            <p>Predicting the future of technology requires balancing informed analysis with recognition of uncertainty. While specific predictions often prove wrong, understanding current trends and breakthrough trajectories can help us prepare for a range of possible futures.</p>
+                            
+                            <p>In the next decade, we'll likely see the convergence of AI, quantum computing, and biotechnology create entirely new categories of problems we can solve. Brain-computer interfaces may begin to augment human cognition, while advanced materials and nanotechnology could enable technologies that seem impossible today.</p>
+                            
+                            <p>The democratization of powerful technologies will continue, with tools that once required massive resources becoming accessible to individuals and small teams. This democratization could accelerate innovation but also create new challenges around regulation, safety, and ethical use of powerful technologies.</p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Future Technology Timeline">
+                                <caption>Projected timeline of emerging technology breakthroughs and adoption</caption>
+                            </div>
+                            
+                            <p>Perhaps most importantly, future technology development will likely be shaped by humanity's greatest challenges: climate change, aging populations, resource scarcity, and inequality. The technologies that succeed will be those that not only push the boundaries of what's possible but also contribute to solving these fundamental human problems. The future will be built by those who can envision technology not just as advancement, but as a tool for human flourishing.</p>
+                        </article>
+                        
+                        <!-- Comments Section -->
+                        <div class="comments-section" id="comments-section">
+                            <div class="comments-header">
+                                <h3><i class="fas fa-comments"></i> Discussion</h3>
+                                <p>Share your thoughts and engage with the content</p>
+                            </div>
+                            
+                            <!-- Comment Form -->
+                            <div class="comment-form-container">
+                                <form class="comment-form" id="comment-form">
+                                    <div class="form-group">
+                                        <div class="name-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="anonymous-toggle">
+                                                <span class="slider"></span>
+                                            </label>
+                                            <span class="toggle-label">Comment anonymously</span>
+                                        </div>
+                                        
+                                        <div class="name-input" id="name-input">
+                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="submit-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Comments List -->
+                            <div class="comments-list" id="comments-list">
+                                <!-- Comments will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer>
+                <p>&copy; 2025 Fathir. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="topic-script.js"></script>
+    <script src="comments.js"></script>
+</body>
+</html>
