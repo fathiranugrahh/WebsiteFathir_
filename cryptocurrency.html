@@ -9,16 +9,101 @@
     <link rel="stylesheet" href="cryptocurrency-style.css">
     <link rel="stylesheet" href="comments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Language Toggle Styles */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(247, 37, 133, 0.2);
+            border-radius: 50px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .language-toggle:hover {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(247, 37, 133, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(247, 37, 133, 0.2);
+        }
+
+        .language-toggle .lang-icon {
+            font-size: 14px;
+            color: rgba(247, 37, 133, 0.8);
+            transition: color 0.3s ease;
+        }
+
+        .language-toggle:hover .lang-icon {
+            color: #f72585;
+        }
+
+        .language-toggle .lang-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .language-toggle:hover .lang-text {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .language-toggle .lang-switch {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-left: 4px;
+        }
+
+        /* Animation for language switch */
+        .content-switching {
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .language-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+            }
+            
+            .language-toggle .lang-text {
+                font-size: 12px;
+            }
+            
+            .language-toggle .lang-icon {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="main-wrapper">
+        <!-- Language Toggle -->
+        <div class="language-toggle" id="languageToggle">
+            <i class="fas fa-globe lang-icon"></i>
+            <span class="lang-text" data-en="EN" data-id="ID">EN</span>
+            <span class="lang-switch" data-en="→ ID" data-id="→ EN">→ ID</span>
+        </div>
+
         <div class="container">
             <!-- Topic Header -->
             <header class="topic-header" id="crypto-header">
                 <div class="topic-title-container">
-                    <h1 class="topic-title">Cryptocurrency & Blockchain</h1>
+                    <h1 class="topic-title" data-en="Cryptocurrency & Blockchain" data-id="Mata Uang Kripto & Blockchain">Cryptocurrency & Blockchain</h1>
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> <span>/</span> <span>Cryptocurrency & Blockchain</span>
+                        <a href="index.html" data-en="Home" data-id="Beranda">Home</a> <span>/</span> <span data-en="Cryptocurrency & Blockchain" data-id="Mata Uang Kripto & Blockchain">Cryptocurrency & Blockchain</span>
                     </div>
                 </div>
             </header>
@@ -30,12 +115,12 @@
                     <aside class="topic-sidebar">
                         <nav class="sidebar-nav">
                             <ul>
-                                <li class="active"><a href="#intro">Introduction to Crypto</a></li>
-                                <li><a href="#blockchain">Blockchain Technology</a></li>
-                                <li><a href="#defi">DeFi & Smart Contracts</a></li>
-                                <li><a href="#nfts">NFTs & Digital Assets</a></li>
-                                <li><a href="#market">Market Analysis</a></li>
-                                <li><a href="#future">Future of Crypto</a></li>
+                                <li class="active"><a href="#intro" data-en="Introduction to Crypto" data-id="Pengenalan Kripto">Introduction to Crypto</a></li>
+                                <li><a href="#blockchain" data-en="Blockchain Technology" data-id="Teknologi Blockchain">Blockchain Technology</a></li>
+                                <li><a href="#defi" data-en="DeFi & Smart Contracts" data-id="DeFi & Smart Contract">DeFi & Smart Contracts</a></li>
+                                <li><a href="#nfts" data-en="NFTs & Digital Assets" data-id="NFT & Aset Digital">NFTs & Digital Assets</a></li>
+                                <li><a href="#market" data-en="Market Analysis" data-id="Analisis Pasar">Market Analysis</a></li>
+                                <li><a href="#future" data-en="Future of Crypto" data-id="Masa Depan Kripto">Future of Crypto</a></li>
                             </ul>
                         </nav>
                         
@@ -43,7 +128,7 @@
                         <div class="comment-toggle-container">
                             <button class="comment-toggle-btn" onclick="toggleComments()">
                                 <i class="fas fa-comments"></i>
-                                <span>Comments</span>
+                                <span data-en="Comments" data-id="Komentar">Comments</span>
                                 <span class="comment-count" id="total-comments">0</span>
                             </button>
                         </div>
@@ -52,108 +137,207 @@
                     <!-- Main Content Area -->
                     <main class="topic-main-content">
                         <article id="intro" class="topic-article active">
-                            <h2>Introduction to Cryptocurrency</h2>
-                            <p>Cryptocurrency represents a revolutionary form of digital money that operates outside the traditional banking system. Based on blockchain technology, these digital assets are secured by cryptography, making them nearly impossible to counterfeit or double-spend. Since the introduction of Bitcoin in 2009, the cryptocurrency ecosystem has expanded dramatically.</p>
+                            <h2 data-en="Introduction to Cryptocurrency" data-id="Pengenalan Mata Uang Kripto">Introduction to Cryptocurrency</h2>
                             
-                            <p>My interest in cryptocurrency began when I recognized the potential for these technologies to transform our financial systems. Beyond their value as speculative investments, cryptocurrencies offer a vision of borderless, permission-less value transfer, enabling new economic models and challenging long-standing financial paradigms.</p>
+                            <p data-en="Cryptocurrency represents a revolutionary form of digital money that operates outside the traditional banking system. Based on blockchain technology, these digital assets are secured by cryptography, making them nearly impossible to counterfeit or double-spend. Since the introduction of Bitcoin in 2009, the cryptocurrency ecosystem has expanded dramatically." 
+                               data-id="Mata uang kripto merupakan bentuk revolusioner uang digital yang beroperasi di luar sistem perbankan tradisional. Berdasarkan teknologi blockchain, aset digital ini diamankan oleh kriptografi, membuatnya hampir mustahil untuk dipalsukan atau dibelanjakan ganda. Sejak diperkenalkannya Bitcoin pada 2009, ekosistem kripto telah berkembang pesat.">
+                               Cryptocurrency represents a revolutionary form of digital money that operates outside the traditional banking system. Based on blockchain technology, these digital assets are secured by cryptography, making them nearly impossible to counterfeit or double-spend. Since the introduction of Bitcoin in 2009, the cryptocurrency ecosystem has expanded dramatically.
+                            </p>
                             
-                            <p>The broader cryptocurrency space encompasses thousands of digital assets with differing purposes, from decentralized digital currencies like Bitcoin, to smart contract platforms like Ethereum, to specialized tokens designed for specific use cases in gaming, finance, and digital identity.</p>
+                            <p data-en="My interest in cryptocurrency began when I recognized the potential for these technologies to transform our financial systems. Beyond their value as speculative investments, cryptocurrencies offer a vision of borderless, permission-less value transfer, enabling new economic models and challenging long-standing financial paradigms."
+                               data-id="Minat saya terhadap kripto dimulai ketika menyadari potensi teknologi ini untuk mengubah sistem keuangan kita. Selain nilainya sebagai investasi spekulatif, kripto menawarkan visi transfer nilai tanpa batas dan tanpa izin, memungkinkan model ekonomi baru dan menantang paradigma keuangan yang telah lama ada.">
+                               My interest in cryptocurrency began when I recognized the potential for these technologies to transform our financial systems. Beyond their value as speculative investments, cryptocurrencies offer a vision of borderless, permission-less value transfer, enabling new economic models and challenging long-standing financial paradigms.
+                            </p>
+                            
+                            <p data-en="The broader cryptocurrency space encompasses thousands of digital assets with differing purposes, from decentralized digital currencies like Bitcoin, to smart contract platforms like Ethereum, to specialized tokens designed for specific use cases in gaming, finance, and digital identity."
+                               data-id="Ruang kripto yang lebih luas mencakup ribuan aset digital dengan tujuan berbeda, mulai dari mata uang digital terdesentralisasi seperti Bitcoin, platform smart contract seperti Ethereum, hingga token khusus yang dirancang untuk kasus penggunaan spesifik dalam gaming, keuangan, dan identitas digital.">
+                               The broader cryptocurrency space encompasses thousands of digital assets with differing purposes, from decentralized digital currencies like Bitcoin, to smart contract platforms like Ethereum, to specialized tokens designed for specific use cases in gaming, finance, and digital identity.
+                            </p>
                             
                             <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Cryptocurrency Ecosystem">
-                                <caption>The complex ecosystem of cryptocurrency projects, categories, and their interconnections</caption>
+                                <caption data-en="The complex ecosystem of cryptocurrency projects, categories, and their interconnections" 
+                                        data-id="Ekosistem kompleks proyek kripto, kategori, dan keterkaitannya">
+                                        The complex ecosystem of cryptocurrency projects, categories, and their interconnections
+                                </caption>
                             </div>
                             
-                            <p>Throughout this section, I analyze the various dimensions of cryptocurrency, examining not just the technical fundamentals but also the socioeconomic implications of a shift toward decentralized financial systems. This exploration balances technical rigor with accessibility, aiming to clarify a complex topic that's often clouded by hyperbole and misunderstanding.</p>
+                            <p data-en="Throughout this section, I analyze the various dimensions of cryptocurrency, examining not just the technical fundamentals but also the socioeconomic implications of a shift toward decentralized financial systems. This exploration balances technical rigor with accessibility, aiming to clarify a complex topic that's often clouded by hyperbole and misunderstanding."
+                               data-id="Di seluruh bagian ini, saya menganalisis berbagai dimensi kripto, meneliti tidak hanya dasar-dasar teknisnya tetapi juga implikasi sosio-ekonomi dari pergeseran menuju sistem keuangan terdesentralisasi. Eksplorasi ini menyeimbangkan ketelitian teknis dengan aksesibilitas, bertujuan untuk memperjelas topik kompleks yang sering dikaburkan oleh hiperbola dan kesalahpahaman.">
+                               Throughout this section, I analyze the various dimensions of cryptocurrency, examining not just the technical fundamentals but also the socioeconomic implications of a shift toward decentralized financial systems. This exploration balances technical rigor with accessibility, aiming to clarify a complex topic that's often clouded by hyperbole and misunderstanding.
+                            </p>
                         </article>
                         
                         <article id="blockchain" class="topic-article">
-                            <h2>Blockchain Technology</h2>
-                            <p>Blockchain technology serves as the foundational infrastructure for cryptocurrencies, representing a revolutionary approach to data management and consensus. At its core, a blockchain is a distributed ledger that records transactions across multiple computers in a way that ensures security, transparency, and immutability.</p>
+                            <h2 data-en="Blockchain Technology" data-id="Teknologi Blockchain">Blockchain Technology</h2>
                             
-                            <p>The innovation of blockchain lies in its ability to establish trust without centralized authority. Through cryptographic verification and consensus mechanisms like Proof of Work and Proof of Stake, blockchain networks create a shared source of truth that participants can verify independently. This fundamental shift in how we establish trust has implications far beyond digital currencies.</p>
+                            <p data-en="Blockchain technology serves as the foundational infrastructure for cryptocurrencies, representing a revolutionary approach to data management and consensus. At its core, a blockchain is a distributed ledger that records transactions across multiple computers in a way that ensures security, transparency, and immutability."
+                               data-id="Teknologi blockchain berfungsi sebagai infrastruktur dasar untuk kripto, mewakili pendekatan revolusioner untuk manajemen data dan konsensus. Pada intinya, blockchain adalah buku besar terdistribusi yang mencatat transaksi di beberapa komputer dengan cara yang memastikan keamanan, transparansi, dan kekekalan.">
+                               Blockchain technology serves as the foundational infrastructure for cryptocurrencies, representing a revolutionary approach to data management and consensus. At its core, a blockchain is a distributed ledger that records transactions across multiple computers in a way that ensures security, transparency, and immutability.
+                            </p>
                             
-                            <p>The evolution of blockchain technology has produced distinct generations of platforms, each expanding the possibilities: Bitcoin introduced peer-to-peer electronic cash, Ethereum pioneered programmable smart contracts, and newer platforms like Solana and Polkadot are addressing scalability and interoperability challenges that earlier networks face.</p>
+                            <p data-en="The innovation of blockchain lies in its ability to establish trust without centralized authority. Through cryptographic verification and consensus mechanisms like Proof of Work and Proof of Stake, blockchain networks create a shared source of truth that participants can verify independently. This fundamental shift in how we establish trust has implications far beyond digital currencies."
+                               data-id="Inovasi blockchain terletak pada kemampuannya membangun kepercayaan tanpa otoritas terpusat. Melalui verifikasi kriptografi dan mekanisme konsensus seperti Proof of Work dan Proof of Stake, jaringan blockchain menciptakan sumber kebenaran bersama yang dapat diverifikasi peserta secara independen. Perubahan fundamental dalam cara kita membangun kepercayaan ini memiliki implikasi jauh beyond mata uang digital.">
+                               The innovation of blockchain lies in its ability to establish trust without centralized authority. Through cryptographic verification and consensus mechanisms like Proof of Work and Proof of Stake, blockchain networks create a shared source of truth that participants can verify independently. This fundamental shift in how we establish trust has implications far beyond digital currencies.
+                            </p>
+                            
+                            <p data-en="The evolution of blockchain technology has produced distinct generations of platforms, each expanding the possibilities: Bitcoin introduced peer-to-peer electronic cash, Ethereum pioneered programmable smart contracts, and newer platforms like Solana and Polkadot are addressing scalability and interoperability challenges that earlier networks face."
+                               data-id="Evolusi teknologi blockchain telah menghasilkan generasi platform yang berbeda, masing-masing memperluas kemungkinan: Bitcoin memperkenalkan uang elektronik peer-to-peer, Ethereum memelopori smart contract yang dapat diprogram, dan platform yang lebih baru seperti Solana dan Polkadot mengatasi tantangan skalabilitas dan interoperabilitas yang dihadapi jaringan sebelumnya.">
+                               The evolution of blockchain technology has produced distinct generations of platforms, each expanding the possibilities: Bitcoin introduced peer-to-peer electronic cash, Ethereum pioneered programmable smart contracts, and newer platforms like Solana and Polkadot are addressing scalability and interoperability challenges that earlier networks face.
+                            </p>
                             
                             <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Blockchain Architecture">
-                                <caption>Simplified diagram of blockchain architecture showing blocks, transactions, and cryptographic connections</caption>
+                                <caption data-en="Simplified diagram of blockchain architecture showing blocks, transactions, and cryptographic connections"
+                                        data-id="Diagram sederhana arsitektur blockchain yang menunjukkan blok, transaksi, dan koneksi kriptografi">
+                                        Simplified diagram of blockchain architecture showing blocks, transactions, and cryptographic connections
+                                </caption>
                             </div>
                             
-                            <p>While the technology continues to mature, blockchain has demonstrated promising applications beyond cryptocurrency, including supply chain tracking, digital identity systems, voting mechanisms, and cross-border payments. These use cases leverage the transparency, immutability, and decentralization that make blockchain a potentially transformative technology for numerous industries.</p>
+                            <p data-en="While the technology continues to mature, blockchain has demonstrated promising applications beyond cryptocurrency, including supply chain tracking, digital identity systems, voting mechanisms, and cross-border payments. These use cases leverage the transparency, immutability, and decentralization that make blockchain a potentially transformative technology for numerous industries."
+                               data-id="Sementara teknologi terus matang, blockchain telah menunjukkan aplikasi yang menjanjikan di luar kripto, termasuk pelacakan rantai pasokan, sistem identitas digital, mekanisme pemungutan suara, dan pembayaran lintas batas. Kasus penggunaan ini memanfaatkan transparansi, kekekalan, dan desentralisasi yang membuat blockchain menjadi teknologi yang berpotensi transformatif untuk berbagai industri.">
+                               While the technology continues to mature, blockchain has demonstrated promising applications beyond cryptocurrency, including supply chain tracking, digital identity systems, voting mechanisms, and cross-border payments. These use cases leverage the transparency, immutability, and decentralization that make blockchain a potentially transformative technology for numerous industries.
+                            </p>
                         </article>
                         
                         <article id="defi" class="topic-article">
-                            <h2>DeFi & Smart Contracts</h2>
-                            <p>Decentralized Finance (DeFi) represents one of the most significant applications of blockchain technology, creating an open, permissionless alternative to traditional financial services. Built primarily on smart contract platforms like Ethereum, DeFi applications enable lending, borrowing, trading, and asset management without traditional intermediaries.</p>
+                            <h2 data-en="DeFi & Smart Contracts" data-id="DeFi & Smart Contract">DeFi & Smart Contracts</h2>
                             
-                            <p>Smart contracts form the backbone of the DeFi ecosystem. These self-executing pieces of code automatically enforce the terms of an agreement when predetermined conditions are met. Unlike traditional contracts that require trusted third parties for enforcement, smart contracts leverage the immutability and transparency of blockchain to create trustless financial protocols.</p>
+                            <p data-en="Decentralized Finance (DeFi) represents one of the most significant applications of blockchain technology, creating an open, permissionless alternative to traditional financial services. Built primarily on smart contract platforms like Ethereum, DeFi applications enable lending, borrowing, trading, and asset management without traditional intermediaries."
+                               data-id="Decentralized Finance (DeFi) merupakan salah satu aplikasi paling signifikan dari teknologi blockchain, menciptakan alternatif terbuka dan tanpa izin untuk layanan keuangan tradisional. Dibangun terutama di platform smart contract seperti Ethereum, aplikasi DeFi memungkinkan pinjam-meminjam, trading, dan manajemen aset tanpa perantara tradisional.">
+                               Decentralized Finance (DeFi) represents one of the most significant applications of blockchain technology, creating an open, permissionless alternative to traditional financial services. Built primarily on smart contract platforms like Ethereum, DeFi applications enable lending, borrowing, trading, and asset management without traditional intermediaries.
+                            </p>
                             
-                            <p>The composability of DeFi protocols—often described as "money legos"—allows developers to build increasingly complex financial applications by combining existing components. This interoperability has fueled rapid innovation but also creates systemic risks when vulnerabilities in one protocol can cascade through interconnected systems.</p>
+                            <p data-en="Smart contracts form the backbone of the DeFi ecosystem. These self-executing pieces of code automatically enforce the terms of an agreement when predetermined conditions are met. Unlike traditional contracts that require trusted third parties for enforcement, smart contracts leverage the immutability and transparency of blockchain to create trustless financial protocols."
+                               data-id="Smart contract membentuk tulang punggung ekosistem DeFi. Kode yang mengeksekusi diri ini secara otomatis menegakkan persyaratan perjanjian ketika kondisi yang telah ditentukan terpenuhi. Tidak seperti kontrak tradisional yang memerlukan pihak ketiga terpercaya untuk penegakan, smart contract memanfaatkan kekekalan dan transparansi blockchain untuk menciptakan protokol keuangan tanpa kepercayaan.">
+                               Smart contracts form the backbone of the DeFi ecosystem. These self-executing pieces of code automatically enforce the terms of an agreement when predetermined conditions are met. Unlike traditional contracts that require trusted third parties for enforcement, smart contracts leverage the immutability and transparency of blockchain to create trustless financial protocols.
+                            </p>
+                            
+                            <p data-en="The composability of DeFi protocols—often described as \"money legos\"—allows developers to build increasingly complex financial applications by combining existing components. This interoperability has fueled rapid innovation but also creates systemic risks when vulnerabilities in one protocol can cascade through interconnected systems."
+                               data-id="Komposabilitas protokol DeFi—sering disebut sebagai \"lego uang\"—memungkinkan developer membangun aplikasi keuangan yang semakin kompleks dengan menggabungkan komponen yang ada. Interoperabilitas ini telah memicu inovasi cepat tetapi juga menciptakan risiko sistemik ketika kerentanan dalam satu protokol dapat menyebar melalui sistem yang saling terhubung.">
+                               The composability of DeFi protocols—often described as "money legos"—allows developers to build increasingly complex financial applications by combining existing components. This interoperability has fueled rapid innovation but also creates systemic risks when vulnerabilities in one protocol can cascade through interconnected systems.
+                            </p>
                             
                             <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="DeFi Ecosystem">
-                                <caption>Visualization of major DeFi protocols and their interconnections across the ecosystem</caption>
+                                <caption data-en="Visualization of major DeFi protocols and their interconnections across the ecosystem"
+                                        data-id="Visualisasi protokol DeFi utama dan keterkaitannya di seluruh ekosistem">
+                                        Visualization of major DeFi protocols and their interconnections across the ecosystem
+                                </caption>
                             </div>
                             
-                            <p>While DeFi offers unprecedented financial access and opportunities for innovation, it also presents significant challenges regarding security, scalability, regulatory compliance, and user experience. Addressing these challenges while preserving the core benefits of decentralization represents one of the most fascinating areas of development in the cryptocurrency space.</p>
+                            <p data-en="While DeFi offers unprecedented financial access and opportunities for innovation, it also presents significant challenges regarding security, scalability, regulatory compliance, and user experience. Addressing these challenges while preserving the core benefits of decentralization represents one of the most fascinating areas of development in the cryptocurrency space."
+                               data-id="Sementara DeFi menawarkan akses keuangan yang belum pernah ada sebelumnya dan peluang untuk inovasi, ia juga menghadirkan tantangan signifikan terkait keamanan, skalabilitas, kepatuhan regulasi, dan pengalaman pengguna. Mengatasi tantangan ini sambil mempertahankan manfaat inti desentralisasi merupakan salah satu area pengembangan paling menarik dalam ruang kripto.">
+                               While DeFi offers unprecedented financial access and opportunities for innovation, it also presents significant challenges regarding security, scalability, regulatory compliance, and user experience. Addressing these challenges while preserving the core benefits of decentralization represents one of the most fascinating areas of development in the cryptocurrency space.
+                            </p>
                         </article>
                         
                         <article id="nfts" class="topic-article">
-                            <h2>NFTs & Digital Assets</h2>
-                            <p>Non-Fungible Tokens (NFTs) have emerged as a powerful mechanism for representing ownership of unique digital and physical assets on the blockchain. Unlike cryptocurrencies, where each token is identical to others of its kind, NFTs contain distinctive information that makes each token irreplaceable and impossible to exchange on a like-for-like basis.</p>
+                            <h2 data-en="NFTs & Digital Assets" data-id="NFT & Aset Digital">NFTs & Digital Assets</h2>
                             
-                            <p>The explosion of interest in NFTs has transformed numerous industries, most visibly digital art and collectibles. By enabling verifiable scarcity and provenance for digital assets, NFTs have created new economic models for creators, allowing them to monetize digital works in ways previously impossible and receive ongoing royalties from secondary sales.</p>
+                            <p data-en="Non-Fungible Tokens (NFTs) have emerged as a powerful mechanism for representing ownership of unique digital and physical assets on the blockchain. Unlike cryptocurrencies, where each token is identical to others of its kind, NFTs contain distinctive information that makes each token irreplaceable and impossible to exchange on a like-for-like basis."
+                               data-id="Non-Fungible Token (NFT) telah muncul sebagai mekanisme yang kuat untuk mewakili kepemilikan aset digital dan fisik yang unik di blockchain. Tidak seperti kripto, di mana setiap token identik dengan yang lain sejenis, NFT berisi informasi khas yang membuat setiap token tidak dapat digantikan dan tidak mungkin ditukar secara langsung.">
+                               Non-Fungible Tokens (NFTs) have emerged as a powerful mechanism for representing ownership of unique digital and physical assets on the blockchain. Unlike cryptocurrencies, where each token is identical to others of its kind, NFTs contain distinctive information that makes each token irreplaceable and impossible to exchange on a like-for-like basis.
+                            </p>
                             
-                            <p>Beyond the headline-grabbing art sales, NFTs are finding utility across diverse domains including gaming (for in-game assets), virtual real estate, music, identity verification, event ticketing, and supply chain tracking. In each case, the technology enables new models of ownership, authentication, and value transfer.</p>
+                            <p data-en="The explosion of interest in NFTs has transformed numerous industries, most visibly digital art and collectibles. By enabling verifiable scarcity and provenance for digital assets, NFTs have created new economic models for creators, allowing them to monetize digital works in ways previously impossible and receive ongoing royalties from secondary sales."
+                               data-id="Ledakan minat terhadap NFT telah mengubah berbagai industri, paling jelas seni digital dan koleksi. Dengan memungkinkan kelangkaan dan asal-usul yang dapat diverifikasi untuk aset digital, NFT telah menciptakan model ekonomi baru untuk kreator, memungkinkan mereka memonetisasi karya digital dengan cara yang sebelumnya tidak mungkin dan menerima royalti berkelanjutan dari penjualan sekunder.">
+                               The explosion of interest in NFTs has transformed numerous industries, most visibly digital art and collectibles. By enabling verifiable scarcity and provenance for digital assets, NFTs have created new economic models for creators, allowing them to monetize digital works in ways previously impossible and receive ongoing royalties from secondary sales.
+                            </p>
+                            
+                            <p data-en="Beyond the headline-grabbing art sales, NFTs are finding utility across diverse domains including gaming (for in-game assets), virtual real estate, music, identity verification, event ticketing, and supply chain tracking. In each case, the technology enables new models of ownership, authentication, and value transfer."
+                               data-id="Di luar penjualan seni yang mencuri perhatian, NFT menemukan utilitas di berbagai domain termasuk gaming (untuk aset dalam game), real estat virtual, musik, verifikasi identitas, tiket acara, dan pelacakan rantai pasokan. Dalam setiap kasus, teknologi ini memungkinkan model baru kepemilikan, otentikasi, dan transfer nilai.">
+                               Beyond the headline-grabbing art sales, NFTs are finding utility across diverse domains including gaming (for in-game assets), virtual real estate, music, identity verification, event ticketing, and supply chain tracking. In each case, the technology enables new models of ownership, authentication, and value transfer.
+                            </p>
                             
                             <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="NFT Applications">
-                                <caption>Overview of NFT applications across industries from art to gaming to real estate</caption>
+                                <caption data-en="Overview of NFT applications across industries from art to gaming to real estate"
+                                        data-id="Gambaran umum aplikasi NFT di berbagai industri dari seni hingga gaming hingga real estat">
+                                        Overview of NFT applications across industries from art to gaming to real estate
+                                </caption>
                             </div>
                             
-                            <p>While the NFT market has experienced significant volatility, the underlying technology continues to mature and find more substantive applications. The evolution of NFTs toward greater utility, improved energy efficiency, and enhanced user experiences suggests a future where digital asset ownership becomes increasingly integrated into our economic and social systems.</p>
+                            <p data-en="While the NFT market has experienced significant volatility, the underlying technology continues to mature and find more substantive applications. The evolution of NFTs toward greater utility, improved energy efficiency, and enhanced user experiences suggests a future where digital asset ownership becomes increasingly integrated into our economic and social systems."
+                               data-id="Sementara pasar NFT telah mengalami volatilitas yang signifikan, teknologi dasarnya terus matang dan menemukan aplikasi yang lebih substantif. Evolusi NFT menuju utilitas yang lebih besar, efisiensi energi yang lebih baik, dan pengalaman pengguna yang ditingkatkan menunjukkan masa depan di mana kepemilikan aset digital menjadi semakin terintegrasi ke dalam sistem ekonomi dan sosial kita.">
+                               While the NFT market has experienced significant volatility, the underlying technology continues to mature and find more substantive applications. The evolution of NFTs toward greater utility, improved energy efficiency, and enhanced user experiences suggests a future where digital asset ownership becomes increasingly integrated into our economic and social systems.
+                            </p>
                         </article>
                         
                         <article id="market" class="topic-article">
-                            <h2>Market Analysis</h2>
-                            <p>The cryptocurrency market presents a unique financial landscape characterized by extreme volatility, rapid innovation, and complex market dynamics. With a global 24/7 trading infrastructure and relatively low barriers to entry, crypto markets have attracted diverse participants from retail investors to institutional players.</p>
+                            <h2 data-en="Market Analysis" data-id="Analisis Pasar">Market Analysis</h2>
                             
-                            <p>Market analysis in the cryptocurrency space requires integrating traditional financial metrics with new frameworks tailored to this emergent asset class. On-chain analysis examines blockchain data to derive insights about network activity, wallet behaviors, and token flows. Technical analysis studies price patterns and trading volumes to identify potential market trends. Fundamental analysis evaluates the underlying value proposition, technological innovation, and adoption metrics of specific projects.</p>
+                            <p data-en="The cryptocurrency market presents a unique financial landscape characterized by extreme volatility, rapid innovation, and complex market dynamics. With a global 24/7 trading infrastructure and relatively low barriers to entry, crypto markets have attracted diverse participants from retail investors to institutional players."
+                               data-id="Pasar kripto menyajikan lanskap keuangan yang unik yang ditandai dengan volatilitas ekstrem, inovasi cepat, dan dinamika pasar yang kompleks. Dengan infrastruktur perdagangan global 24/7 dan hambatan masuk yang relatif rendah, pasar kripto telah menarik peserta yang beragam dari investor ritel hingga pelaku institusional.">
+                               The cryptocurrency market presents a unique financial landscape characterized by extreme volatility, rapid innovation, and complex market dynamics. With a global 24/7 trading infrastructure and relatively low barriers to entry, crypto markets have attracted diverse participants from retail investors to institutional players.
+                            </p>
                             
-                            <p>The cryptocurrency market exhibits distinctive cyclical patterns, including the famous "Bitcoin halving" cycles that occur approximately every four years when the mining reward is reduced by half. These cycles, along with broader technological adoption curves, regulatory developments, and macroeconomic factors, have created identifiable market phases from accumulation to euphoria to capitulation.</p>
+                            <p data-en="Market analysis in the cryptocurrency space requires integrating traditional financial metrics with new frameworks tailored to this emergent asset class. On-chain analysis examines blockchain data to derive insights about network activity, wallet behaviors, and token flows. Technical analysis studies price patterns and trading volumes to identify potential market trends. Fundamental analysis evaluates the underlying value proposition, technological innovation, and adoption metrics of specific projects."
+                               data-id="Analisis pasar dalam ruang kripto memerlukan integrasi metrik keuangan tradisional dengan kerangka kerja baru yang disesuaikan untuk kelas aset yang muncul ini. Analisis on-chain meneliti data blockchain untuk mendapatkan wawasan tentang aktivitas jaringan, perilaku wallet, dan aliran token. Analisis teknis mempelajari pola harga dan volume perdagangan untuk mengidentifikasi tren pasar potensial. Analisis fundamental mengevaluasi proposisi nilai dasar, inovasi teknologi, dan metrik adopsi proyek tertentu.">
+                               Market analysis in the cryptocurrency space requires integrating traditional financial metrics with new frameworks tailored to this emergent asset class. On-chain analysis examines blockchain data to derive insights about network activity, wallet behaviors, and token flows. Technical analysis studies price patterns and trading volumes to identify potential market trends. Fundamental analysis evaluates the underlying value proposition, technological innovation, and adoption metrics of specific projects.
+                            </p>
+                            
+                            <p data-en="The cryptocurrency market exhibits distinctive cyclical patterns, including the famous \"Bitcoin halving\" cycles that occur approximately every four years when the mining reward is reduced by half. These cycles, along with broader technological adoption curves, regulatory developments, and macroeconomic factors, have created identifiable market phases from accumulation to euphoria to capitulation."
+                               data-id="Pasar kripto menunjukkan pola siklus yang khas, termasuk siklus \"Bitcoin halving\" yang terkenal yang terjadi kira-kira setiap empat tahun ketika hadiah mining dikurangi setengah. Siklus ini, bersama dengan kurva adopsi teknologi yang lebih luas, perkembangan regulasi, dan faktor makroekonomi, telah menciptakan fase pasar yang dapat diidentifikasi dari akumulasi hingga euforia hingga kapitulasi.">
+                               The cryptocurrency market exhibits distinctive cyclical patterns, including the famous "Bitcoin halving" cycles that occur approximately every four years when the mining reward is reduced by half. These cycles, along with broader technological adoption curves, regulatory developments, and macroeconomic factors, have created identifiable market phases from accumulation to euphoria to capitulation.
+                            </p>
                             
                             <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Crypto Market Cycles">
-                                <caption>Illustration of cryptocurrency market cycles and key indicators for market phase identification</caption>
+                                <caption data-en="Illustration of cryptocurrency market cycles and key indicators for market phase identification"
+                                        data-id="Ilustrasi siklus pasar kripto dan indikator kunci untuk identifikasi fase pasar">
+                                        Illustration of cryptocurrency market cycles and key indicators for market phase identification
+                                </caption>
                             </div>
                             
-                            <p>While price speculation dominates much of the discourse around cryptocurrencies, meaningful market analysis looks beyond short-term price movements to assess value accrual mechanisms, network effects, regulatory environments, and technological developments that may drive long-term outcomes in this rapidly evolving sector.</p>
+                            <p data-en="While price speculation dominates much of the discourse around cryptocurrencies, meaningful market analysis looks beyond short-term price movements to assess value accrual mechanisms, network effects, regulatory environments, and technological developments that may drive long-term outcomes in this rapidly evolving sector."
+                               data-id="Sementara spekulasi harga mendominasi banyak diskusi seputar kripto, analisis pasar yang bermakna melihat melampaui pergerakan harga jangka pendek untuk menilai mekanisme akrual nilai, efek jaringan, lingkungan regulasi, dan perkembangan teknologi yang dapat mendorong hasil jangka panjang di sektor yang berkembang pesat ini.">
+                               While price speculation dominates much of the discourse around cryptocurrencies, meaningful market analysis looks beyond short-term price movements to assess value accrual mechanisms, network effects, regulatory environments, and technological developments that may drive long-term outcomes in this rapidly evolving sector.
+                            </p>
                         </article>
                         
                         <article id="future" class="topic-article">
-                            <h2>Future of Crypto</h2>
-                            <p>The future of cryptocurrency and blockchain technology stands at an inflection point, balancing transformative potential against significant technological, regulatory, and adoption challenges. Several key trends are shaping the trajectory of this space as it continues to evolve and mature.</p>
+                            <h2 data-en="Future of Crypto" data-id="Masa Depan Kripto">Future of Crypto</h2>
                             
-                            <p>Institutional adoption represents one of the most significant shifts in the cryptocurrency landscape. Major financial institutions, corporations, and even governments are exploring blockchain applications, from Bitcoin treasury reserves to central bank digital currencies (CBDCs). This mainstream integration brings both legitimacy and new demands for compliance, security, and stability.</p>
+                            <p data-en="The future of cryptocurrency and blockchain technology stands at an inflection point, balancing transformative potential against significant technological, regulatory, and adoption challenges. Several key trends are shaping the trajectory of this space as it continues to evolve and mature."
+                               data-id="Masa depan kripto dan teknologi blockchain berada di titik balik, menyeimbangkan potensi transformatif dengan tantangan teknologi, regulasi, dan adopsi yang signifikan. Beberapa tren utama membentuk lintasan space ini saat terus berkembang dan matang.">
+                               The future of cryptocurrency and blockchain technology stands at an inflection point, balancing transformative potential against significant technological, regulatory, and adoption challenges. Several key trends are shaping the trajectory of this space as it continues to evolve and mature.
+                            </p>
                             
-                            <p>Technological development continues at a rapid pace, with significant research addressing blockchain's core challenges of scalability, interoperability, privacy, and energy efficiency. Layer-2 solutions, next-generation consensus mechanisms, zero-knowledge proofs, and cross-chain bridges are among the innovations pushing the boundaries of what's possible with decentralized technology.</p>
+                            <p data-en="Institutional adoption represents one of the most significant shifts in the cryptocurrency landscape. Major financial institutions, corporations, and even governments are exploring blockchain applications, from Bitcoin treasury reserves to central bank digital currencies (CBDCs). This mainstream integration brings both legitimacy and new demands for compliance, security, and stability."
+                               data-id="Adopsi institusional merupakan salah satu pergeseran paling signifikan dalam lanskap kripto. Institusi keuangan besar, korporasi, dan bahkan pemerintah mengeksplorasi aplikasi blockchain, dari cadangan treasury Bitcoin hingga mata uang digital bank sentral (CBDC). Integrasi mainstream ini membawa legitimasi dan tuntutan baru untuk kepatuhan, keamanan, dan stabilitas.">
+                               Institutional adoption represents one of the most significant shifts in the cryptocurrency landscape. Major financial institutions, corporations, and even governments are exploring blockchain applications, from Bitcoin treasury reserves to central bank digital currencies (CBDCs). This mainstream integration brings both legitimacy and new demands for compliance, security, and stability.
+                            </p>
+                            
+                            <p data-en="Technological development continues at a rapid pace, with significant research addressing blockchain's core challenges of scalability, interoperability, privacy, and energy efficiency. Layer-2 solutions, next-generation consensus mechanisms, zero-knowledge proofs, and cross-chain bridges are among the innovations pushing the boundaries of what's possible with decentralized technology."
+                               data-id="Pengembangan teknologi berlanjut dengan kecepatan tinggi, dengan penelitian signifikan mengatasi tantangan inti blockchain yaitu skalabilitas, interoperabilitas, privasi, dan efisiensi energi. Solusi Layer-2, mekanisme konsensus generasi berikutnya, zero-knowledge proof, dan cross-chain bridge adalah di antara inovasi yang mendorong batas kemungkinan dengan teknologi terdesentralisasi.">
+                               Technological development continues at a rapid pace, with significant research addressing blockchain's core challenges of scalability, interoperability, privacy, and energy efficiency. Layer-2 solutions, next-generation consensus mechanisms, zero-knowledge proofs, and cross-chain bridges are among the innovations pushing the boundaries of what's possible with decentralized technology.
+                            </p>
                             
                             <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Future Blockchain Applications">
-                                <caption>Visualization of emerging blockchain applications and their potential societal impact</caption>
+                                <caption data-en="Visualization of emerging blockchain applications and their potential societal impact"
+                                        data-id="Visualisasi aplikasi blockchain yang muncul dan dampak potensial mereka terhadap masyarakat">
+                                        Visualization of emerging blockchain applications and their potential societal impact
+                                </caption>
                             </div>
                             
-                            <p>The regulatory landscape for cryptocurrencies continues to evolve globally, with increasing clarity in some jurisdictions and ongoing uncertainty in others. Finding the balance between consumer protection and innovation-friendly policies remains a challenge for regulators, while the industry itself is developing more sophisticated self-regulatory frameworks and compliance solutions.</p>
+                            <p data-en="The regulatory landscape for cryptocurrencies continues to evolve globally, with increasing clarity in some jurisdictions and ongoing uncertainty in others. Finding the balance between consumer protection and innovation-friendly policies remains a challenge for regulators, while the industry itself is developing more sophisticated self-regulatory frameworks and compliance solutions."
+                               data-id="Lanskap regulasi untuk kripto terus berkembang secara global, dengan peningkatan kejelasan di beberapa yurisdiksi dan ketidakpastian yang berkelanjutan di yang lain. Menemukan keseimbangan antara perlindungan konsumen dan kebijakan yang ramah inovasi tetap menjadi tantangan bagi regulator, sementara industri itu sendiri mengembangkan kerangka kerja self-regulatory yang lebih canggih dan solusi kepatuhan.">
+                               The regulatory landscape for cryptocurrencies continues to evolve globally, with increasing clarity in some jurisdictions and ongoing uncertainty in others. Finding the balance between consumer protection and innovation-friendly policies remains a challenge for regulators, while the industry itself is developing more sophisticated self-regulatory frameworks and compliance solutions.
+                            </p>
                             
-                            <p>Perhaps most importantly, the future of cryptocurrency will be determined by its ability to solve real-world problems and create tangible value beyond speculation. Whether through financial inclusion for the unbanked, more efficient cross-border payments, democratized access to investment opportunities, or novel forms of organization and governance, the long-term success of this technology depends on its practical utility in addressing genuine human needs.</p>
+                            <p data-en="Perhaps most importantly, the future of cryptocurrency will be determined by its ability to solve real-world problems and create tangible value beyond speculation. Whether through financial inclusion for the unbanked, more efficient cross-border payments, democratized access to investment opportunities, or novel forms of organization and governance, the long-term success of this technology depends on its practical utility in addressing genuine human needs."
+                               data-id="Yang mungkin paling penting, masa depan kripto akan ditentukan oleh kemampuannya menyelesaikan masalah dunia nyata dan menciptakan nilai nyata di luar spekulasi. Baik melalui inklusi keuangan untuk yang tidak memiliki rekening bank, pembayaran lintas batas yang lebih efisien, akses demokratis ke peluang investasi, atau bentuk organisasi dan tata kelola yang novel, kesuksesan jangka panjang teknologi ini bergantung pada utilitas praktisnya dalam mengatasi kebutuhan manusia yang sejati.">
+                               Perhaps most importantly, the future of cryptocurrency will be determined by its ability to solve real-world problems and create tangible value beyond speculation. Whether through financial inclusion for the unbanked, more efficient cross-border payments, democratized access to investment opportunities, or novel forms of organization and governance, the long-term success of this technology depends on its practical utility in addressing genuine human needs.
+                            </p>
                         </article>
                         
                         <!-- Comments Section -->
                         <div class="comments-section" id="comments-section">
                             <div class="comments-header">
-                                <h3><i class="fas fa-comments"></i> Discussion</h3>
-                                <p>Share your thoughts and engage with the content</p>
+                                <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
+                                <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan berinteraksi dengan konten">Share your thoughts and engage with the content</p>
                             </div>
                             
                             <!-- Comment Form -->
@@ -165,22 +349,22 @@
                                                 <input type="checkbox" id="anonymous-toggle">
                                                 <span class="slider"></span>
                                             </label>
-                                            <span class="toggle-label">Comment anonymously</span>
+                                            <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar anonim">Comment anonymously</span>
                                         </div>
                                         
                                         <div class="name-input" id="name-input">
-                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
+                                            <input type="text" id="commenter-name" data-en="Your name (optional)" data-id="Nama Anda (opsional)" placeholder="Your name (optional)">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group">
-                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                        <textarea id="comment-text" data-en="Share your thoughts, questions, or insights about this topic..." data-id="Bagikan pemikiran, pertanyaan, atau wawasan Anda tentang topik ini..." placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
                                     </div>
                                     
                                     <div class="form-actions">
                                         <button type="submit" class="submit-btn">
                                             <i class="fas fa-paper-plane"></i>
-                                            Post Comment
+                                            <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
                                         </button>
                                     </div>
                                 </form>
@@ -197,7 +381,7 @@
 
             <!-- Footer -->
             <footer>
-                <p>&copy; 2025 Fathir. All rights reserved.</p>
+                <p data-en="&copy; 2025 Fathir. All rights reserved." data-id="&copy; 2025 Fathir. Hak cipta dilindungi.">&copy; 2025 Fathir. All rights reserved.</p>
             </footer>
         </div>
     </div>
@@ -205,5 +389,77 @@
     <script src="script.js"></script>
     <script src="topic-script.js"></script>
     <script src="comments.js"></script>
+    
+    <script>
+        // Language Toggle Functionality
+        let currentLanguage = 'en';
+
+        function switchLanguage() {
+            const mainContent = document.querySelector('.topic-main-content');
+            mainContent.classList.add('content-switching');
+            
+            setTimeout(() => {
+                currentLanguage = currentLanguage === 'en' ? 'id' : 'en';
+                
+                // Update all elements with data attributes
+                const elements = document.querySelectorAll('[data-en][data-id]');
+                elements.forEach(element => {
+                    const text = element.getAttribute(`data-${currentLanguage}`);
+                    if (text) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = text;
+                        } else {
+                            element.textContent = text;
+                        }
+                    }
+                });
+                
+                // Update language toggle button
+                const langText = document.querySelector('.lang-text');
+                const langSwitch = document.querySelector('.lang-switch');
+                langText.textContent = currentLanguage.toUpperCase();
+                langSwitch.textContent = currentLanguage === 'en' ? '→ ID' : '→ EN';
+                
+                // Update HTML lang attribute
+                document.documentElement.lang = currentLanguage;
+                
+                mainContent.classList.remove('content-switching');
+            }, 200);
+        }
+
+        // Add event listener to language toggle
+        document.getElementById('languageToggle').addEventListener('click', switchLanguage);
+
+        // Smooth scrolling enhancement for sidebar navigation
+        document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update active state
+                    document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                    
+                    // Update visible article
+                    document.querySelectorAll('.topic-article').forEach(article => article.classList.remove('active'));
+                    target.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language state
+            const langText = document.querySelector('.lang-text');
+            const langSwitch = document.querySelector('.lang-switch');
+            langText.textContent = 'EN';
+            langSwitch.textContent = '→ ID';
+        });
+    </script>
 </body>
 </html>
