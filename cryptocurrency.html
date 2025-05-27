@@ -6,10 +6,79 @@
     <title>Cryptocurrency & Blockchain | My Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="topic-pages.css">
-    <link rel="stylesheet" href="cryptocurrency-style.css">
     <link rel="stylesheet" href="comments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Cryptocurrency specific styles */
+
+/* Crypto Header Background */
+#crypto-header {
+    background: linear-gradient(to right, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.8)), 
+                url('/api/placeholder/1200/400');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+#crypto-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 50%, rgba(247, 37, 133, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
+    z-index: 1;
+}
+
+/* Crypto specific title gradient */
+#crypto-header .topic-title {
+    background: linear-gradient(to right, #f72585, #7209b7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Crypto sidebar */
+.topic-sidebar {
+    border-left: 4px solid #f72585;
+}
+
+/* Crypto specific active nav items */
+#crypto-header + .topic-content-section .sidebar-nav li.active a {
+    background-color: rgba(247, 37, 133, 0.1);
+    color: #f72585;
+    border-left: 3px solid #f72585;
+}
+
+/* Crypto article headers */
+#crypto-header + .topic-content-section .topic-article h2 {
+    color: #f72585;
+}
+
+#crypto-header + .topic-content-section .topic-article h2::after {
+    background: linear-gradient(to right, #f72585, #7209b7);
+}
+
+/* TEXT ALIGNMENT FIX - Make paragraphs justified */
+.topic-article p {
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Also apply to other text elements for consistency */
+.topic-article {
+    text-align: justify;
+}
+
+.topic-article h2 {
+    text-align: left; /* Keep headers left-aligned */
+}
+.topic-article h1 {
+    margin-bottom: 15px;
+}
         /* Language Toggle Styles */
         .language-toggle {
             position: fixed;
@@ -115,12 +184,13 @@
                     <aside class="topic-sidebar">
                         <nav class="sidebar-nav">
                             <ul>
-                                <li class="active"><a href="#intro" data-en="Introduction to Crypto" data-id="Pengenalan Kripto">Introduction to Crypto</a></li>
-                                <li><a href="#blockchain" data-en="Blockchain Technology" data-id="Teknologi Blockchain">Blockchain Technology</a></li>
-                                <li><a href="#defi" data-en="DeFi & Smart Contracts" data-id="DeFi & Smart Contract">DeFi & Smart Contracts</a></li>
-                                <li><a href="#nfts" data-en="NFTs & Digital Assets" data-id="NFT & Aset Digital">NFTs & Digital Assets</a></li>
-                                <li><a href="#market" data-en="Market Analysis" data-id="Analisis Pasar">Market Analysis</a></li>
-                                <li><a href="#future" data-en="Future of Crypto" data-id="Masa Depan Kripto">Future of Crypto</a></li>
+                                <li class="active"><a href="#intro" data-en="History Of Money" data-id="Sejarah Uang">History Of Money</a></li>
+                                <li><a href="#blockchain" data-en="Introduction To Cryptocurrency" data-id="Pengenalan Mata Uang Kripto">Introduction To Cryptocurrency</a></li>
+                                <li><a href="#defi" data-en="Blockchain Technology " data-id="Teknologi Blockchain">Blockchain Technology </a></li>
+                                <li><a href="#nfts" data-en="Consensus Mechanism" data-id="Mekanisme Konsensus">Consensus Mechanism</a></li>
+                                <li><a href="#market" data-en="Smart Contract" data-id="Smart Contract">Smart Contract</a></li>
+                                <li><a href="#future" data-en="Market Analysis" data-id="Analisis Pasar">Market Analysis</a></li>
+                                <li class="activ"><a href="#intr" data-en="My Personal Journey " data-id="Pengalaman Pribadi Saya">My Personal Journey </a></li>
                             </ul>
                         </nav>
                         
@@ -137,190 +207,380 @@
                     <!-- Main Content Area -->
                     <main class="topic-main-content">
                         <article id="intro" class="topic-article active">
-                            <h2 data-en="Introduction to Cryptocurrency" data-id="Pengenalan Mata Uang Kripto">Introduction to Cryptocurrency</h2>
+                            <h2 data-en="History Of Money" data-id="Sejarah Uang">History Of Money</h2>
                             
-                            <p data-en="Cryptocurrency represents a revolutionary form of digital money that operates outside the traditional banking system. Based on blockchain technology, these digital assets are secured by cryptography, making them nearly impossible to counterfeit or double-spend. Since the introduction of Bitcoin in 2009, the cryptocurrency ecosystem has expanded dramatically." 
-                               data-id="Mata uang kripto merupakan bentuk revolusioner uang digital yang beroperasi di luar sistem perbankan tradisional. Berdasarkan teknologi blockchain, aset digital ini diamankan oleh kriptografi, membuatnya hampir mustahil untuk dipalsukan atau dibelanjakan ganda. Sejak diperkenalkannya Bitcoin pada 2009, ekosistem kripto telah berkembang pesat.">
-                               Cryptocurrency represents a revolutionary form of digital money that operates outside the traditional banking system. Based on blockchain technology, these digital assets are secured by cryptography, making them nearly impossible to counterfeit or double-spend. Since the introduction of Bitcoin in 2009, the cryptocurrency ecosystem has expanded dramatically.
+                            <p data-en="Cryptocurrency is basically the marriage between finance and technology. But before we dive deeper into crypto, we gotta understand the history of money first. Why? Because talking about crypto is really about talking about value. And money is just a tool for transferring value between people." 
+                               data-id="Cryptocurrency itu sebenarnya perkawinan antara finance dan teknologi. Tapi sebelum masuk ke sana, kita harus ngerti dulu sejarah uang. Kenapa? Karena ngomongin crypto artinya ngomongin value. Dan uang itu basically cuma alat transfer value antar manusia.">
+                               Cryptocurrency is basically the marriage between finance and technology. But before we dive deeper into crypto, we gotta understand the history of money first. Why? Because talking about crypto is really about talking about value. And money is just a tool for transferring value between people.
                             </p>
                             
-                            <p data-en="My interest in cryptocurrency began when I recognized the potential for these technologies to transform our financial systems. Beyond their value as speculative investments, cryptocurrencies offer a vision of borderless, permission-less value transfer, enabling new economic models and challenging long-standing financial paradigms."
-                               data-id="Minat saya terhadap kripto dimulai ketika menyadari potensi teknologi ini untuk mengubah sistem keuangan kita. Selain nilainya sebagai investasi spekulatif, kripto menawarkan visi transfer nilai tanpa batas dan tanpa izin, memungkinkan model ekonomi baru dan menantang paradigma keuangan yang telah lama ada.">
-                               My interest in cryptocurrency began when I recognized the potential for these technologies to transform our financial systems. Beyond their value as speculative investments, cryptocurrencies offer a vision of borderless, permission-less value transfer, enabling new economic models and challenging long-standing financial paradigms.
+                            <p data-en="Thousands of years ago, humans used a barter system. Imagine this Budi has a bunch of apples, Ucok has an axe. They trade apples for the axe. But barter wasn’t practical. Imagine trying to buy a house with apples. How many apples would you need? And what if they rot before the deal is done? Barter was too messy and inefficient."
+                               data-id="Ratusan ribu tahun lalu, manusia awalnya pakai sistem barter. Si Budi punya apel, si Ucok punya kapak. Mereka tukeran apel dengan kapak. Tapi sistem barter ini nggak praktis. Bayangin lo mau beli rumah pakai apel, berapa banyak apel yang harus disiapin? Belum lagi apel bisa busuk sebelum transaksinya kelar. Sistem barter ini bikin manusia mikir, “harus ada cara yang lebih simpel.”".>
+                              Thousands of years ago, humans used a barter system. Imagine this, Budi has a bunch of apples, Ucok has an axe. They trade apples for the axe. But barter wasn’t practical. Imagine trying to buy a house with apples. How many apples would you need? And what if they rot before the deal is done? Barter was too messy and inefficient.
                             </p>
                             
-                            <p data-en="The broader cryptocurrency space encompasses thousands of digital assets with differing purposes, from decentralized digital currencies like Bitcoin, to smart contract platforms like Ethereum, to specialized tokens designed for specific use cases in gaming, finance, and digital identity."
-                               data-id="Ruang kripto yang lebih luas mencakup ribuan aset digital dengan tujuan berbeda, mulai dari mata uang digital terdesentralisasi seperti Bitcoin, platform smart contract seperti Ethereum, hingga token khusus yang dirancang untuk kasus penggunaan spesifik dalam gaming, keuangan, dan identitas digital.">
-                               The broader cryptocurrency space encompasses thousands of digital assets with differing purposes, from decentralized digital currencies like Bitcoin, to smart contract platforms like Ethereum, to specialized tokens designed for specific use cases in gaming, finance, and digital identity.
+                            <p data-en="Humans, being smart creatures, started looking for something better to use as money. Salt was used at one point because it held stable value. But later, people realized salt was everywhere, especially near the coast. So, they tried using other stuff – shells, animal skins, rai stones, and eventually, gold. Now, gold was different. It’s rare, durable, and hard to fake. That made it perfect for trade. Gold and silver coins were born. Life got easier – no more dragging carts of goods around. Just toss some coins in your pocket
+                               But then came new problems. What if you had a lot of gold? Where would you keep it? Who would guard it? And what if the people you trusted to guard it ran off with your gold? In 7th century China, during the Tang Dynasty, paper money was introduced. Simple idea: you deposit your gold in storage, and you get a receipt (paper money) that represents the gold’s value. You could exchange it back for gold anytime. This idea spread to Europe through trade routes, and by the 17th century, the Bank of England was officially issuing paper money. Back then, the paper’s value was backed by gold (the gold standard)."
+                               data-id="Manusia itu makhluk cerdas. Mereka mulai nyari barang-barang yang bisa dipake sebagai alat tukar. Garam pernah jadi uang karena nilainya stabil. Tapi lama-lama garam gampang didapet, terutama buat yang tinggal di pesisir. Orang mulai pakai barang lain: kerang, kulit, batu rai, sampe emas. Nah, emas beda dari yang lain. Emas itu langka, tahan lama, dan susah dipalsukan. Karena itu, orang di banyak tempat setuju emas jadi alat tukar. Lahir lah koin emas dan perak. Sistem ini bikin hidup lebih gampang – nggak perlu bawa barang dagangan ke mana-mana, cukup bawa koin di kantong.
+                               Tapi muncul masalah baru. Kalau emas lo banyak, mau ditaruh di mana? Gimana cara jaganya? Dan kalau nitip ke orang, gimana kalau mereka malah kabur bawa emas lo? Nah, di Tiongkok abad ke-7, Dinasti Tang ngenalin uang kertas. Konsepnya simpel: lo titipin emas di tempat penyimpanan, terus dapet surat (uang kertas) yang nunjukin kepemilikan emas itu. Uang kertas ini bisa ditukar balik jadi emas kapan aja. Konsep ini nyebar ke Eropa lewat jalur dagang. Abad ke-17, Bank of England resmi nerbitin uang kertas. Dulu si kertas ini nilainya dijamin emas (gold standard).">
+                               Humans, being smart creatures, started looking for something better to use as money. Salt was used at one point because it held stable value. But later, people realized salt was everywhere, especially near the coast. So, they tried using other stuff – shells, animal skins, rai stones, and eventually, gold. Now, gold was different. It’s rare, durable, and hard to fake. That made it perfect for trade. Gold and silver coins were born. Life got easier – no more dragging carts of goods around. Just toss some coins in your pocket.
+                               But then came new problems. What if you had a lot of gold? Where would you keep it? Who would guard it? And what if the people you trusted to guard it ran off with your gold? In 7th century China, during the Tang Dynasty, paper money was introduced. Simple idea: you deposit your gold in storage, and you get a receipt (paper money) that represents the gold’s value. You could exchange it back for gold anytime. This idea spread to Europe through trade routes, and by the 17th century, the Bank of England was officially issuing paper money. Back then, the paper’s value was backed by gold (the gold standard).
+                            </p>
+
+                            <p data-en="But this system didn’t last forever. Countries started abandoning the gold standard, especially after Germany’s defeat in World War I, when they printed tons of money without gold backing, causing hyperinflation. Then in 1971, US President Nixon cut the link between the dollar and gold – known as the Nixon Shock. Since then, fiat currency was born. Money today isn’t backed by gold, but purely by trust in the government. And when governments print too much money, we get inflation – prices go up, and the value of your money goes down."
+                               data-id="Tapi sistem ini juga nggak bertahan lama. Negara-negara mulai ninggalin gold standard, terutama pas Jerman kalah Perang Dunia dan bikin hyperinflasi dengan nyetak banyak uang tanpa dasar emas. Dan di tahun 1971, Presiden AS Nixon resmi nyabut hubungan dolar sama emas – dikenal dengan Nixon Shock. Sejak itu, uang fiat lahir. Uang sekarang nggak lagi didukung emas, tapi cuma berdasarkan kepercayaan sama pemerintah. Dan kalau pemerintah cetak uang banyak, ya jadinya inflasi – harga barang naik, nilai duit turun.".>
+                              But this system didn’t last forever. Countries started abandoning the gold standard, especially after Germany’s defeat in World War I, when they printed tons of money without gold backing, causing hyperinflation. Then in 1971, US President Nixon cut the link between the dollar and gold – known as the Nixon Shock. Since then, fiat currency was born. Money today isn’t backed by gold, but purely by trust in the government. And when governments print too much money, we get inflation – prices go up, and the value of your money goes down.
                             </p>
                             
-                            <div class="topic-image">
+                           <!-- <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Cryptocurrency Ecosystem">
                                 <caption data-en="The complex ecosystem of cryptocurrency projects, categories, and their interconnections" 
                                         data-id="Ekosistem kompleks proyek kripto, kategori, dan keterkaitannya">
                                         The complex ecosystem of cryptocurrency projects, categories, and their interconnections
                                 </caption>
-                            </div>
+                            </div> -->
                             
-                            <p data-en="Throughout this section, I analyze the various dimensions of cryptocurrency, examining not just the technical fundamentals but also the socioeconomic implications of a shift toward decentralized financial systems. This exploration balances technical rigor with accessibility, aiming to clarify a complex topic that's often clouded by hyperbole and misunderstanding."
-                               data-id="Di seluruh bagian ini, saya menganalisis berbagai dimensi kripto, meneliti tidak hanya dasar-dasar teknisnya tetapi juga implikasi sosio-ekonomi dari pergeseran menuju sistem keuangan terdesentralisasi. Eksplorasi ini menyeimbangkan ketelitian teknis dengan aksesibilitas, bertujuan untuk memperjelas topik kompleks yang sering dikaburkan oleh hiperbola dan kesalahpahaman.">
-                               Throughout this section, I analyze the various dimensions of cryptocurrency, examining not just the technical fundamentals but also the socioeconomic implications of a shift toward decentralized financial systems. This exploration balances technical rigor with accessibility, aiming to clarify a complex topic that's often clouded by hyperbole and misunderstanding.
+                            <p data-en="So, if you’re wondering, why do things like salt, shells, stones, or gold have value? The answer’s simple. Because we (humans, sometimes kinda dumb) decided they have value. That’s it. Even gold is only valuable because it’s rare and hard to fake. But fiat money – paper not backed by gold – can be printed endlessly.
+                            That’s why humans, being the smart creatures they are, started looking for a better, fairer, and harder-to-manipulate system. And that’s where cryptocurrency comes into the story And this is where cryptocurrency enters the scene – an innovation so insane it feels like it’s beyond what this generation could create. Many people even wonder, Is this really something we humans came up with, or could it actually be a technology sent by AI from the future?. Maybe, just maybe, we’re all just pawns in a bigger game than we could ever imagine."
+                               data-id="Jadi kalau lo nanya, kenapa benda kayak garam, batu, kerang, atau emas bisa punya nilai? Jawabannya simpel. Karena manusia (yang kadang goblok juga) ngasih nilai ke benda itu. Intinya? Nilai uang itu ada karena kita sepakat itu bernilai. Tapi masalahnya, kepercayaan ini gampang disalahgunakan. Makanya muncul ide bikin sistem yang lebih adil dan susah dimanipulasi. Dan di sinilah cryptocurrency muncul  – sebagai sebuah inovasi yang bahkan nggak masuk akal untuk generasi yang belum terlalu maju. Banyak orang sampai bertanya-tanya, Apakah ini cuma buatan manusia, atau jangan-jangan ini teknologi masa depan yang dikirimkan oleh AI?. Mungkin saja, siapa tau kita cuma pion dalam permainan yang lebih besar dari yang kita bayangkan.">
+                               So, if you’re wondering, why do things like salt, shells, stones, or gold have value? The answer’s simple. Because we (humans, sometimes kinda dumb) decided they have value. That’s it. Even gold is only valuable because it’s rare and hard to fake. But fiat money – paper not backed by gold – can be printed endlessly.
+                               That’s why humans, being the smart creatures they are, started looking for a better, fairer, and harder-to-manipulate system.
+                               And that’s where cryptocurrency comes into the story. And this is where cryptocurrency enters the scene – an innovation so insane it feels like it’s beyond what this generation could create. Many people even wonder, "Is this really something we humans came up with, or could it actually be a technology sent by AI from the future?". Maybe, just maybe, we’re all just pawns in a bigger game than we could ever imagine.
                             </p>
                         </article>
                         
                         <article id="blockchain" class="topic-article">
-                            <h2 data-en="Blockchain Technology" data-id="Teknologi Blockchain">Blockchain Technology</h2>
+                            <h2 data-en="Introduction To Cryptocurrency" data-id="Pengenalan Mata Uang Kripto">Introduction To Cryptocurrency</h2>
                             
-                            <p data-en="Blockchain technology serves as the foundational infrastructure for cryptocurrencies, representing a revolutionary approach to data management and consensus. At its core, a blockchain is a distributed ledger that records transactions across multiple computers in a way that ensures security, transparency, and immutability."
-                               data-id="Teknologi blockchain berfungsi sebagai infrastruktur dasar untuk kripto, mewakili pendekatan revolusioner untuk manajemen data dan konsensus. Pada intinya, blockchain adalah buku besar terdistribusi yang mencatat transaksi di beberapa komputer dengan cara yang memastikan keamanan, transparansi, dan kekekalan.">
-                               Blockchain technology serves as the foundational infrastructure for cryptocurrencies, representing a revolutionary approach to data management and consensus. At its core, a blockchain is a distributed ledger that records transactions across multiple computers in a way that ensures security, transparency, and immutability.
+                            <p data-en="Cryptocurrency is a form of digital currency that isn’t controlled by any government or central financial institution. It uses cryptography and blockchain technology to ensure transaction security and transparency. The blockchain is like a giant digital ledger, stored on thousands (even millions) of computers worldwide, making it decentralized rather than controlled by one entity."
+                               data-id="Cryptocurrency adalah bentuk mata uang digital yang nggak dikontrol sama pemerintah atau lembaga keuangan kayak bank sentral. Cryptocurrency menggunakan teknologi kriptografi dan blockchain buat ngejamin keamanan dan transparansi transaksi. Blockchain ini semacam buku besar digital yang disimpan di ribuan bahkan jutaan komputer di seluruh dunia, jadi decentralized alias nggak terpusat.">
+                               Cryptocurrency is a form of digital currency that isn’t controlled by any government or central financial institution. It uses cryptography and blockchain technology to ensure transaction security and transparency. The blockchain is like a giant digital ledger, stored on thousands (even millions) of computers worldwide, making it decentralized rather than controlled by one entity.
                             </p>
                             
-                            <p data-en="The innovation of blockchain lies in its ability to establish trust without centralized authority. Through cryptographic verification and consensus mechanisms like Proof of Work and Proof of Stake, blockchain networks create a shared source of truth that participants can verify independently. This fundamental shift in how we establish trust has implications far beyond digital currencies."
-                               data-id="Inovasi blockchain terletak pada kemampuannya membangun kepercayaan tanpa otoritas terpusat. Melalui verifikasi kriptografi dan mekanisme konsensus seperti Proof of Work dan Proof of Stake, jaringan blockchain menciptakan sumber kebenaran bersama yang dapat diverifikasi peserta secara independen. Perubahan fundamental dalam cara kita membangun kepercayaan ini memiliki implikasi jauh beyond mata uang digital.">
-                               The innovation of blockchain lies in its ability to establish trust without centralized authority. Through cryptographic verification and consensus mechanisms like Proof of Work and Proof of Stake, blockchain networks create a shared source of truth that participants can verify independently. This fundamental shift in how we establish trust has implications far beyond digital currencies.
+                            <p data-en="How is this different from traditional systems?."
+                                data-id="Gimana bedanya sama sistem yang udah ada sebelumnya?.">
+                               How is this different from traditional systems?
                             </p>
                             
-                            <p data-en="The evolution of blockchain technology has produced distinct generations of platforms, each expanding the possibilities: Bitcoin introduced peer-to-peer electronic cash, Ethereum pioneered programmable smart contracts, and newer platforms like Solana and Polkadot are addressing scalability and interoperability challenges that earlier networks face."
-                               data-id="Evolusi teknologi blockchain telah menghasilkan generasi platform yang berbeda, masing-masing memperluas kemungkinan: Bitcoin memperkenalkan uang elektronik peer-to-peer, Ethereum memelopori smart contract yang dapat diprogram, dan platform yang lebih baru seperti Solana dan Polkadot mengatasi tantangan skalabilitas dan interoperabilitas yang dihadapi jaringan sebelumnya.">
-                               The evolution of blockchain technology has produced distinct generations of platforms, each expanding the possibilities: Bitcoin introduced peer-to-peer electronic cash, Ethereum pioneered programmable smart contracts, and newer platforms like Solana and Polkadot are addressing scalability and interoperability challenges that earlier networks face.
+                            <p data-en="Imagine a centralized system: when you transfer money to someone through a bank, the transaction must be verified, recorded, and approved by the bank. If the bank system goes down or the government blocks your transaction, you’re stuck. This makes traditional finance systems prone to manipulation, censorship, or failure.
+                                        In a decentralized system like cryptocurrency, there’s no single entity controlling everything. Transactions are recorded on the blockchain, and everyone in the network (nodes) can verify the transaction. So instead of trusting a central authority, you trust the transparent system itself. For example, with Bitcoin, every transaction is recorded and verified by thousands of computers worldwide, making it practically tamper-proof."
+                                data-id="Bayangin sistem sentralisasi: misalnya lo transfer duit dari rekening lo ke orang lain lewat bank. Transaksi lo harus diverifikasi, dicatat, dan disetujui oleh bank. Kalau bank lagi down atau pemerintah memutuskan buat ngeblokir transaksi lo, ya kelar. Ini bikin sistem keuangan tradisional rentan manipulasi, sensor, atau kegagalan sistem.
+                                Sedangkan di sistem desentralisasi kayak cryptocurrency, nggak ada satu entitas yang ngontrol semuanya. Transaksi dicatat di blockchain, dan setiap orang di jaringan (node) bisa memverifikasi transaksi itu. Jadi nggak perlu percaya sama satu pihak, cukup percaya sama sistemnya yang transparan. Misalnya Bitcoin, tiap transaksi dicatat dan diverifikasi oleh ribuan komputer di seluruh dunia, jadi nggak bisa dimanipulasi seenaknya.">
+                               Imagine a centralized system: when you transfer money to someone through a bank, the transaction must be verified, recorded, and approved by the bank. If the bank system goes down or the government blocks your transaction, you’re stuck. This makes traditional finance systems prone to manipulation, censorship, or failure.
+                               In a decentralized system like cryptocurrency, there’s no single entity controlling everything. Transactions are recorded on the blockchain, and everyone in the network (nodes) can verify the transaction. So instead of trusting a central authority, you trust the transparent system itself. For example, with Bitcoin, every transaction is recorded and verified by thousands of computers worldwide, making it practically tamper-proof.
                             </p>
                             
-                            <div class="topic-image">
+                            <p data-en="Why did we call cryptocurrency a technology from the future? Because the concept is so radical it blows your mind. Imagine a global financial system without needing central authorities, banks, or intermediaries, and transactions are still secure and transparent. Not only that, blockchain can also enable self-executing digital contracts (smart contracts), which makes people think, “This can’t be a human idea, maybe it’s something AI from the future would come up with!” 😆."
+                               data-id="Kenapa sebelumnya kita bilang cryptocurrency ini kayak teknologi masa depan? Karena konsep ini benar-benar radikal dan bikin otak meledak. Bayangin aja: bikin sistem keuangan global tanpa butuh otoritas pusat, tanpa harus percaya sama bank, dan transaksi tetap aman dan transparan. Nggak cuma itu, teknologi blockchain juga bisa bikin kontrak digital otomatis jalan sendiri (smart contracts), yang bikin banyak orang mikir, “Ini kayaknya bukan ide manusia biasa deh, jangan-jangan ini buatan AI masa depan?” Wkwk.">
+                               Why did we call cryptocurrency a technology from the future? Because the concept is so radical it blows your mind. Imagine a global financial system without needing central authorities, banks, or intermediaries, and transactions are still secure and transparent. Not only that, blockchain can also enable self-executing digital contracts (smart contracts), which makes people think, “This can’t be a human idea, maybe it’s something AI from the future would come up with!” 😆
+                            </p>
+                            
+                          <!--  <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Blockchain Architecture">
                                 <caption data-en="Simplified diagram of blockchain architecture showing blocks, transactions, and cryptographic connections"
                                         data-id="Diagram sederhana arsitektur blockchain yang menunjukkan blok, transaksi, dan koneksi kriptografi">
                                         Simplified diagram of blockchain architecture showing blocks, transactions, and cryptographic connections
                                 </caption>
-                            </div>
+                            </div> -->
                             
-                            <p data-en="While the technology continues to mature, blockchain has demonstrated promising applications beyond cryptocurrency, including supply chain tracking, digital identity systems, voting mechanisms, and cross-border payments. These use cases leverage the transparency, immutability, and decentralization that make blockchain a potentially transformative technology for numerous industries."
-                               data-id="Sementara teknologi terus matang, blockchain telah menunjukkan aplikasi yang menjanjikan di luar kripto, termasuk pelacakan rantai pasokan, sistem identitas digital, mekanisme pemungutan suara, dan pembayaran lintas batas. Kasus penggunaan ini memanfaatkan transparansi, kekekalan, dan desentralisasi yang membuat blockchain menjadi teknologi yang berpotensi transformatif untuk berbagai industri.">
-                               While the technology continues to mature, blockchain has demonstrated promising applications beyond cryptocurrency, including supply chain tracking, digital identity systems, voting mechanisms, and cross-border payments. These use cases leverage the transparency, immutability, and decentralization that make blockchain a potentially transformative technology for numerous industries.
+                            <p data-en="In fact, cryptocurrency isn’t the first digital currency. Back in the 1990s, there was DigiCash by David Chaum, which aimed to create encrypted digital money. But it failed because it couldn’t achieve decentralization and required trust in a central entity. There was also e-gold in the early 2000s, but it was shut down due to legal issues and misuse for illegal activities. So why did Bitcoin (and other cryptocurrencies) succeed? Because it doesn’t rely on a central authority. The system is peer-to-peer and transparent, and every node in the blockchain works to secure the system."
+                               data-id="Faktanya, cryptocurrency bukan digital currency pertama. Dulu tahun 1990-an, ada yang namanya DigiCash bikinan David Chaum, yang konsepnya bikin uang digital terenkripsi. Tapi gagal total karena nggak bisa bikin sistem desentralisasi dan butuh trust ke satu entitas. Ada juga e-gold yang sempat rame di awal 2000-an, tapi ditutup karena masalah hukum dan penyalahgunaan buat kegiatan ilegal. Kenapa Bitcoin (dan crypto lain) bisa sukses? Karena dia nggak butuh pihak sentral, sistemnya peer-to-peer dan transparan, dan tiap node di blockchain saling menjaga keamanan sistemnya.">
+                              In fact, cryptocurrency isn’t the first digital currency. Back in the 1990s, there was DigiCash by David Chaum, which aimed to create encrypted digital money. But it failed because it couldn’t achieve decentralization and required trust in a central entity. There was also e-gold in the early 2000s, but it was shut down due to legal issues and misuse for illegal activities. So why did Bitcoin (and other cryptocurrencies) succeed? Because it doesn’t rely on a central authority. The system is peer-to-peer and transparent, and every node in the blockchain works to secure the system.
+                            </p>
+
+                            <p data-en="Now, cryptocurrency has evolved rapidly. There are thousands of crypto assets with different features. Bitcoin for value transfer, Ethereum introducing smart contracts that run automatically on the blockchain, stablecoins for price stability, and even NFTs for unique digital tokens. They all share core principles: security, transparency, and decentralization."
+                                data-id="Sekarang, cryptocurrency udah berkembang pesat. Ada ribuan jenis crypto dengan fitur berbeda-beda. Bitcoin buat transfer nilai, Ethereum ngenalin smart contracts yang bikin program bisa jalan otomatis di blockchain, ada stablecoin buat nilai stabil, bahkan ada NFT buat token unik. Semuanya didasari prinsip utama: keamanan, transparansi, dan desentralisasi.">
+                               Now, cryptocurrency has evolved rapidly. There are thousands of crypto assets with different features. Bitcoin for value transfer, Ethereum introducing smart contracts that run automatically on the blockchain, stablecoins for price stability, and even NFTs for unique digital tokens. They all share core principles: security, transparency, and decentralization.
                             </p>
                         </article>
                         
                         <article id="defi" class="topic-article">
-                            <h2 data-en="DeFi & Smart Contracts" data-id="DeFi & Smart Contract">DeFi & Smart Contracts</h2>
+                            <h2 data-en="Blockchain Technology " data-id="Teknologi Blockchain">Blockchain Technology </h2>
                             
-                            <p data-en="Decentralized Finance (DeFi) represents one of the most significant applications of blockchain technology, creating an open, permissionless alternative to traditional financial services. Built primarily on smart contract platforms like Ethereum, DeFi applications enable lending, borrowing, trading, and asset management without traditional intermediaries."
-                               data-id="Decentralized Finance (DeFi) merupakan salah satu aplikasi paling signifikan dari teknologi blockchain, menciptakan alternatif terbuka dan tanpa izin untuk layanan keuangan tradisional. Dibangun terutama di platform smart contract seperti Ethereum, aplikasi DeFi memungkinkan pinjam-meminjam, trading, dan manajemen aset tanpa perantara tradisional.">
-                               Decentralized Finance (DeFi) represents one of the most significant applications of blockchain technology, creating an open, permissionless alternative to traditional financial services. Built primarily on smart contract platforms like Ethereum, DeFi applications enable lending, borrowing, trading, and asset management without traditional intermediaries.
+                            <p data-en="Blockchain is the technology behind cryptocurrency. In simple terms, blockchain is like a digital ledger that records every transaction transparently, securely, and immutably. It’s called 'blockchain' because transaction data is stored in blocks linked together (chain) forming a long, unbreakable chain."
+                               data-id="Blockchain adalah teknologi yang mendasari cryptocurrency. Sederhananya, blockchain itu seperti buku besar digital (digital ledger) yang mencatat setiap transaksi secara transparan, aman, dan nggak bisa diubah. Disebut 'blockchain' karena data transaksi dicatat dalam blok-blok yang saling terhubung (chain) membentuk rantai panjang.">
+                               Blockchain is the technology behind cryptocurrency. In simple terms, blockchain is like a digital ledger that records every transaction transparently, securely, and immutably. It’s called "blockchain" because transaction data is stored in blocks linked together (chain) forming a long, unbreakable chain.
+                            </p>
+
+                            <h1 data-en="🧩 Blockchain Technology " data-id="🧩 Cara Kerja Blockchain?">🧩 How Blockchain Works? </h1>
+                            
+                            <p data-en="1️⃣ Each block contains transaction data, a timestamp, and a hash of the previous block. This hash acts like a unique digital fingerprint."
+                               data-id="1️⃣ Setiap blok berisi data transaksi, timestamp, dan hash dari blok sebelumnya. Hash ini semacam sidik jari digital unik.">
+                               1️⃣ Each block contains transaction data, a timestamp, and a hash of the previous block. This hash acts like a unique digital fingerprint.
+                            </p>
+
+                            <p data-en="2️⃣ When a new block is added, the system verifies its validity using network consensus."
+                               data-id="2️⃣ Ketika blok baru ditambahkan, sistem memverifikasi validitasnya dengan konsensus jaringan.">
+                               2️⃣ When a new block is added, the system verifies its validity using network consensus.
+                            </p>
+
+                            <p data-en="3️⃣ Once verified and added, the data inside the block cannot be changed (immutable), making blockchain highly resistant to tampering."
+                               data-id="3️⃣ Begitu blok terverifikasi dan ditambahkan, data di dalamnya nggak bisa diubah (immutable), bikin blockchain tahan manipulasi.">
+                               3️⃣ Once verified and added, the data inside the block cannot be changed (immutable), making blockchain highly resistant to tampering.
+                            </p>
+
+                            <p data-en="For example: You send Bitcoin to a friend. This transaction is recorded on the blockchain. Thousands of computers (nodes) verify it. If valid, the transaction is added to a new block, appended to the blockchain, and all nodes update their copy."
+                               data-id="Misalnya: Lo kirim Bitcoin ke teman lo. Transaksi ini dicatat di blockchain. Ribuan komputer (node) memverifikasi transaksi itu. Kalau valid, transaksi ditulis di blok baru, yang ditambahkan ke blockchain, dan semua node menyimpan salinannya.">
+                               For example: You send Bitcoin to a friend. This transaction is recorded on the blockchain. Thousands of computers (nodes) verify it. If valid, the transaction is added to a new block, appended to the blockchain, and all nodes update their copy.
+                            </p>
+
+                            <h1 data-en="🔐 Advantages of Blockchain " data-id="🔐 Keunggulan Blockchain">🔐 Advantages of Blockchain </h1>
+
+                              <p data-en="Decentralization: No single entity controls it. All nodes in the network hold a copy."
+                               data-id="Desentralisasi: Nggak ada satu pihak yang ngontrol. Semua node di jaringan punya salinan blockchain.">
+                              Decentralization: No single entity controls it. All nodes in the network hold a copy.
+                            </p>
+
+                              <p data-en="Security: Extremely hard to hack because you’d have to hack all nodes at once."
+                               data-id="Keamanan: Susah banget buat ngehack, karena lo harus hack semua node secara bersamaan.">
+                               Security: Extremely hard to hack because you’d have to hack all nodes at once.
+                            </p>
+
+                              <p data-en="Transparency: Everyone can see transaction records on the blockchain."
+                               data-id="Transparansi: Semua orang bisa lihat catatan transaksi di blockchain.">
+                               Transparency: Everyone can see transaction records on the blockchain.
+                            </p>
+
+                            <p data-en="Efficiency: Processes can be automated through smart contracts, like on Ethereum."
+                               data-id="Efisiensi: Bisa otomatisasi proses lewat smart contracts kayak di Ethereum.">
+                               Efficiency: Processes can be automated through smart contracts, like on Ethereum.
                             </p>
                             
-                            <p data-en="Smart contracts form the backbone of the DeFi ecosystem. These self-executing pieces of code automatically enforce the terms of an agreement when predetermined conditions are met. Unlike traditional contracts that require trusted third parties for enforcement, smart contracts leverage the immutability and transparency of blockchain to create trustless financial protocols."
-                               data-id="Smart contract membentuk tulang punggung ekosistem DeFi. Kode yang mengeksekusi diri ini secara otomatis menegakkan persyaratan perjanjian ketika kondisi yang telah ditentukan terpenuhi. Tidak seperti kontrak tradisional yang memerlukan pihak ketiga terpercaya untuk penegakan, smart contract memanfaatkan kekekalan dan transparansi blockchain untuk menciptakan protokol keuangan tanpa kepercayaan.">
-                               Smart contracts form the backbone of the DeFi ecosystem. These self-executing pieces of code automatically enforce the terms of an agreement when predetermined conditions are met. Unlike traditional contracts that require trusted third parties for enforcement, smart contracts leverage the immutability and transparency of blockchain to create trustless financial protocols.
+                            <h1 data-en="💡 Why Blockchain is Called the Technology of the Future " data-id="💡 Kenapa Blockchain Dianggap Teknologi Masa Depan?">💡 Why Blockchain is Called the Technology of the Future </h1>
+
+                            <p data-en="Because it completely disrupts traditional systems. Old systems rely on central authorities (banks, governments). Blockchain enables systems to operate without middlemen, more cheaply, securely, and transparently. That’s why many people say, “It’s like a technology from the future landing in our hands today.” Some even speculate that blockchain might have been designed by artificial intelligence or mysterious entities from the future."
+                               data-id="Karena dia bener-bener ngacak pola lama. Sistem lama bergantung sama otoritas (bank, pemerintah). Blockchain bikin sistem bisa jalan tanpa middleman, lebih murah, aman, dan transparan. Makanya, banyak orang bilang, “Ini kayak teknologi dari masa depan yang jatuh ke tangan kita sekarang.” Bahkan banyak yang spekulasi, teknologi blockchain mungkin dirancang oleh kecerdasan buatan atau entitas misterius dari masa depan.">
+                              Because it completely disrupts traditional systems. Old systems rely on central authorities (banks, governments). Blockchain enables systems to operate without middlemen, more cheaply, securely, and transparently. That’s why many people say, “It’s like a technology from the future landing in our hands today.” Some even speculate that blockchain might have been designed by artificial intelligence or mysterious entities from the future.
+                            </p>
+
+                            <h1 data-en="⚠️ Not a New Concept" data-id="⚠️ Bukan Konsep Baru">⚠️ Not a New Concept </h1>
+                            
+                            <p data-en="Before Bitcoin, ledger technology had been attempted in digital systems, but they all failed due to centralization or insecurity. Blockchain succeeded because it created a system that is:"
+                               data-id="Sebelum Bitcoin, teknologi ledger udah dicoba dalam sistem-sistem digital, tapi semuanya gagal karena terlalu sentralisasi atau nggak aman. Blockchain sukses karena berhasil bikin sistem:">
+                               Before Bitcoin, ledger technology had been attempted in digital systems, but they all failed due to centralization or insecurity. Blockchain succeeded because it created a system that is:
+                            </p>
+
+                            <p data-en="Distributed: Data is spread across many nodes."
+                               data-id="Tahan manipulasi: Data terverifikasi kolektif, bukan satu pihak.">
+                               Distributed: Data is spread across many nodes.
+                            </p>
+
+                            <p data-en="Tamper-resistant: Data is verified collectively, not by a single entity."
+                               data-id="Tahan manipulasi: Data terverifikasi kolektif, bukan satu pihak.">
+                               Tamper-resistant: Data is verified collectively, not by a single entity.
+                            </p>
+
+                            <p data-en="Self-sustaining: The system operates itself via consensus (like proof of work or proof of stake)."
+                               data-id="Self-sustaining: Sistem jalan sendiri lewat konsensus (misal proof of work atau proof of stake).">
+                               Self-sustaining: The system operates itself via consensus (like proof of work or proof of stake).
+                            </p>
+
+                            <h1 data-en="🚨 Super Strong Security" data-id="🚨 Keamanan Super Kuat">🚨 Super Strong Security </h1>
+
+                            <p data-en="Blockchain, especially like Bitcoin’s, has a level of security that makes hackers scratch their heads. Why? Because to hack the blockchain, you’d need to control at least 51% of the network’s total computational power (hashrate). This is known as a 51% attack.
+                            Imagine this: Bitcoin has thousands of nodes all storing identical data. If you wanted to change a transaction record to fake owning Bitcoin, you’d have to hack thousands of nodes at once. You’d need to build a supercomputer that can overpower the current total hashrate of Bitcoin’s network."
+                               data-id="Blockchain, terutama yang kayak Bitcoin, punya sistem keamanan yang bikin hacker garuk-garuk kepala. Kenapa? Karena buat ngehack blockchain, lo harus mengontrol minimal 51% dari seluruh kekuatan komputasi jaringan (hashrate). Ini dikenal sebagai 51% attack.
+                               Bayangin gini: Bitcoin punya ribuan node yang nyimpen data yang sama. Kalau lo mau ubah catatan transaksi biar misalnya lo punya Bitcoin palsu, lo harus ngehack ribuan node sekaligus. Lo harus bikin komputer super gede yang bisa ngalahin seluruh hashrate jaringan Bitcoin yang sekarang.">
+                               Blockchain, especially like Bitcoin’s, has a level of security that makes hackers scratch their heads. Why? Because to hack the blockchain, you’d need to control at least 51% of the network’s total computational power (hashrate). This is known as a 51% attack.
+                               Imagine this: Bitcoin has thousands of nodes all storing identical data. If you wanted to change a transaction record to fake owning Bitcoin, you’d have to hack thousands of nodes at once. You’d need to build a supercomputer that can overpower the current total hashrate of Bitcoin’s network.
+                            </p>
+
+                            <p data-en="For example: Bitcoin’s hashrate is currently around 500 exahashes per second (1 exahash = 10^18 hashes). To hack it, you’d need to create a mining machine with at least 250 exahashes. The cost? Hundreds of billions of dollars just for hardware and electricity. 
+                            Plus, the system is real-time – if you’re even slightly slow, other nodes immediately detect the manipulation."
+                               data-id="Contohnya: Hashrate Bitcoin saat ini tuh sekitar 500 exahashes per detik (1 exahash = 10^18 hash). Buat ngehack, lo harus bikin mesin mining dengan kekuatan minimal 250 exahashes. Biayanya? Ratusan miliar dolar buat beli perangkat keras dan listriknya.
+                               Belum lagi, sistem ini real-time – begitu lo lambat sedikit, node lain langsung mendeteksi manipulasi lo.">
+                               For example: Bitcoin’s hashrate is currently around 500 exahashes per second (1 exahash = 10^18 hashes). To hack it, you’d need to create a mining machine with at least 250 exahashes. The cost? Hundreds of billions of dollars just for hardware and electricity.
+                               Plus, the system is real-time – if you’re even slightly slow, other nodes immediately detect the manipulation.
+                            </p>
+
+                            <p data-en="That’s why people say: “If Bitcoin could be hacked, all the banks in the world would’ve been breached first wkwkwk.” Blockchain is like a digital fortress that makes hackers think thousands of times. It’s not just about money, but also about computational power that’s practically impossible to achieve."
+                               data-id="Itulah kenapa orang bilang: “Kalau Bitcoin bisa ditembus, bank-bank di seluruh dunia udah jebol duluan wkwkwk.” Blockchain tuh ibaratnya benteng digital yang bikin hacker mikir ribuan kali, karena bukan cuma butuh duit gede, tapi juga kekuatan komputasi yang nyaris nggak masuk akal.">
+                               That’s why people say: “If Bitcoin could be hacked, all the banks in the world would’ve been breached first wkwkwk.” Blockchain is like a digital fortress that makes hackers think thousands of times. It’s not just about money, but also about computational power that’s practically impossible to achieve.
                             </p>
                             
-                            <p data-en="The composability of DeFi protocols—often described as \"money legos\"—allows developers to build increasingly complex financial applications by combining existing components. This interoperability has fueled rapid innovation but also creates systemic risks when vulnerabilities in one protocol can cascade through interconnected systems."
-                               data-id="Komposabilitas protokol DeFi—sering disebut sebagai \"lego uang\"—memungkinkan developer membangun aplikasi keuangan yang semakin kompleks dengan menggabungkan komponen yang ada. Interoperabilitas ini telah memicu inovasi cepat tetapi juga menciptakan risiko sistemik ketika kerentanan dalam satu protokol dapat menyebar melalui sistem yang saling terhubung.">
-                               The composability of DeFi protocols—often described as "money legos"—allows developers to build increasingly complex financial applications by combining existing components. This interoperability has fueled rapid innovation but also creates systemic risks when vulnerabilities in one protocol can cascade through interconnected systems.
-                            </p>
-                            
-                            <div class="topic-image">
+                           <!-- <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="DeFi Ecosystem">
                                 <caption data-en="Visualization of major DeFi protocols and their interconnections across the ecosystem"
                                         data-id="Visualisasi protokol DeFi utama dan keterkaitannya di seluruh ekosistem">
                                         Visualization of major DeFi protocols and their interconnections across the ecosystem
                                 </caption>
-                            </div>
-                            
-                            <p data-en="While DeFi offers unprecedented financial access and opportunities for innovation, it also presents significant challenges regarding security, scalability, regulatory compliance, and user experience. Addressing these challenges while preserving the core benefits of decentralization represents one of the most fascinating areas of development in the cryptocurrency space."
-                               data-id="Sementara DeFi menawarkan akses keuangan yang belum pernah ada sebelumnya dan peluang untuk inovasi, ia juga menghadirkan tantangan signifikan terkait keamanan, skalabilitas, kepatuhan regulasi, dan pengalaman pengguna. Mengatasi tantangan ini sambil mempertahankan manfaat inti desentralisasi merupakan salah satu area pengembangan paling menarik dalam ruang kripto.">
-                               While DeFi offers unprecedented financial access and opportunities for innovation, it also presents significant challenges regarding security, scalability, regulatory compliance, and user experience. Addressing these challenges while preserving the core benefits of decentralization represents one of the most fascinating areas of development in the cryptocurrency space.
-                            </p>
+                            </div> -->
+                        
                         </article>
                         
                         <article id="nfts" class="topic-article">
-                            <h2 data-en="NFTs & Digital Assets" data-id="NFT & Aset Digital">NFTs & Digital Assets</h2>
+                            <h2 data-en="Consensus Mechanism" data-id="Mekanisme Konsensus">Consensus Mechanism</h2>
                             
-                            <p data-en="Non-Fungible Tokens (NFTs) have emerged as a powerful mechanism for representing ownership of unique digital and physical assets on the blockchain. Unlike cryptocurrencies, where each token is identical to others of its kind, NFTs contain distinctive information that makes each token irreplaceable and impossible to exchange on a like-for-like basis."
-                               data-id="Non-Fungible Token (NFT) telah muncul sebagai mekanisme yang kuat untuk mewakili kepemilikan aset digital dan fisik yang unik di blockchain. Tidak seperti kripto, di mana setiap token identik dengan yang lain sejenis, NFT berisi informasi khas yang membuat setiap token tidak dapat digantikan dan tidak mungkin ditukar secara langsung.">
-                               Non-Fungible Tokens (NFTs) have emerged as a powerful mechanism for representing ownership of unique digital and physical assets on the blockchain. Unlike cryptocurrencies, where each token is identical to others of its kind, NFTs contain distinctive information that makes each token irreplaceable and impossible to exchange on a like-for-like basis.
+                            <p data-en="Blockchain isn’t just about having duplicate digital records across multiple nodes, it’s also about how all the nodes agree on what data is valid. This “agreement” process is called the consensus mechanism. There are several types of consensus, but the two most well-known are Proof of Work (PoW) and Proof of Stake (PoS)."
+                               data-id="Blockchain bukan cuma soal catatan digital yang diduplikasi di banyak tempat, tapi juga soal bagaimana caranya semua node setuju bahwa data di jaringan itu sah. Nah, proses “kesepakatan” inilah yang disebut mekanisme konsensus. Ada beberapa jenis konsensus, dua yang paling terkenal adalah Proof of Work (PoW) dan Proof of Stake (PoS).">
+                               Blockchain isn’t just about having duplicate digital records across multiple nodes, it’s also about how all the nodes agree on what data is valid. This “agreement” process is called the consensus mechanism. There are several types of consensus, but the two most well-known are Proof of Work (PoW) and Proof of Stake (PoS).
                             </p>
                             
-                            <p data-en="The explosion of interest in NFTs has transformed numerous industries, most visibly digital art and collectibles. By enabling verifiable scarcity and provenance for digital assets, NFTs have created new economic models for creators, allowing them to monetize digital works in ways previously impossible and receive ongoing royalties from secondary sales."
-                               data-id="Ledakan minat terhadap NFT telah mengubah berbagai industri, paling jelas seni digital dan koleksi. Dengan memungkinkan kelangkaan dan asal-usul yang dapat diverifikasi untuk aset digital, NFT telah menciptakan model ekonomi baru untuk kreator, memungkinkan mereka memonetisasi karya digital dengan cara yang sebelumnya tidak mungkin dan menerima royalti berkelanjutan dari penjualan sekunder.">
-                               The explosion of interest in NFTs has transformed numerous industries, most visibly digital art and collectibles. By enabling verifiable scarcity and provenance for digital assets, NFTs have created new economic models for creators, allowing them to monetize digital works in ways previously impossible and receive ongoing royalties from secondary sales.
+                            <p data-en="Proof of Work, used by Bitcoin, basically requires miners to solve incredibly complex mathematical puzzles to validate transactions. Whoever solves it first gets to add a new block to the blockchain and earn a reward. However, PoW is extremely energy-intensive because it needs massive computational power. That’s why Proof of Stake emerged. In PoS, the right to validate blocks is based on how much token a person is “staking” (locking up). The more they stake, the higher the chance they get picked. This system is way more energy-efficient because it doesn’t require huge computations like PoW."
+                               data-id="Proof of Work, yang digunakan Bitcoin, intinya mengharuskan para miner untuk memecahkan teka-teki matematika super rumit buat bisa memvalidasi transaksi. Siapa yang berhasil duluan, dia yang berhak nambahin blok baru ke blockchain dan dapet reward. Tapi PoW ini boros energi banget, karena butuh daya komputasi super gede. Itulah kenapa muncul Proof of Stake. Di PoS, yang berhak validasi blok dipilih berdasarkan seberapa banyak token yang mereka “staking” (dititipkan). Makin banyak staking, makin besar peluang dipilih. Ini jauh lebih hemat energi karena nggak perlu komputasi gede kayak PoW.">
+                              Proof of Work, used by Bitcoin, basically requires miners to solve incredibly complex mathematical puzzles to validate transactions. Whoever solves it first gets to add a new block to the blockchain and earn a reward. However, PoW is extremely energy-intensive because it needs massive computational power. That’s why Proof of Stake emerged. In PoS, the right to validate blocks is based on how much token a person is “staking” (locking up). The more they stake, the higher the chance they get picked. This system is way more energy-efficient because it doesn’t require huge computations like PoW.
                             </p>
                             
-                            <p data-en="Beyond the headline-grabbing art sales, NFTs are finding utility across diverse domains including gaming (for in-game assets), virtual real estate, music, identity verification, event ticketing, and supply chain tracking. In each case, the technology enables new models of ownership, authentication, and value transfer."
-                               data-id="Di luar penjualan seni yang mencuri perhatian, NFT menemukan utilitas di berbagai domain termasuk gaming (untuk aset dalam game), real estat virtual, musik, verifikasi identitas, tiket acara, dan pelacakan rantai pasokan. Dalam setiap kasus, teknologi ini memungkinkan model baru kepemilikan, otentikasi, dan transfer nilai.">
-                               Beyond the headline-grabbing art sales, NFTs are finding utility across diverse domains including gaming (for in-game assets), virtual real estate, music, identity verification, event ticketing, and supply chain tracking. In each case, the technology enables new models of ownership, authentication, and value transfer.
+                            <p data-en="Why is the consensus mechanism so important? Because in blockchain, there’s no central authority controlling everything. Imagine if there were no consensus – anyone could insert fake data into the network. With consensus, all nodes agree that a transaction is valid. This is what makes blockchain so resilient."
+                               data-id="Kenapa mekanisme konsensus penting? Karena di blockchain, nggak ada pihak tunggal yang mengatur. Bayangin kalau tanpa konsensus, orang bisa seenaknya masukin data palsu ke jaringan. Dengan konsensus, semua node setuju bahwa transaksi valid. Makanya, sistem ini bikin blockchain jadi tahan banting.">
+                               Why is the consensus mechanism so important? Because in blockchain, there’s no central authority controlling everything. Imagine if there were no consensus – anyone could insert fake data into the network. With consensus, all nodes agree that a transaction is valid. This is what makes blockchain so resilient.
                             </p>
                             
-                            <div class="topic-image">
+                          <!--  <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="NFT Applications">
                                 <caption data-en="Overview of NFT applications across industries from art to gaming to real estate"
                                         data-id="Gambaran umum aplikasi NFT di berbagai industri dari seni hingga gaming hingga real estat">
                                         Overview of NFT applications across industries from art to gaming to real estate
                                 </caption>
-                            </div>
+                            </div> -->
                             
-                            <p data-en="While the NFT market has experienced significant volatility, the underlying technology continues to mature and find more substantive applications. The evolution of NFTs toward greater utility, improved energy efficiency, and enhanced user experiences suggests a future where digital asset ownership becomes increasingly integrated into our economic and social systems."
-                               data-id="Sementara pasar NFT telah mengalami volatilitas yang signifikan, teknologi dasarnya terus matang dan menemukan aplikasi yang lebih substantif. Evolusi NFT menuju utilitas yang lebih besar, efisiensi energi yang lebih baik, dan pengalaman pengguna yang ditingkatkan menunjukkan masa depan di mana kepemilikan aset digital menjadi semakin terintegrasi ke dalam sistem ekonomi dan sosial kita.">
-                               While the NFT market has experienced significant volatility, the underlying technology continues to mature and find more substantive applications. The evolution of NFTs toward greater utility, improved energy efficiency, and enhanced user experiences suggests a future where digital asset ownership becomes increasingly integrated into our economic and social systems.
+                            <p data-en="In the previous chapter, we mentioned how cryptocurrency feels like it came from the future, and that’s because its consensus system eliminates the need for third-party intermediaries like banks to guarantee transactions. Back then, there were digital currency ideas like DigiCash and e-Gold, but they failed because they still relied on centralized systems that were vulnerable to abuse. Cryptocurrencies, with blockchain and its consensus mechanisms, make the system decentralized and nearly impossible to manipulate. That’s why people say it’s like something created by future AI, because the system is so advanced it leaves ordinary people in awe."
+                               data-id="Kita bilang di bab sebelumnya bahwa cryptocurrency kayak muncul dari masa depan karena sistem konsensus ini menghilangkan kebutuhan pihak ketiga kayak bank buat jamin transaksi. Dulu, pernah ada ide digital currency kayak DigiCash dan e-Gold, tapi gagal karena masih mengandalkan sentralisasi yang rentan disalahgunakan. Cryptocurrency dengan blockchain dan konsensusnya bikin sistem ini jadi decentralized dan nyaris mustahil dimanipulasi. Inilah yang bikin orang bilang ini kayak bikinan AI masa depan, karena sistemnya bener-bener canggih dan bikin orang awam geleng-geleng.">
+                               In the previous chapter, we mentioned how cryptocurrency feels like it came from the future, and that’s because its consensus system eliminates the need for third-party intermediaries like banks to guarantee transactions. Back then, there were digital currency ideas like DigiCash and e-Gold, but they failed because they still relied on centralized systems that were vulnerable to abuse. Cryptocurrencies, with blockchain and its consensus mechanisms, make the system decentralized and nearly impossible to manipulate. That’s why people say it’s like something created by future AI, because the system is so advanced it leaves ordinary people in awe.
                             </p>
                         </article>
                         
                         <article id="market" class="topic-article">
-                            <h2 data-en="Market Analysis" data-id="Analisis Pasar">Market Analysis</h2>
+                            <h2 data-en="Smart Contract" data-id="Smart Contract">Smart Contract</h2>
                             
-                            <p data-en="The cryptocurrency market presents a unique financial landscape characterized by extreme volatility, rapid innovation, and complex market dynamics. With a global 24/7 trading infrastructure and relatively low barriers to entry, crypto markets have attracted diverse participants from retail investors to institutional players."
-                               data-id="Pasar kripto menyajikan lanskap keuangan yang unik yang ditandai dengan volatilitas ekstrem, inovasi cepat, dan dinamika pasar yang kompleks. Dengan infrastruktur perdagangan global 24/7 dan hambatan masuk yang relatif rendah, pasar kripto telah menarik peserta yang beragam dari investor ritel hingga pelaku institusional.">
-                               The cryptocurrency market presents a unique financial landscape characterized by extreme volatility, rapid innovation, and complex market dynamics. With a global 24/7 trading infrastructure and relatively low barriers to entry, crypto markets have attracted diverse participants from retail investors to institutional players.
+                            <p data-en="If consensus is the foundation that makes blockchain networks trustworthy, then smart contracts are the “brains” that make the blockchain system more than just a digital ledger. A smart contract is a computer program that runs automatically on the blockchain network. It executes commands without human intervention when certain conditions are met. Think of a smart contract like a vending machine. You insert coins (input), choose a product (condition), and the machine automatically dispenses your item (output) – no cashier needed. On blockchain, smart contracts can automatically execute transactions, such as transferring tokens, validating data, or even powering decentralized applications (dApps)."
+                               data-id="Kalau konsensus adalah fondasi buat jaringan blockchain bisa dipercaya, smart contract adalah “otak” yang bikin sistem blockchain jadi lebih dari sekadar buku besar digital. Smart contract (kontrak pintar) adalah program komputer yang berjalan otomatis di jaringan blockchain. Mereka bisa mengeksekusi perintah tanpa campur tangan manusia setelah syarat tertentu terpenuhi. Bayangin smart contract kayak mesin penjual otomatis. Lo masukin koin (input), pilih produk (syarat), dan mesin langsung ngeluarin barangnya (output) tanpa perlu penjaga. Di blockchain, misalnya, smart contract bisa bikin transaksi otomatis kayak transfer token, validasi data, atau bahkan bikin aplikasi desentralisasi (dApps).">
+                               If consensus is the foundation that makes blockchain networks trustworthy, then smart contracts are the “brains” that make the blockchain system more than just a digital ledger. A smart contract is a computer program that runs automatically on the blockchain network. It executes commands without human intervention when certain conditions are met. Think of a smart contract like a vending machine. You insert coins (input), choose a product (condition), and the machine automatically dispenses your item (output) – no cashier needed. On blockchain, smart contracts can automatically execute transactions, such as transferring tokens, validating data, or even powering decentralized applications (dApps).
                             </p>
                             
-                            <p data-en="Market analysis in the cryptocurrency space requires integrating traditional financial metrics with new frameworks tailored to this emergent asset class. On-chain analysis examines blockchain data to derive insights about network activity, wallet behaviors, and token flows. Technical analysis studies price patterns and trading volumes to identify potential market trends. Fundamental analysis evaluates the underlying value proposition, technological innovation, and adoption metrics of specific projects."
-                               data-id="Analisis pasar dalam ruang kripto memerlukan integrasi metrik keuangan tradisional dengan kerangka kerja baru yang disesuaikan untuk kelas aset yang muncul ini. Analisis on-chain meneliti data blockchain untuk mendapatkan wawasan tentang aktivitas jaringan, perilaku wallet, dan aliran token. Analisis teknis mempelajari pola harga dan volume perdagangan untuk mengidentifikasi tren pasar potensial. Analisis fundamental mengevaluasi proposisi nilai dasar, inovasi teknologi, dan metrik adopsi proyek tertentu.">
-                               Market analysis in the cryptocurrency space requires integrating traditional financial metrics with new frameworks tailored to this emergent asset class. On-chain analysis examines blockchain data to derive insights about network activity, wallet behaviors, and token flows. Technical analysis studies price patterns and trading volumes to identify potential market trends. Fundamental analysis evaluates the underlying value proposition, technological innovation, and adoption metrics of specific projects.
+                            <p data-en="Why is this so revolutionary? Because it creates a trustless system. You don’t need to trust another person to fulfill the contract – you just trust the code. For example, imagine a smart contract for buying a house. Once the buyer sends the payment, the property certificate is automatically transferred to their digital wallet. No notary, no bank. Everything is automatic, transparent, and secure."
+                               data-id="Kenapa smart contract ini revolusioner? Karena dia bikin sistem yang trustless. Artinya, lo nggak perlu percaya orang lain buat jalankan kontrak. Lo cukup percaya kodenya. Contoh: misalnya lo bikin perjanjian jual-beli rumah di smart contract. Setelah pembeli bayar, sertifikat rumah langsung ditransfer otomatis ke dompet digital pembeli. Nggak perlu notaris, nggak perlu bank. Semua otomatis, transparan, dan aman.">
+                               Why is this so revolutionary? Because it creates a trustless system. You don’t need to trust another person to fulfill the contract – you just trust the code. For example, imagine a smart contract for buying a house. Once the buyer sends the payment, the property certificate is automatically transferred to their digital wallet. No notary, no bank. Everything is automatic, transparent, and secure.
                             </p>
                             
-                            <p data-en="The cryptocurrency market exhibits distinctive cyclical patterns, including the famous \"Bitcoin halving\" cycles that occur approximately every four years when the mining reward is reduced by half. These cycles, along with broader technological adoption curves, regulatory developments, and macroeconomic factors, have created identifiable market phases from accumulation to euphoria to capitulation."
-                               data-id="Pasar kripto menunjukkan pola siklus yang khas, termasuk siklus \"Bitcoin halving\" yang terkenal yang terjadi kira-kira setiap empat tahun ketika hadiah mining dikurangi setengah. Siklus ini, bersama dengan kurva adopsi teknologi yang lebih luas, perkembangan regulasi, dan faktor makroekonomi, telah menciptakan fase pasar yang dapat diidentifikasi dari akumulasi hingga euforia hingga kapitulasi.">
-                               The cryptocurrency market exhibits distinctive cyclical patterns, including the famous "Bitcoin halving" cycles that occur approximately every four years when the mining reward is reduced by half. These cycles, along with broader technological adoption curves, regulatory developments, and macroeconomic factors, have created identifiable market phases from accumulation to euphoria to capitulation.
+                            <p data-en="This is where the connection to NFTs and digital assets comes in. Smart contracts allow for the creation of tokens that represent digital ownership (like NFTs for digital art, music, concert tickets). This makes the concept of “digital ownership” real. People don’t just claim they own a digital file – they actually have a verifiable, unforgeable certificate of ownership stored on the blockchain.
+                            You’ve probably heard of DeFi (Decentralized Finance). This is all built on smart contracts. You can stake, borrow, lend, or trade tokens without intermediaries – all automatically and transparently. The advantage? No need to worry about third parties cheating or taking huge fees. The downside? If the code has a vulnerability, it can be exploited by hackers, because blockchain code is immutable – it can’t be changed once deployed."
+                               data-id="Nah, di sinilah hubungannya sama NFT dan aset digital. Smart contract bikin bisa bikin token yang mewakili kepemilikan digital (contohnya NFT buat seni digital, musik, tiket konser). Ini bikin konsep “digital ownership” jadi nyata. Orang nggak cuma bisa klaim punya file digital, tapi benar-benar bisa punya sertifikat kepemilikan yang unforgeable (nggak bisa dipalsuin) yang disimpan di blockchain.
+                               Lo juga pasti sering dengar istilah DeFi (Decentralized Finance). Ini semua dasarnya dari smart contract. Lo bisa staking, pinjam-meminjam, trading token tanpa perantara, semua otomatis dan transparan. Kelebihannya? Lo nggak perlu takut pihak ketiga nipu atau motong biaya gede. Kekurangannya? Kalau kodenya ada celah, bisa dimanfaatkan hacker, karena kode di blockchain immutable alias nggak bisa diubah setelah di-deploy.">
+                              This is where the connection to NFTs and digital assets comes in. Smart contracts allow for the creation of tokens that represent digital ownership (like NFTs for digital art, music, concert tickets). This makes the concept of “digital ownership” real. People don’t just claim they own a digital file – they actually have a verifiable, unforgeable certificate of ownership stored on the blockchain.
+                              You’ve probably heard of DeFi (Decentralized Finance). This is all built on smart contracts. You can stake, borrow, lend, or trade tokens without intermediaries – all automatically and transparently. The advantage? No need to worry about third parties cheating or taking huge fees. The downside? If the code has a vulnerability, it can be exploited by hackers, because blockchain code is immutable – it can’t be changed once deployed.
                             </p>
                             
-                            <div class="topic-image">
+                          <!--  <div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Crypto Market Cycles">
                                 <caption data-en="Illustration of cryptocurrency market cycles and key indicators for market phase identification"
                                         data-id="Ilustrasi siklus pasar kripto dan indikator kunci untuk identifikasi fase pasar">
                                         Illustration of cryptocurrency market cycles and key indicators for market phase identification
                                 </caption>
-                            </div>
+                            </div> -->
                             
-                            <p data-en="While price speculation dominates much of the discourse around cryptocurrencies, meaningful market analysis looks beyond short-term price movements to assess value accrual mechanisms, network effects, regulatory environments, and technological developments that may drive long-term outcomes in this rapidly evolving sector."
-                               data-id="Sementara spekulasi harga mendominasi banyak diskusi seputar kripto, analisis pasar yang bermakna melihat melampaui pergerakan harga jangka pendek untuk menilai mekanisme akrual nilai, efek jaringan, lingkungan regulasi, dan perkembangan teknologi yang dapat mendorong hasil jangka panjang di sektor yang berkembang pesat ini.">
-                               While price speculation dominates much of the discourse around cryptocurrencies, meaningful market analysis looks beyond short-term price movements to assess value accrual mechanisms, network effects, regulatory environments, and technological developments that may drive long-term outcomes in this rapidly evolving sector.
+                            <p data-en="Many people say smart contracts are the gateway to a digital future, like AI or global automation. Because everything can happen without a central authority controlling it. For example, you could create a digital inheritance contract that automatically activates under certain conditions. Or build a voting system that’s immune to vote manipulation. This makes people wonder – could ideas like this have come not just from human minds, but maybe from a “future AI” teaching us how to build systems that are truly fair and autonomous?"
+                               data-id="Oh ya, banyak orang bilang smart contract ini adalah pintu ke masa depan digital, kayak AI atau otomatisasi global. Karena semua bisa terjadi tanpa pihak sentral yang atur. Misalnya, lo bisa bikin kontrak warisan digital, yang otomatis akan aktif kalau kondisi tertentu terpenuhi. Atau bikin sistem voting online tanpa manipulasi suara. Ini bikin banyak orang mikir, jangan-jangan ide kayak gini bukan cuma datang dari manusia biasa, tapi mungkin dari “AI masa depan” yang ngajarin kita gimana bikin sistem yang benar-benar adil dan otonom.">
+                               Many people say smart contracts are the gateway to a digital future, like AI or global automation. Because everything can happen without a central authority controlling it. For example, you could create a digital inheritance contract that automatically activates under certain conditions. Or build a voting system that’s immune to vote manipulation. This makes people wonder – could ideas like this have come not just from human minds, but maybe from a “future AI” teaching us how to build systems that are truly fair and autonomous?
                             </p>
                         </article>
+
                         
                         <article id="future" class="topic-article">
-                            <h2 data-en="Future of Crypto" data-id="Masa Depan Kripto">Future of Crypto</h2>
+                            <h2 data-en="Market Analysis" data-id="Analisis Pasar">Market Analysis</h2>
                             
-                            <p data-en="The future of cryptocurrency and blockchain technology stands at an inflection point, balancing transformative potential against significant technological, regulatory, and adoption challenges. Several key trends are shaping the trajectory of this space as it continues to evolve and mature."
-                               data-id="Masa depan kripto dan teknologi blockchain berada di titik balik, menyeimbangkan potensi transformatif dengan tantangan teknologi, regulasi, dan adopsi yang signifikan. Beberapa tren utama membentuk lintasan space ini saat terus berkembang dan matang.">
-                               The future of cryptocurrency and blockchain technology stands at an inflection point, balancing transformative potential against significant technological, regulatory, and adoption challenges. Several key trends are shaping the trajectory of this space as it continues to evolve and mature.
+                            <p data-en="After discussing the technology and core concepts of cryptocurrency, now we dive into the exciting part: market analysis. In the crypto world, market analysis is a crucial tool for investors, traders, and anyone looking to profit from price movements. There are two main approaches: fundamental analysis and technical analysis."
+                               data-id="Setelah kita bahas teknologi dan konsep dasar cryptocurrency, sekarang kita masuk ke ranah yang lebih seru: analisis pasar. Dalam dunia crypto, market analysis jadi senjata utama buat investor, trader, dan siapa aja yang mau dapet keuntungan dari pergerakan harga. Nah, dalam analisis pasar, kita kenal dua pendekatan utama: analisis fundamental dan analisis teknikal.">
+                               After discussing the technology and core concepts of cryptocurrency, now we dive into the exciting part: market analysis. In the crypto world, market analysis is a crucial tool for investors, traders, and anyone looking to profit from price movements. There are two main approaches: fundamental analysis and technical analysis.
                             </p>
                             
-                            <p data-en="Institutional adoption represents one of the most significant shifts in the cryptocurrency landscape. Major financial institutions, corporations, and even governments are exploring blockchain applications, from Bitcoin treasury reserves to central bank digital currencies (CBDCs). This mainstream integration brings both legitimacy and new demands for compliance, security, and stability."
-                               data-id="Adopsi institusional merupakan salah satu pergeseran paling signifikan dalam lanskap kripto. Institusi keuangan besar, korporasi, dan bahkan pemerintah mengeksplorasi aplikasi blockchain, dari cadangan treasury Bitcoin hingga mata uang digital bank sentral (CBDC). Integrasi mainstream ini membawa legitimasi dan tuntutan baru untuk kepatuhan, keamanan, dan stabilitas.">
-                               Institutional adoption represents one of the most significant shifts in the cryptocurrency landscape. Major financial institutions, corporations, and even governments are exploring blockchain applications, from Bitcoin treasury reserves to central bank digital currencies (CBDCs). This mainstream integration brings both legitimacy and new demands for compliance, security, and stability.
+                            <h1 data-en="🔎 1. Fundamental Analysis " data-id="🔎 1. Analisis Fundamental ">🔎 1. Fundamental Analysis </h1>
+                            <p data-en="Fundamental analysis in crypto is similar to stock market analysis, aiming to determine the intrinsic value of a crypto asset based on underlying factors. But unlike stocks, crypto projects don’t have financial statements. Instead, we analyze:"
+                               data-id="Analisis fundamental di dunia crypto mirip kayak di pasar saham. Tujuannya buat menilai nilai intrinsik dari aset crypto berdasarkan faktor-faktor mendasar. Tapi bedanya, di crypto, nggak ada laporan keuangan perusahaan kayak di saham. Jadi kita pakai faktor lain kayak:">
+                               Fundamental analysis in crypto is similar to stock market analysis, aiming to determine the intrinsic value of a crypto asset based on underlying factors. But unlike stocks, crypto projects don’t have financial statements. Instead, we analyze:
+                           </p>
+
+                            <p data-en="- Whitepapers & Roadmaps: Official documents explaining the project’s goals, technology, and future plans. For example, Bitcoin’s whitepaper by Satoshi Nakamoto or Ethereum’s roadmap to Ethereum 2.0."
+                               data-id="- Whitepaper & Roadmap: Dokumen resmi yang ngejelasin tujuan, teknologi, dan rencana masa depan dari proyek crypto tersebut. Misalnya whitepaper Bitcoin yang ditulis oleh Satoshi Nakamoto, atau roadmap Ethereum yang menjelaskan pengembangan ke Ethereum 2.0.">
+                               - Whitepapers & Roadmaps: Official documents explaining the project’s goals, technology, and future plans. For example, Bitcoin’s whitepaper by Satoshi Nakamoto or Ethereum’s roadmap to Ethereum 2.0.
+                            </p>
+
+                            <p data-en="- Team & Community: Who’s behind the project? Do they have a good reputation and experience? A large and loyal community indicates the project’s potential for longevity."
+                               data-id="- Tim & Komunitas: Siapa di balik proyek ini? Apakah timnya berpengalaman dan punya reputasi baik? Komunitas aktif juga jadi indikator bagus. Semakin besar dan loyal komunitasnya, makin besar kemungkinan proyek bertahan.">
+                               - Team & Community: Who’s behind the project? Do they have a good reputation and experience? A large and loyal community indicates the project’s potential for longevity.
+                            </p>
+
+                            <p data-en="- Technology & Use Case: Is the technology innovative and solving real problems? For example, Ethereum’s smart contracts created the DeFi and NFT ecosystem, while Solana offers ultra-fast transactions with low fees."
+                               data-id="- Teknologi & Use Case: Apakah teknologinya inovatif dan bener-bener menyelesaikan masalah? Contohnya, Ethereum membawa konsep smart contract yang bikin ekosistem DeFi dan NFT berkembang. Atau Solana yang menawarkan transaksi super cepat dengan biaya rendah.">
+                               - Technology & Use Case: Is the technology innovative and solving real problems? For example, Ethereum’s smart contracts created the DeFi and NFT ecosystem, while Solana offers ultra-fast transactions with low fees.
                             </p>
                             
-                            <p data-en="Technological development continues at a rapid pace, with significant research addressing blockchain's core challenges of scalability, interoperability, privacy, and energy efficiency. Layer-2 solutions, next-generation consensus mechanisms, zero-knowledge proofs, and cross-chain bridges are among the innovations pushing the boundaries of what's possible with decentralized technology."
-                               data-id="Pengembangan teknologi berlanjut dengan kecepatan tinggi, dengan penelitian signifikan mengatasi tantangan inti blockchain yaitu skalabilitas, interoperabilitas, privasi, dan efisiensi energi. Solusi Layer-2, mekanisme konsensus generasi berikutnya, zero-knowledge proof, dan cross-chain bridge adalah di antara inovasi yang mendorong batas kemungkinan dengan teknologi terdesentralisasi.">
-                               Technological development continues at a rapid pace, with significant research addressing blockchain's core challenges of scalability, interoperability, privacy, and energy efficiency. Layer-2 solutions, next-generation consensus mechanisms, zero-knowledge proofs, and cross-chain bridges are among the innovations pushing the boundaries of what's possible with decentralized technology.
+                            <p data-en="- Tokenomics: How is the token distributed? Is the supply and demand balanced? For example, Bitcoin has a total supply of 21 million, creating scarcity and potential for long-term price growth."
+                               data-id="- Tokenomics: Gimana distribusi tokennya? Apakah supply dan demand-nya sehat? Contoh: Bitcoin punya total supply 21 juta, yang bikin harganya cenderung naik seiring waktu karena kelangkaan.">
+                               - Tokenomics: How is the token distributed? Is the supply and demand balanced? For example, Bitcoin has a total supply of 21 million, creating scarcity and potential for long-term price growth.
+                            </p>
+
+                            <p data-en="- Regulation & Market Sentiment: Is the project compliant with regulations? Major countries like the US or China can drastically influence prices through policy changes."
+                               data-id="- Regulasi & Sentimen Pasar: Apakah proyek ini patuh regulasi? Negara-negara besar kayak AS atau Tiongkok bisa mempengaruhi harga secara drastis lewat kebijakan mereka.">
+                               - Regulation & Market Sentiment: Is the project compliant with regulations? Major countries like the US or China can drastically influence prices through policy changes.
+                            </p>
+
+                            <p data-en="Fundamental analysis helps us understand why a crypto asset is worth holding long-term. For instance, Bitcoin and Ethereum have strong fundamentals, while smaller tokens without solid foundations are more prone to collapse."
+                               data-id="Analisis fundamental ini bikin kita ngerti kenapa sebuah aset crypto layak buat dipegang jangka panjang. Misalnya, kenapa banyak orang percaya Bitcoin atau Ethereum bakal terus bertahan, sementara koin-koin kecil yang nggak punya fundamental kuat gampang ambruk.">
+                               Fundamental analysis helps us understand why a crypto asset is worth holding long-term. For instance, Bitcoin and Ethereum have strong fundamentals, while smaller tokens without solid foundations are more prone to collapse.
+                            </p>
+
+                            <h1 data-en="📈 2. Technical Analysis" data-id="📈 2. Analisis Teknikal ">🔎 📈 2. Technical Analysis </h1>
+                            
+                           <p data-en="Technical analysis focuses on price movement patterns and trading volumes to predict future price movements. It uses candlestick charts, technical indicators, and specific patterns. Key tools include:"
+                               data-id="Analisis teknikal lebih fokus ke pola pergerakan harga dan volume perdagangan. Tujuannya buat memprediksi pergerakan harga di masa depan. Analisis ini pakai grafik candlestick, indikator teknikal, dan pola-pola tertentu. Contoh alat yang sering dipakai:">
+                               Technical analysis focuses on price movement patterns and trading volumes to predict future price movements. It uses candlestick charts, technical indicators, and specific patterns. Key tools include:
+                            </p>
+
+                            <p data-en="- Support & Resistance: Price levels where the price tends to stop falling or rising. Support acts as a “floor,” resistance as a “ceiling.”"
+                               data-id="- Support & Resistance: Level harga di mana harga cenderung berhenti turun atau naik. Support kayak 'lantai', 'resistance kayak atap'">
+                               - Support & Resistance: Price levels where the price tends to stop falling or rising. Support acts as a “floor,” resistance as a “ceiling.”
+                            </p>
+
+                            <p data-en="- Moving Average (MA): Average price over a certain period. For example, 50-day or 200-day MA. A shorter MA crossing above a longer MA (golden cross) is often a bullish signal."
+                               data-id="- Moving Average (MA): Rata-rata harga dalam periode tertentu. Misalnya MA 50 hari atau MA 200 hari. Kalau MA pendek memotong MA panjang dari bawah (golden cross), biasanya sinyal bullish.">
+                               - Moving Average (MA): Average price over a certain period. For example, 50-day or 200-day MA. A shorter MA crossing above a longer MA (golden cross) is often a bullish signal.
+                            </p>
+
+                            <p data-en="- RSI (Relative Strength Index): Indicates if an asset is overbought or oversold."
+                               data-id="- RSI (Relative Strength Index): Indikator yang ngasih tau apakah aset overbought (jenuh beli) atau oversold (jenuh jual).">
+                               - RSI (Relative Strength Index): Indicates if an asset is overbought or oversold.
+                            </p>
+
+                            <p data-en="- MACD (Moving Average Convergence Divergence): Shows market momentum."
+                               data-id="- MACD (Moving Average Convergence Divergence): Indikator yang nunjukin momentum pasar">
+                               - MACD (Moving Average Convergence Divergence): Shows market momentum.
+                            </p>
+
+                            <p data-en="- Volume: Amount of transactions. High volume often indicates significant price movements."
+                               data-id="- Volume: Besarnya transaksi yang terjadi. Volume besar biasanya nunjukin pergerakan harga yang signifikan.">
+                               - Volume: Amount of transactions. High volume often indicates significant price movements.
+                            </p>
+
+                            <p data-en="In crypto, technical analysis can be more volatile than traditional markets because of its high volatility. Crypto traders often use short timeframes like 1-hour or 4-hour charts for quick decisions."
+                               data-id="Di crypto, analisis teknikal kadang lebih 'liar' dibandingkan pasar tradisional karena volatilitasnya tinggi. Jadi trader crypto sering pakai timeframe pendek kayak 1 jam atau 4 jam buat ambil keputusan cepat.">
+                               In crypto, technical analysis can be more volatile than traditional markets because of its high volatility. Crypto traders often use short timeframes like 1-hour or 4-hour charts for quick decisions.
+                            </p>
+
+                            <h1 data-en="🤯 Why Are Both Important? " data-id="🤯 Kenapa Keduanya Penting? ">🤯 Why Are Both Important? </h1>
+                           
+                            <p data-en="Earlier we mentioned that crypto feels like future technology because of its decentralization, trustlessness, and borderless nature. But despite its sophistication, the market is still driven by human factors: fear, greed, news, and hype. That’s why fundamental analysis helps us see the logical reasons for long-term investment, while technical analysis helps us time market entries and exits."
+                               data-id="Nah bro, di sub bab sebelumnya kita bilang crypto kayak teknologi dari masa depan karena sifatnya yang desentralisasi, trustless, dan borderless. Tapi walaupun canggih, market tetap dikendalikan oleh faktor manusia: ketakutan, keserakahan, berita, dan hype. Itu sebabnya analisis fundamental bantu kita lihat alasan logis buat investasi jangka panjang, sementara analisis teknikal bantu kita lihat timing yang tepat buat masuk dan keluar pasar.">
+                               Earlier we mentioned that crypto feels like future technology because of its decentralization, trustlessness, and borderless nature. But despite its sophistication, the market is still driven by human factors: fear, greed, news, and hype. That’s why fundamental analysis helps us see the logical reasons for long-term investment, while technical analysis helps us time market entries and exits.
+                            </p>
+
+                            <p data-en="Before Bitcoin, several digital currencies like e-Gold or Liberty Reserve failed because they lacked strong fundamentals and were centralized, making them easy targets for governments. Bitcoin succeeded due to its decentralization and robust blockchain technology. That’s why Bitcoin’s fundamentals are stronger compared to past digital currencies."
+                               data-id="Dulu sebelum Bitcoin, sempat ada proyek-proyek digital currency yang gagal karena nggak ada fundamental kuat. Contohnya kayak e-Gold atau Liberty Reserve yang disikat sama pemerintah karena sistemnya sentralisasi dan gampang diserang. Bitcoin sukses karena desentralisasi dan teknologi blockchain-nya yang kuat. Itu sebabnya analisis fundamental Bitcoin kuat banget dibanding digital currency yang lain.">
+                               Before Bitcoin, several digital currencies like e-Gold or Liberty Reserve failed because they lacked strong fundamentals and were centralized, making them easy targets for governments. Bitcoin succeeded due to its decentralization and robust blockchain technology. That’s why Bitcoin’s fundamentals are stronger compared to past digital currencies.
                             </p>
                             
-                            <div class="topic-image">
+                            <p data-en="Before Bitcoin, several digital currencies like e-Gold or Liberty Reserve failed because they lacked strong fundamentals and were centralized, making them easy targets for governments. Bitcoin succeeded due to its decentralization and robust blockchain technology. That’s why Bitcoin’s fundamentals are stronger compared to past digital currencies."
+                               data-id="Kalau lo mau jadi pemain handal di crypto, nggak cukup cuma ngerti grafik, tapi juga harus paham apa yang bikin proyek itu worth it buat jangka panjang. Dengan dua analisis ini, lo bisa punya pandangan yang lebih tajam dan nggak gampang kebawa arus FOMO atau panik saat market drop.">
+                               Before Bitcoin, several digital currencies like e-Gold or Liberty Reserve failed because they lacked strong fundamentals and were centralized, making them easy targets for governments. Bitcoin succeeded due to its decentralization and robust blockchain technology. That’s why Bitcoin’s fundamentals are stronger compared to past digital currencies.
+                            </p>
+
+                          <!--<div class="topic-image">
                                 <img src="/api/placeholder/600/300" alt="Future Blockchain Applications">
                                 <caption data-en="Visualization of emerging blockchain applications and their potential societal impact"
                                         data-id="Visualisasi aplikasi blockchain yang muncul dan dampak potensial mereka terhadap masyarakat">
                                         Visualization of emerging blockchain applications and their potential societal impact
                                 </caption>
-                            </div>
+                            </div> -->  
                             
                             <p data-en="The regulatory landscape for cryptocurrencies continues to evolve globally, with increasing clarity in some jurisdictions and ongoing uncertainty in others. Finding the balance between consumer protection and innovation-friendly policies remains a challenge for regulators, while the industry itself is developing more sophisticated self-regulatory frameworks and compliance solutions."
                                data-id="Lanskap regulasi untuk kripto terus berkembang secara global, dengan peningkatan kejelasan di beberapa yurisdiksi dan ketidakpastian yang berkelanjutan di yang lain. Menemukan keseimbangan antara perlindungan konsumen dan kebijakan yang ramah inovasi tetap menjadi tantangan bagi regulator, sementara industri itu sendiri mengembangkan kerangka kerja self-regulatory yang lebih canggih dan solusi kepatuhan.">
@@ -332,6 +592,54 @@
                                Perhaps most importantly, the future of cryptocurrency will be determined by its ability to solve real-world problems and create tangible value beyond speculation. Whether through financial inclusion for the unbanked, more efficient cross-border payments, democratized access to investment opportunities, or novel forms of organization and governance, the long-term success of this technology depends on its practical utility in addressing genuine human needs.
                             </p>
                         </article>
+
+
+
+
+
+
+
+                        
+                        <article id="intr" class="topic-article activ">
+                            <h2 data-en="My Personal Journey - The Truth Behind the Charts" data-id="Pengalaman Pribadi Saya - Kebenaran di Balik Grafik">My Personal Journey – The Truth Behind the Charts</h2>
+                            
+                            <p data-en=""
+                               data-id="">
+                            </p>
+                            
+                            <p data-en=""
+                               data-id="">
+                            </p>
+                            
+                            <p data-en=""
+                               data-id="">
+                            </p>
+
+                            <p data-en=""
+                               data-id="">
+                            </p>
+                            
+                           <!-- <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Cryptocurrency Ecosystem">
+                                <caption data-en="The complex ecosystem of cryptocurrency projects, categories, and their interconnections" 
+                                        data-id="Ekosistem kompleks proyek kripto, kategori, dan keterkaitannya">
+                                        The complex ecosystem of cryptocurrency projects, categories, and their interconnections
+                                </caption>
+                            </div> -->
+                            <p data-en=""
+                               data-id="">
+                            </p>
+
+                            <p data-en=""
+                               data-id="">
+                            </p>
+                        </article>
+
+
+
+
+
+
                         
                         <!-- Comments Section -->
                         <div class="comments-section" id="comments-section">

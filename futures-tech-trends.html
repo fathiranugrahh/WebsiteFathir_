@@ -3,67 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Tech Trends | My Portfolio</title>
+    <title>Futures | My Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="topic-pages.css">
     <link rel="stylesheet" href="comments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-/* Future Tech Header Background */
-        #future-tech-header {
-            background: linear-gradient(to right, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.8)), 
-                        url('/api/placeholder/1200/400');
-            background-size: cover;
-            background-position: center;
-            position: relative;
+        /* TEXT ALIGNMENT FIX - Make paragraphs justified */
+.topic-article p {
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Also apply to other text elements for consistency */
+.topic-article {
+    text-align: justify;
+}
+
+.topic-article h2 {
+    text-align: left; /* Keep headers left-aligned */
+}
+        /* Language Toggle Styles */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(247, 37, 133, 0.2);
+            border-radius: 50px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        #future-tech-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(157, 78, 221, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
-            z-index: 1;
+        .language-toggle:hover {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(247, 37, 133, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(247, 37, 133, 0.2);
         }
 
-        #future-tech-header + .topic-content-section .topic-sidebar {
-            border-left-color: #9d4edd;
+        .language-toggle .lang-icon {
+            font-size: 14px;
+            color: rgba(247, 37, 133, 0.8);
+            transition: color 0.3s ease;
         }
 
-        #future-tech-header + .topic-content-section .sidebar-nav li.active a {
-            background-color: rgba(157, 78, 221, 0.1);
-            color: #9d4edd;
-            border-left-color: #9d4edd;
+        .language-toggle:hover .lang-icon {
+            color: #f72585;
         }
 
-        #future-tech-header + .topic-content-section .topic-article h2 {
-            color: #9d4edd;
+        .language-toggle .lang-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
 
-        #future-tech-header + .topic-content-section .topic-article h2::after {
-            background: linear-gradient(to right, #9d4edd, #c77dff);
+        .language-toggle:hover .lang-text {
+            color: rgba(255, 255, 255, 0.95);
         }
 
-        #future-tech-header + .topic-content-section .topic-title {
-            background: linear-gradient(to right, #9d4edd, #c77dff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .language-toggle .lang-switch {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-left: 4px;
+        }
+
+        /* Animation for language switch */
+        .content-switching {
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .language-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+            }
+            
+            .language-toggle .lang-text {
+                font-size: 12px;
+            }
+            
+            .language-toggle .lang-icon {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="main-wrapper">
+        <!-- Language Toggle -->
+        <div class="language-toggle" id="languageToggle">
+            <i class="fas fa-globe lang-icon"></i>
+            <span class="lang-text" data-en="EN" data-id="ID">EN</span>
+            <span class="lang-switch" data-en="→ ID" data-id="→ EN">→ ID</span>
+        </div>
+
         <div class="container">
             <!-- Topic Header -->
-            <header class="topic-header" id="future-tech-header">
+            <header class="topic-header" id="ai-header">
                 <div class="topic-title-container">
-                    <h1 class="topic-title">Future Tech Trends</h1>
+                    <h1 class="topic-title" data-en="Futures Tech Trends" data-id="Masa Depan Trend Teknologi">Futures Tech Trends</h1>
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> <span>/</span> <span>Future Tech Trends</span>
+                        <a href="index.html" data-en="Home" data-id="Beranda">Home</a> <span>/</span> <span data-en="Futures Tech Trends" data-id="Masa Depan Tekonologi">Futures Tech Trends</span>
                     </div>
                 </div>
             </header>
@@ -75,12 +130,12 @@
                     <aside class="topic-sidebar">
                         <nav class="sidebar-nav">
                             <ul>
-                                <li class="active"><a href="#intro">The Tech Horizon</a></li>
-                                <li><a href="#quantum">Quantum Computing</a></li>
-                                <li><a href="#ar-vr">AR/VR & Metaverse</a></li>
-                                <li><a href="#biotech">Biotechnology</a></li>
-                                <li><a href="#sustainable">Sustainable Tech</a></li>
-                                <li><a href="#predictions">Future Predictions</a></li>
+                                <li class="active"><a href="#intro" data-en="Introduction to AI" data-id="Pengenalan AI">Introduction to AI</a></li>
+                                <li><a href="#ml" data-en="Machine Learning" data-id="Machine Learning">Machine Learning</a></li>
+                                <li><a href="#nlp" data-en="Natural Language Processing" data-id="Pemrosesan Bahasa Alami">Natural Language Processing</a></li>
+                                <li><a href="#cv" data-en="Computer Vision" data-id="Computer Vision">Computer Vision</a></li>
+                                <li><a href="#ethics" data-en="AI Ethics" data-id="Etika AI">AI Ethics</a></li>
+                                <li><a href="#future" data-en="Future of AI" data-id="Masa Depan AI">Future of AI</a></li>
                             </ul>
                         </nav>
                         
@@ -88,7 +143,7 @@
                         <div class="comment-toggle-container">
                             <button class="comment-toggle-btn" onclick="toggleComments()">
                                 <i class="fas fa-comments"></i>
-                                <span>Comments</span>
+                                <span data-en="Comments" data-id="Komentar">Comments</span>
                                 <span class="comment-count" id="total-comments">0</span>
                             </button>
                         </div>
@@ -97,101 +152,197 @@
                     <!-- Main Content Area -->
                     <main class="topic-main-content">
                         <article id="intro" class="topic-article active">
-                            <h2>The Tech Horizon</h2>
-                            <p>The technological landscape is evolving at an unprecedented pace, reshaping how we work, communicate, and perceive reality itself. As we stand at the threshold of the next digital revolution, emerging technologies promise to transform society in ways we're only beginning to understand.</p>
+                            <h2 data-en="Introduction to AI" data-id="Pengenalan Kecerdasan Buatan">Introduction to AI</h2>
                             
-                            <p>From quantum computers that could solve problems considered impossible today, to biotechnology that blurs the line between digital and biological systems, the future holds extraordinary possibilities. These innovations aren't just incremental improvements—they represent fundamental shifts in the capabilities of human civilization.</p>
+                            <p data-en="Artificial Intelligence represents one of the most transformative technologies of our era. As computing power continues to increase and algorithms become more sophisticated, AI systems are becoming increasingly integrated into our daily lives, reshaping industries and challenging our understanding of what machines can accomplish."
+                               data-id="Kecerdasan Buatan merupakan salah satu teknologi paling transformatif di era kita. Seiring dengan peningkatan daya komputasi dan algoritma yang semakin canggih, sistem AI semakin terintegrasi dalam kehidupan sehari-hari, mengubah industri dan menantang pemahaman kita tentang apa yang dapat dicapai mesin.">
+                               Artificial Intelligence represents one of the most transformative technologies of our era. As computing power continues to increase and algorithms become more sophisticated, AI systems are becoming increasingly integrated into our daily lives, reshaping industries and challenging our understanding of what machines can accomplish.
+                            </p>
                             
-                            <p>My exploration of future tech trends focuses on understanding not just what's technically possible, but how these technologies will integrate into our daily lives, reshape industries, and address global challenges. The convergence of multiple technological domains creates opportunities for solutions we haven't yet imagined.</p>
+                            <p data-en="The field of AI encompasses a range of approaches and techniques that enable computers to perform tasks that typically require human intelligence. These include learning from experience, recognizing patterns, understanding natural language, and making decisions in complex environments with uncertainty."
+                               data-id="Bidang AI mencakup berbagai pendekatan dan teknik yang memungkinkan komputer melakukan tugas yang biasanya memerlukan kecerdasan manusia. Ini termasuk belajar dari pengalaman, mengenali pola, memahami bahasa alami, dan membuat keputusan dalam lingkungan kompleks dengan ketidakpastian.">
+                               The field of AI encompasses a range of approaches and techniques that enable computers to perform tasks that typically require human intelligence. These include learning from experience, recognizing patterns, understanding natural language, and making decisions in complex environments with uncertainty.
+                            </p>
                             
-                            <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Future Technology Concepts">
-                                <caption>Conceptual visualization of emerging technologies converging to shape our future</caption>
-                            </div>
-                            
-                            <p>The most exciting aspect of studying future tech trends is recognizing patterns that suggest where breakthrough innovations might emerge. By understanding the trajectory of current research and development, we can better prepare for a future that will likely be more transformed than we expect, yet perhaps different from what we specifically predict.</p>
-                        </article>
-                        
-                        <article id="quantum" class="topic-article">
-                            <h2>Quantum Computing</h2>
-                            <p>Quantum computing represents one of the most revolutionary technological developments of our time, promising to solve certain types of problems exponentially faster than classical computers. This technology harnesses the strange properties of quantum mechanics to perform calculations in fundamentally new ways.</p>
-                            
-                            <p>Unlike classical bits that exist in states of 0 or 1, quantum bits (qubits) can exist in superposition, being both 0 and 1 simultaneously until measured. This, combined with quantum entanglement and interference, allows quantum computers to explore multiple solution paths simultaneously for certain types of problems.</p>
-                            
-                            <p>The potential applications are staggering: drug discovery through molecular simulation, optimization of logistics networks, cryptography and security, financial modeling, and artificial intelligence acceleration. However, current quantum computers are still fragile, requiring extreme conditions to maintain quantum states.</p>
+                            <p data-en="My fascination with AI stems from its interdisciplinary nature, drawing from computer science, mathematics, linguistics, psychology, and philosophy. This convergence of disciplines creates a rich field of study with profound implications for the future of humanity."
+                               data-id="Ketertarikan saya pada AI berasal dari sifat interdisiplinernya, yang mengambil dari ilmu komputer, matematika, linguistik, psikologi, dan filsafat. Konvergensi disiplin ini menciptakan bidang studi yang kaya dengan implikasi mendalam untuk masa depan umat manusia.">
+                               My fascination with AI stems from its interdisciplinary nature, drawing from computer science, mathematics, linguistics, psychology, and philosophy. This convergence of disciplines creates a rich field of study with profound implications for the future of humanity.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Quantum Computing Visualization">
-                                <caption>Visual representation of quantum computing principles and quantum circuits</caption>
+                                <img src="/api/placeholder/600/300" alt="AI Concept Visualization">
+                                <caption data-en="Visual representation of AI concepts and their interconnections"
+                                        data-id="Representasi visual konsep AI dan keterkaitannya">
+                                        Visual representation of AI concepts and their interconnections
+                                </caption>
                             </div>
                             
-                            <p>The race toward "quantum advantage"—where quantum computers outperform classical computers on practical problems—is intensifying. Major tech companies and research institutions are investing billions, while startups explore novel approaches to quantum hardware and algorithms. The eventual breakthrough could reshape entire industries overnight.</p>
+                            <p data-en="Throughout this section, I explore various aspects of artificial intelligence, from technical foundations to philosophical considerations about consciousness and the nature of intelligence itself. I approach these topics both as a practitioner working with AI technologies and as a thoughtful observer contemplating their broader implications for society."
+                               data-id="Di seluruh bagian ini, saya mengeksplorasi berbagai aspek kecerdasan buatan, dari fondasi teknis hingga pertimbangan filosofis tentang kesadaran dan sifat kecerdasan itu sendiri. Saya mendekati topik-topik ini baik sebagai praktisi yang bekerja dengan teknologi AI maupun sebagai pengamat yang bijaksana yang merenungkan implikasinya yang lebih luas untuk masyarakat.">
+                               Throughout this section, I explore various aspects of artificial intelligence, from technical foundations to philosophical considerations about consciousness and the nature of intelligence itself. I approach these topics both as a practitioner working with AI technologies and as a thoughtful observer contemplating their broader implications for society.
+                            </p>
                         </article>
                         
-                        <article id="ar-vr" class="topic-article">
-                            <h2>AR/VR & Metaverse</h2>
-                            <p>Augmented Reality (AR) and Virtual Reality (VR) technologies are converging to create immersive digital experiences that blend the physical and virtual worlds. These technologies are evolving from entertainment novelties to essential tools for work, education, and social interaction.</p>
+                        <article id="ml" class="topic-article">
+                            <h2 data-en="Machine Learning" data-id="Machine Learning">Machine Learning</h2>
                             
-                            <p>AR overlays digital information onto the real world, enhancing our perception and interaction with our environment. From navigation assistance to industrial maintenance, AR applications are becoming increasingly sophisticated and practical. Smart glasses and AR contact lenses represent the next frontier in seamless digital integration.</p>
+                            <p data-en="Machine Learning represents the cornerstone of modern AI development, focusing on systems that can learn from data without being explicitly programmed. This paradigm shift has enabled remarkable advances in pattern recognition, prediction, and automation."
+                               data-id="Machine Learning merupakan landasan utama pengembangan AI modern, berfokus pada sistem yang dapat belajar dari data tanpa diprogram secara eksplisit. Pergeseran paradigma ini telah memungkinkan kemajuan luar biasa dalam pengenalan pola, prediksi, dan otomatisasi.">
+                               Machine Learning represents the cornerstone of modern AI development, focusing on systems that can learn from data without being explicitly programmed. This paradigm shift has enabled remarkable advances in pattern recognition, prediction, and automation.
+                            </p>
                             
-                            <p>VR creates fully immersive digital environments that can transport users to entirely different realities. Beyond gaming, VR is revolutionizing fields like medical training, therapy, remote collaboration, and education. The technology's ability to create presence—the feeling of actually being in a virtual space—opens unprecedented possibilities for human experience.</p>
+                            <p data-en="The basic workflow of machine learning involves collecting data, training a model on that data, and then using the trained model to make predictions or decisions about new data. This seemingly straightforward process has been refined through decades of research into sophisticated approaches that can tackle increasingly complex problems."
+                               data-id="Alur kerja dasar machine learning melibatkan pengumpulan data, melatih model pada data tersebut, dan kemudian menggunakan model yang telah dilatih untuk membuat prediksi atau keputusan tentang data baru. Proses yang tampak sederhana ini telah disempurnakan melalui penelitian selama puluhan tahun menjadi pendekatan canggih yang dapat mengatasi masalah yang semakin kompleks.">
+                               The basic workflow of machine learning involves collecting data, training a model on that data, and then using the trained model to make predictions or decisions about new data. This seemingly straightforward process has been refined through decades of research into sophisticated approaches that can tackle increasingly complex problems.
+                            </p>
+                            
+                            <p data-en="Key areas of machine learning include supervised learning (learning from labeled examples), unsupervised learning (finding patterns in unlabeled data), and reinforcement learning (learning through trial and error interaction with an environment). Each approach has its strengths and applications, from image classification to strategic decision-making."
+                               data-id="Area kunci machine learning mencakup supervised learning (belajar dari contoh berlabel), unsupervised learning (menemukan pola dalam data tanpa label), dan reinforcement learning (belajar melalui interaksi trial and error dengan lingkungan). Setiap pendekatan memiliki kekuatan dan aplikasinya, dari klasifikasi gambar hingga pengambilan keputusan strategis.">
+                               Key areas of machine learning include supervised learning (learning from labeled examples), unsupervised learning (finding patterns in unlabeled data), and reinforcement learning (learning through trial and error interaction with an environment). Each approach has its strengths and applications, from image classification to strategic decision-making.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="AR/VR Applications">
-                                <caption>Diverse applications of AR and VR technologies across different industries</caption>
+                                <img src="/api/placeholder/600/300" alt="Machine Learning Pipeline">
+                                <caption data-en="A typical machine learning pipeline from data collection to model deployment"
+                                        data-id="Pipeline machine learning tipikal dari pengumpulan data hingga deployment model">
+                                        A typical machine learning pipeline from data collection to model deployment
+                                </caption>
                             </div>
                             
-                            <p>The concept of the metaverse—persistent, shared virtual worlds where people can work, play, and socialize—represents the ultimate convergence of these technologies. While still in early stages, the metaverse could fundamentally change how we think about physical location, social interaction, and digital ownership through innovations like NFTs and virtual economies.</p>
+                            <p data-en="Deep learning, a subset of machine learning based on artificial neural networks, has driven many recent breakthroughs. These systems, inspired by the structure of the human brain, have demonstrated remarkable capabilities in areas like language translation, image recognition, and game playing, sometimes exceeding human performance."
+                               data-id="Deep learning, subset dari machine learning yang berdasarkan jaringan saraf tiruan, telah mendorong banyak terobosan terbaru. Sistem ini, yang terinspirasi oleh struktur otak manusia, telah menunjukkan kemampuan luar biasa dalam bidang seperti terjemahan bahasa, pengenalan gambar, dan bermain game, terkadang melebihi kinerja manusia.">
+                               Deep learning, a subset of machine learning based on artificial neural networks, has driven many recent breakthroughs. These systems, inspired by the structure of the human brain, have demonstrated remarkable capabilities in areas like language translation, image recognition, and game playing, sometimes exceeding human performance.
+                            </p>
                         </article>
                         
-                        <article id="biotech" class="topic-article">
-                            <h2>Biotechnology</h2>
-                            <p>Biotechnology is entering a new era where the boundaries between digital technology and biological systems are increasingly blurred. Advances in genetic engineering, synthetic biology, and computational biology are creating possibilities that were pure science fiction just decades ago.</p>
+                        <article id="nlp" class="topic-article">
+                            <h2 data-en="Natural Language Processing" data-id="Pemrosesan Bahasa Alami">Natural Language Processing</h2>
                             
-                            <p>CRISPR gene editing technology has democratized genetic modification, allowing precise changes to DNA sequences. This capability is being applied to treat genetic diseases, enhance crop yields, and even attempt to reverse aging processes. The recent development of base editing and prime editing techniques offers even greater precision and safety.</p>
+                            <p data-en="Natural Language Processing (NLP) focuses on enabling computers to understand, interpret, and generate human language. This field sits at the intersection of linguistics, computer science, and artificial intelligence, working to bridge the gap between human communication and digital data processing."
+                               data-id="Natural Language Processing (NLP) berfokus pada memungkinkan komputer memahami, menginterpretasi, dan menghasilkan bahasa manusia. Bidang ini berada di persimpangan linguistik, ilmu komputer, dan kecerdasan buatan, bekerja untuk menjembatani kesenjangan antara komunikasi manusia dan pemrosesan data digital.">
+                               Natural Language Processing (NLP) focuses on enabling computers to understand, interpret, and generate human language. This field sits at the intersection of linguistics, computer science, and artificial intelligence, working to bridge the gap between human communication and digital data processing.
+                            </p>
                             
-                            <p>Synthetic biology takes this further by engineering entirely new biological systems and organisms. Scientists are creating bacteria that produce pharmaceuticals, algae that generate biofuels, and even biological computers that process information using DNA. These engineered biological systems could provide sustainable solutions to major global challenges.</p>
+                            <p data-en="Recent advances in NLP, particularly through transformer-based architectures like BERT, GPT, and T5, have revolutionized how machines process language. These models, trained on vast corpora of text, have demonstrated unprecedented capabilities in tasks ranging from translation and summarization to question answering and creative writing."
+                               data-id="Kemajuan terbaru dalam NLP, terutama melalui arsitektur berbasis transformer seperti BERT, GPT, dan T5, telah merevolusi cara mesin memproses bahasa. Model-model ini, yang dilatih pada korpus teks yang luas, telah menunjukkan kemampuan yang belum pernah ada sebelumnya dalam tugas-tugas mulai dari terjemahan dan ringkasan hingga menjawab pertanyaan dan penulisan kreatif.">
+                               Recent advances in NLP, particularly through transformer-based architectures like BERT, GPT, and T5, have revolutionized how machines process language. These models, trained on vast corpora of text, have demonstrated unprecedented capabilities in tasks ranging from translation and summarization to question answering and creative writing.
+                            </p>
+                            
+                            <p data-en="The challenges of NLP stem from the inherent complexity of human language: its ambiguity, contextual dependencies, cultural nuances, and constant evolution. Addressing these challenges requires models that can capture not just the statistical patterns of language but also its semantic and pragmatic dimensions."
+                               data-id="Tantangan NLP berasal dari kompleksitas inheren bahasa manusia: ambiguitas, ketergantungan kontekstual, nuansa budaya, dan evolusi yang konstan. Mengatasi tantangan ini memerlukan model yang dapat menangkap tidak hanya pola statistik bahasa tetapi juga dimensi semantik dan pragmatisnya.">
+                               The challenges of NLP stem from the inherent complexity of human language: its ambiguity, contextual dependencies, cultural nuances, and constant evolution. Addressing these challenges requires models that can capture not just the statistical patterns of language but also its semantic and pragmatic dimensions.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Biotechnology Innovation">
-                                <caption>Visualization of genetic engineering and synthetic biology applications</caption>
+                                <img src="/api/placeholder/600/300" alt="NLP Architecture">
+                                <caption data-en="Architecture of modern NLP systems showing the processing pipeline"
+                                        data-id="Arsitektur sistem NLP modern yang menunjukkan pipeline pemrosesan">
+                                        Architecture of modern NLP systems showing the processing pipeline
+                                </caption>
                             </div>
                             
-                            <p>The integration of AI with biotechnology is accelerating discovery and development. Machine learning algorithms can predict protein structures, identify drug targets, and design new biological systems. This convergence of digital and biological technologies may lead to the emergence of truly programmable biology, where living systems can be designed and controlled like software.</p>
+                            <p data-en="My work in NLP has explored both technical innovations in model architecture and thoughtful applications that consider the social impact of language technologies. I'm particularly interested in how these systems can augment human capabilities while addressing concerns about bias, misinformation, and privacy."
+                               data-id="Pekerjaan saya dalam NLP telah mengeksplorasi baik inovasi teknis dalam arsitektur model maupun aplikasi yang bijaksana yang mempertimbangkan dampak sosial teknologi bahasa. Saya sangat tertarik pada bagaimana sistem ini dapat meningkatkan kemampuan manusia sambil mengatasi kekhawatiran tentang bias, misinformasi, dan privasi.">
+                               My work in NLP has explored both technical innovations in model architecture and thoughtful applications that consider the social impact of language technologies. I'm particularly interested in how these systems can augment human capabilities while addressing concerns about bias, misinformation, and privacy.
+                            </p>
                         </article>
                         
-                        <article id="sustainable" class="topic-article">
-                            <h2>Sustainable Tech</h2>
-                            <p>Sustainable technology is no longer just an environmental concern—it's becoming a driving force for innovation and economic growth. As climate change pressures mount and resources become scarcer, breakthrough technologies are emerging to create a more sustainable future while maintaining technological progress.</p>
+                        <article id="cv" class="topic-article">
+                            <h2 data-en="Computer Vision" data-id="Computer Vision">Computer Vision</h2>
                             
-                            <p>Renewable energy technologies continue to advance rapidly, with solar panel efficiency increasing and costs plummeting. Next-generation technologies like perovskite solar cells, floating wind farms, and advanced energy storage systems are making renewable energy more viable and reliable than ever before.</p>
+                            <p data-en="Computer Vision enables machines to interpret and make decisions based on visual information, mirroring the human visual system's ability to understand the world through images and video. This field has seen remarkable progress with the advent of deep learning techniques."
+                               data-id="Computer Vision memungkinkan mesin menginterpretasi dan membuat keputusan berdasarkan informasi visual, mencerminkan kemampuan sistem visual manusia untuk memahami dunia melalui gambar dan video. Bidang ini telah mengalami kemajuan luar biasa dengan munculnya teknik deep learning.">
+                               Computer Vision enables machines to interpret and make decisions based on visual information, mirroring the human visual system's ability to understand the world through images and video. This field has seen remarkable progress with the advent of deep learning techniques.
+                            </p>
                             
-                            <p>Carbon capture and utilization technologies are moving beyond simply storing CO2 to actually converting it into useful products. Direct air capture systems, artificial photosynthesis, and carbon-to-fuel technologies could turn atmospheric carbon dioxide from a waste product into a valuable resource.</p>
+                            <p data-en="Modern computer vision systems can perform tasks ranging from basic image classification to complex scene understanding, object detection, image generation, and real-time video analysis. These capabilities are transforming industries from healthcare and manufacturing to retail and entertainment."
+                               data-id="Sistem computer vision modern dapat melakukan tugas mulai dari klasifikasi gambar dasar hingga pemahaman scene yang kompleks, deteksi objek, generasi gambar, dan analisis video real-time. Kemampuan ini mengubah industri dari healthcare dan manufaktur hingga retail dan hiburan.">
+                               Modern computer vision systems can perform tasks ranging from basic image classification to complex scene understanding, object detection, image generation, and real-time video analysis. These capabilities are transforming industries from healthcare and manufacturing to retail and entertainment.
+                            </p>
+                            
+                            <p data-en="Convolutional Neural Networks (CNNs) have been the primary architectural innovation driving advances in computer vision. These networks, inspired by the organization of the animal visual cortex, are particularly adept at identifying patterns in visual data through specialized filters that detect features at different levels of abstraction."
+                               data-id="Convolutional Neural Networks (CNN) telah menjadi inovasi arsitektur utama yang mendorong kemajuan dalam computer vision. Jaringan ini, yang terinspirasi oleh organisasi korteks visual hewan, sangat mahir dalam mengidentifikasi pola dalam data visual melalui filter khusus yang mendeteksi fitur pada berbagai tingkat abstraksi.">
+                               Convolutional Neural Networks (CNNs) have been the primary architectural innovation driving advances in computer vision. These networks, inspired by the organization of the animal visual cortex, are particularly adept at identifying patterns in visual data through specialized filters that detect features at different levels of abstraction.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Sustainable Technology Solutions">
-                                <caption>Clean energy systems and sustainable technology innovations</caption>
+                                <img src="/api/placeholder/600/300" alt="Computer Vision Example">
+                                <caption data-en="Object detection and semantic segmentation in a complex visual scene"
+                                        data-id="Deteksi objek dan segmentasi semantik dalam scene visual yang kompleks">
+                                        Object detection and semantic segmentation in a complex visual scene
+                                </caption>
                             </div>
                             
-                            <p>Circular economy technologies are redesigning how we produce and consume. Advanced recycling systems, biodegradable materials, and products designed for disassembly are reducing waste and resource consumption. Digital technologies like IoT sensors and blockchain are enabling better tracking and optimization of resource flows throughout supply chains.</p>
+                            <p data-en="Recent developments in generative models have expanded the field beyond analysis to synthesis, with techniques like GANs and diffusion models enabling the creation of realistic images from text descriptions or other images. These generative capabilities raise fascinating questions about creativity, authenticity, and the future of visual media."
+                               data-id="Perkembangan terbaru dalam model generatif telah memperluas bidang ini melampaui analisis ke sintesis, dengan teknik seperti GAN dan diffusion model yang memungkinkan pembuatan gambar realistis dari deskripsi teks atau gambar lain. Kemampuan generatif ini menimbulkan pertanyaan menarik tentang kreativitas, keaslian, dan masa depan media visual.">
+                               Recent developments in generative models have expanded the field beyond analysis to synthesis, with techniques like GANs and diffusion models enabling the creation of realistic images from text descriptions or other images. These generative capabilities raise fascinating questions about creativity, authenticity, and the future of visual media.
+                            </p>
                         </article>
                         
-                        <article id="predictions" class="topic-article">
-                            <h2>Future Predictions</h2>
-                            <p>Predicting the future of technology requires balancing informed analysis with recognition of uncertainty. While specific predictions often prove wrong, understanding current trends and breakthrough trajectories can help us prepare for a range of possible futures.</p>
+                        <article id="ethics" class="topic-article">
+                            <h2 data-en="AI Ethics" data-id="Etika AI">AI Ethics</h2>
                             
-                            <p>In the next decade, we'll likely see the convergence of AI, quantum computing, and biotechnology create entirely new categories of problems we can solve. Brain-computer interfaces may begin to augment human cognition, while advanced materials and nanotechnology could enable technologies that seem impossible today.</p>
+                            <p data-en="As AI systems become more powerful and ubiquitous, the ethical dimensions of their development and deployment grow increasingly important. AI ethics encompasses issues of fairness, accountability, transparency, privacy, and the broader societal impact of artificial intelligence."
+                               data-id="Seiring sistem AI menjadi lebih kuat dan allAda di mana-mana, dimensi etis dari pengembangan dan deployment mereka menjadi semakin penting. Etika AI mencakup isu-isu keadilan, akuntabilitas, transparansi, privasi, dan dampak sosial yang lebih luas dari kecerdasan buatan.">
+                               As AI systems become more powerful and ubiquitous, the ethical dimensions of their development and deployment grow increasingly important. AI ethics encompasses issues of fairness, accountability, transparency, privacy, and the broader societal impact of artificial intelligence.
+                            </p>
                             
-                            <p>The democratization of powerful technologies will continue, with tools that once required massive resources becoming accessible to individuals and small teams. This democratization could accelerate innovation but also create new challenges around regulation, safety, and ethical use of powerful technologies.</p>
+                            <p data-en="Algorithmic bias represents one of the central challenges in AI ethics. When systems are trained on data that reflects historical inequities or contains implicit biases, they risk perpetuating or amplifying these biases in their outputs. Addressing this requires not just technical solutions but also diverse perspectives in the development process."
+                               data-id="Bias algoritma merupakan salah satu tantangan utama dalam etika AI. Ketika sistem dilatih pada data yang mencerminkan ketidakadilan historis atau berisi bias implisit, mereka berisiko melestarikan atau memperkuat bias ini dalam output mereka. Mengatasi hal ini memerlukan tidak hanya solusi teknis tetapi juga perspektif yang beragam dalam proses pengembangan.">
+                               Algorithmic bias represents one of the central challenges in AI ethics. When systems are trained on data that reflects historical inequities or contains implicit biases, they risk perpetuating or amplifying these biases in their outputs. Addressing this requires not just technical solutions but also diverse perspectives in the development process.
+                            </p>
+                            
+                            <p data-en="Transparency and explainability present another crucial dimension of AI ethics. As AI systems make decisions that affect people's lives—from loan approvals to medical diagnoses—there's a growing recognition of the importance of understanding how these decisions are reached and ensuring they can be questioned and corrected when necessary."
+                               data-id="Transparansi dan explainability menghadirkan dimensi penting lain dari etika AI. Ketika sistem AI membuat keputusan yang mempengaruhi kehidupan orang—dari persetujuan pinjaman hingga diagnosis medis—ada pengakuan yang berkembang tentang pentingnya memahami bagaimana keputusan ini dicapai dan memastikan mereka dapat dipertanyakan dan diperbaiki bila perlu.">
+                               Transparency and explainability present another crucial dimension of AI ethics. As AI systems make decisions that affect people's lives—from loan approvals to medical diagnoses—there's a growing recognition of the importance of understanding how these decisions are reached and ensuring they can be questioned and corrected when necessary.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Future Technology Timeline">
-                                <caption>Projected timeline of emerging technology breakthroughs and adoption</caption>
+                                <img src="/api/placeholder/600/300" alt="AI Ethics Framework">
+                                <caption data-en="Conceptual framework for responsible AI development and governance"
+                                        data-id="Kerangka konseptual untuk pengembangan dan governance AI yang bertanggung jawab">
+                                        Conceptual framework for responsible AI development and governance
+                                </caption>
                             </div>
                             
-                            <p>Perhaps most importantly, future technology development will likely be shaped by humanity's greatest challenges: climate change, aging populations, resource scarcity, and inequality. The technologies that succeed will be those that not only push the boundaries of what's possible but also contribute to solving these fundamental human problems. The future will be built by those who can envision technology not just as advancement, but as a tool for human flourishing.</p>
+                            <p data-en="The governance of AI technologies presents complex challenges that span technical, legal, economic, and social domains. Finding the right balance between innovation and regulation, between leveraging AI's benefits and mitigating its risks, requires thoughtful collaboration across disciplines, sectors, and national boundaries."
+                               data-id="Governance teknologi AI menghadirkan tantangan kompleks yang mencakup domain teknis, hukum, ekonomi, dan sosial. Menemukan keseimbangan yang tepat antara inovasi dan regulasi, antara memanfaatkan manfaat AI dan mitigasi risikonya, memerlukan kolaborasi yang bijaksana lintas disiplin, sektor, dan batas nasional.">
+                               The governance of AI technologies presents complex challenges that span technical, legal, economic, and social domains. Finding the right balance between innovation and regulation, between leveraging AI's benefits and mitigating its risks, requires thoughtful collaboration across disciplines, sectors, and national boundaries.
+                            </p>
                         </article>
                         
+                        <article id="future" class="topic-article">
+                            <h2 data-en="Future of AI" data-id="Masa Depan AI">Future of AI</h2>
+                            
+                            <p data-en="Predicting the future of artificial intelligence involves navigating between extraordinary possibilities and significant uncertainties. AI technologies continue to advance at a remarkable pace, opening new frontiers in human-machine collaboration and autonomous systems."
+                               data-id="Memprediksi masa depan kecerdasan buatan melibatkan navigasi antara kemungkinan luar biasa dan ketidakpastian yang signifikan. Teknologi AI terus berkembang dengan kecepatan yang luar biasa, membuka frontier baru dalam kolaborasi manusia-mesin dan sistem otonom.">
+                               Predicting the future of artificial intelligence involves navigating between extraordinary possibilities and significant uncertainties. AI technologies continue to advance at a remarkable pace, opening new frontiers in human-machine collaboration and autonomous systems.
+                            </p>
+                            
+                            <p data-en="Several key trends are shaping AI's evolution: the increase in model scale and computational resources, the integration of multiple modalities (text, image, audio, video), the development of more sample-efficient learning techniques, and the growing focus on aligning AI systems with human values and intentions."
+                               data-id="Beberapa tren kunci membentuk evolusi AI: peningkatan skala model dan sumber daya komputasi, integrasi berbagai modalitas (teks, gambar, audio, video), pengembangan teknik pembelajaran yang lebih efisien sampel, dan fokus yang berkembang pada penyelarasan sistem AI dengan nilai dan intensi manusia.">
+                               Several key trends are shaping AI's evolution: the increase in model scale and computational resources, the integration of multiple modalities (text, image, audio, video), the development of more sample-efficient learning techniques, and the growing focus on aligning AI systems with human values and intentions.
+                            </p>
+                            
+                            <p data-en="The concept of artificial general intelligence (AGI)—AI systems with the breadth and flexibility of human cognition—remains both a long-term research goal and a source of speculation about transformative impacts. Whether and when such systems might emerge remains an open question, but their development would raise profound questions about control, safety, and the nature of intelligence itself."
+                               data-id="Konsep artificial general intelligence (AGI)—sistem AI dengan keluasan dan fleksibilitas kognisi manusia—tetap menjadi tujuan penelitian jangka panjang dan sumber spekulasi tentang dampak transformatif. Apakah dan kapan sistem seperti itu mungkin muncul tetap menjadi pertanyaan terbuka, tetapi pengembangan mereka akan menimbulkan pertanyaan mendalam tentang kontrol, keamanan, dan sifat kecerdasan itu sendiri.">
+                               The concept of artificial general intelligence (AGI)—AI systems with the breadth and flexibility of human cognition—remains both a long-term research goal and a source of speculation about transformative impacts. Whether and when such systems might emerge remains an open question, but their development would raise profound questions about control, safety, and the nature of intelligence itself.
+                            </p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Future AI Concepts">
+                                <caption data-en="Conceptual visualization of future AI capabilities and applications"
+                                        data-id="Visualisasi konseptual kemampuan dan aplikasi AI masa depan">
+                                        Conceptual visualization of future AI capabilities and applications
+                                </caption>
+                            </div>
+                            
+                            <p  data-en="Beyond technical developments, the future of AI will be shaped by how societies choose to develop, deploy, and govern these technologies. The decisions made in the coming years about research priorities, regulatory frameworks, and international cooperation will play a crucial role in determining whether AI serves as a tool for broad human flourishing or exacerbates existing challenges and inequalities."
+                               data-id="Di luar perkembangan teknis, masa depan AI akan dibentuk oleh bagaimana masyarakat memilih untuk mengembangkan, deploy, dan">
+                                Beyond technical developments, the future of AI will be shaped by how societies choose to develop, deploy, and govern these technologies. The decisions made in the coming years about research priorities, regulatory frameworks, and international cooperation will play a crucial role in determining whether AI serves as a tool for broad human flourishing or exacerbates existing challenges and inequalities.
+                              </p>
+                        </article>
+
                         <!-- Comments Section -->
                         <div class="comments-section" id="comments-section">
                             <div class="comments-header">
@@ -248,5 +399,79 @@
     <script src="script.js"></script>
     <script src="topic-script.js"></script>
     <script src="comments.js"></script>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLanguage = 'en';
+
+        function switchLanguage() {
+            const mainContent = document.querySelector('.topic-main-content');
+            mainContent.classList.add('content-switching');
+            
+            setTimeout(() => {
+                currentLanguage = currentLanguage === 'en' ? 'id' : 'en';
+                
+                // Update all elements with data attributes
+                const elements = document.querySelectorAll('[data-en][data-id]');
+                elements.forEach(element => {
+                    const text = element.getAttribute(`data-${currentLanguage}`);
+                    if (text) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = text;
+                        } else {
+                            element.textContent = text;
+                        }
+                    }
+                });
+                
+                // Update language toggle button
+                const langText = document.querySelector('.lang-text');
+                const langSwitch = document.querySelector('.lang-switch');
+                langText.textContent = currentLanguage.toUpperCase();
+                langSwitch.textContent = currentLanguage === 'en' ? '→ ID' : '→ EN';
+                
+                // Update HTML lang attribute
+                document.documentElement.lang = currentLanguage;
+                
+                mainContent.classList.remove('content-switching');
+            }, 200);
+        }
+
+        // Add event listener to language toggle
+        document.getElementById('languageToggle').addEventListener('click', switchLanguage);
+
+        // Smooth scrolling enhancement for sidebar navigation
+        document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update active state
+                    document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                    
+                    // Update visible article
+                    document.querySelectorAll('.topic-article').forEach(article => article.classList.remove('active'));
+                    target.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language state
+            const langText = document.querySelector('.lang-text');
+            const langSwitch = document.querySelector('.lang-switch');
+            langText.textContent = 'EN';
+            langSwitch.textContent = '→ ID';
+        });
+    </script>
 </body>
 </html>
+
+

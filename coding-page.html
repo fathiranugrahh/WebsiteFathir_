@@ -3,145 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Coding | My Portfolio</title>
+    <title>Artificial Intelligence | My Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="topic-pages.css">
     <link rel="stylesheet" href="comments.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Creative Coding Header Background */
-        #creative-coding-header {
-            background: linear-gradient(to right, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.8)), 
-                        url('/api/placeholder/1200/400');
-            background-size: cover;
-            background-position: center;
-            position: relative;
+    /* TEXT ALIGNMENT FIX - Make paragraphs justified */
+.topic-article p {
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Also apply to other text elements for consistency */
+.topic-article {
+    text-align: justify;
+}
+
+.topic-article h2 {
+    text-align: left; /* Keep headers left-aligned */
+}
+        /* Language Toggle Styles */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(247, 37, 133, 0.2);
+            border-radius: 50px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        #creative-coding-header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(0, 255, 127, 0.1) 0%, rgba(10, 10, 10, 0) 70%);
-            z-index: 1;
+        .language-toggle:hover {
+            background: rgba(30, 30, 30, 0.95);
+            border-color: rgba(247, 37, 133, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(247, 37, 133, 0.2);
         }
 
-        #creative-coding-header + .topic-content-section .topic-sidebar {
-            border-left-color: #00ff7f;
+        .language-toggle .lang-icon {
+            font-size: 14px;
+            color: rgba(247, 37, 133, 0.8);
+            transition: color 0.3s ease;
         }
 
-        #creative-coding-header + .topic-content-section .sidebar-nav li.active a {
-            background-color: rgba(0, 255, 127, 0.1);
-            color: #00ff7f;
-            border-left-color: #00ff7f;
+        .language-toggle:hover .lang-icon {
+            color: #f72585;
         }
 
-        #creative-coding-header + .topic-content-section .topic-article h2 {
-            color: #00ff7f;
+        .language-toggle .lang-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
         }
 
-        #creative-coding-header + .topic-content-section .topic-article h2::after {
-            background: linear-gradient(to right, #00ff7f, #00d9ff);
+        .language-toggle:hover .lang-text {
+            color: rgba(255, 255, 255, 0.95);
         }
 
-        #creative-coding-header + .topic-content-section .topic-title {
-            background: linear-gradient(to right, #00ff7f, #00d9ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .language-toggle .lang-switch {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.5);
+            margin-left: 4px;
         }
 
-        /* Creative Coding specific comment styles */
-        #creative-coding-header + .topic-content-section .comment-toggle-btn {
-            background: linear-gradient(135deg, rgba(0, 255, 127, 0.1), rgba(0, 217, 255, 0.1));
-            border-color: rgba(0, 255, 127, 0.3);
+        /* Animation for language switch */
+        .content-switching {
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
         }
 
-        #creative-coding-header + .topic-content-section .comment-toggle-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 127, 0.2), rgba(0, 217, 255, 0.2));
-            border-color: rgba(0, 255, 127, 0.5);
-        }
-
-        #creative-coding-header + .topic-content-section .comment-toggle-btn i {
-            color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .comment-count {
-            background-color: rgba(0, 255, 127, 0.2);
-        }
-
-        #creative-coding-header + .topic-content-section .comments-header h3 {
-            color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .comment-form-container {
-            border-left-color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section input:checked + .slider {
-            background-color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .name-input input:focus,
-        #creative-coding-header + .topic-content-section #comment-text:focus,
-        #creative-coding-header + .topic-content-section .reply-form textarea:focus,
-        #creative-coding-header + .topic-content-section .reply-form .name-input input:focus {
-            border-color: #00ff7f;
-            box-shadow: 0 0 0 3px rgba(0, 255, 127, 0.1);
-        }
-
-        #creative-coding-header + .topic-content-section .submit-btn {
-            background: linear-gradient(135deg, #00ff7f, #00d9ff);
-        }
-
-        #creative-coding-header + .topic-content-section .submit-btn:hover {
-            box-shadow: 0 5px 15px rgba(0, 255, 127, 0.3);
-        }
-
-        #creative-coding-header + .topic-content-section .comment-item:hover {
-            border-left-color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .comment-reply:hover {
-            border-left-color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .author-avatar {
-            background: linear-gradient(135deg, #00ff7f, #00d9ff);
-        }
-
-        #creative-coding-header + .topic-content-section .reply-btn {
-            background: rgba(0, 255, 127, 0.1);
-            border-color: rgba(0, 255, 127, 0.3);
-            color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .reply-btn:hover {
-            background: rgba(0, 255, 127, 0.2);
-            border-color: rgba(0, 255, 127, 0.5);
-        }
-
-        #creative-coding-header + .topic-content-section .reply-form-container {
-            border-left-color: #00ff7f;
-        }
-
-        #creative-coding-header + .topic-content-section .comments-empty i {
-            color: rgba(0, 255, 127, 0.3);
+        /* Responsive */
+        @media (max-width: 768px) {
+            .language-toggle {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+            }
+            
+            .language-toggle .lang-text {
+                font-size: 12px;
+            }
+            
+            .language-toggle .lang-icon {
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="main-wrapper">
+        <!-- Language Toggle -->
+        <div class="language-toggle" id="languageToggle">
+            <i class="fas fa-globe lang-icon"></i>
+            <span class="lang-text" data-en="EN" data-id="ID">EN</span>
+            <span class="lang-switch" data-en="→ ID" data-id="→ EN">→ ID</span>
+        </div>
+
         <div class="container">
             <!-- Topic Header -->
-            <header class="topic-header" id="creative-coding-header">
+            <header class="topic-header" id="ai-header">
                 <div class="topic-title-container">
-                    <h1 class="topic-title">Creative Coding</h1>
+                    <h1 class="topic-title" data-en="Creative Code" data-id="Kode Kreatif">Creative Code</h1>
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> <span>/</span> <span>Creative Coding</span>
+                        <a href="index.html" data-en="Home" data-id="Beranda">Home</a> <span>/</span> <span data-en="Creative Code" data-id="Kecerdasan Buatan">Creative <Code></Code></span>
                     </div>
                 </div>
             </header>
@@ -153,12 +130,12 @@
                     <aside class="topic-sidebar">
                         <nav class="sidebar-nav">
                             <ul>
-                                <li class="active"><a href="#intro">Art Meets Code</a></li>
-                                <li><a href="#generative">Generative Art</a></li>
-                                <li><a href="#interactive">Interactive Media</a></li>
-                                <li><a href="#visualization">Data Visualization</a></li>
-                                <li><a href="#tools">Tools & Frameworks</a></li>
-                                <li><a href="#inspiration">Creative Process</a></li>
+                                <li class="active"><a href="#intro" data-en="Introduction to AI" data-id="Pengenalan AI">Introduction to AI</a></li>
+                                <li><a href="#ml" data-en="Machine Learning" data-id="Machine Learning">Machine Learning</a></li>
+                                <li><a href="#nlp" data-en="Natural Language Processing" data-id="Pemrosesan Bahasa Alami">Natural Language Processing</a></li>
+                                <li><a href="#cv" data-en="Computer Vision" data-id="Computer Vision">Computer Vision</a></li>
+                                <li><a href="#ethics" data-en="AI Ethics" data-id="Etika AI">AI Ethics</a></li>
+                                <li><a href="#future" data-en="Future of AI" data-id="Masa Depan AI">Future of AI</a></li>
                             </ul>
                         </nav>
                         
@@ -166,7 +143,7 @@
                         <div class="comment-toggle-container">
                             <button class="comment-toggle-btn" onclick="toggleComments()">
                                 <i class="fas fa-comments"></i>
-                                <span>Comments</span>
+                                <span data-en="Comments" data-id="Komentar">Comments</span>
                                 <span class="comment-count" id="total-comments">0</span>
                             </button>
                         </div>
@@ -175,101 +152,197 @@
                     <!-- Main Content Area -->
                     <main class="topic-main-content">
                         <article id="intro" class="topic-article active">
-                            <h2>Art Meets Code</h2>
-                            <p>Creative coding represents the intersection where artistic expression meets computational thinking, transforming algorithms into aesthetic experiences. This discipline challenges the traditional boundaries between art and technology, using code as a creative medium to generate visual art, interactive installations, and immersive experiences.</p>
+                            <h2 data-en="Introduction to AI" data-id="Pengenalan Kecerdasan Buatan">Introduction to AI</h2>
                             
-                            <p>The beauty of creative coding lies in its ability to make the abstract tangible. Mathematical concepts like fractals, noise functions, and procedural systems become visual narratives. What starts as lines of code transforms into dynamic, living artworks that can respond, evolve, and surprise even their creators.</p>
+                            <p data-en="Artificial Intelligence represents one of the most transformative technologies of our era. As computing power continues to increase and algorithms become more sophisticated, AI systems are becoming increasingly integrated into our daily lives, reshaping industries and challenging our understanding of what machines can accomplish."
+                               data-id="Kecerdasan Buatan merupakan salah satu teknologi paling transformatif di era kita. Seiring dengan peningkatan daya komputasi dan algoritma yang semakin canggih, sistem AI semakin terintegrasi dalam kehidupan sehari-hari, mengubah industri dan menantang pemahaman kita tentang apa yang dapat dicapai mesin.">
+                               Artificial Intelligence represents one of the most transformative technologies of our era. As computing power continues to increase and algorithms become more sophisticated, AI systems are becoming increasingly integrated into our daily lives, reshaping industries and challenging our understanding of what machines can accomplish.
+                            </p>
                             
-                            <p>My journey into creative coding began with curiosity about how digital art is made and evolved into a deep appreciation for the unique aesthetic possibilities that emerge when creativity is constrained and channeled through computational logic. The process teaches patience, experimentation, and the beauty of controlled randomness.</p>
+                            <p data-en="The field of AI encompasses a range of approaches and techniques that enable computers to perform tasks that typically require human intelligence. These include learning from experience, recognizing patterns, understanding natural language, and making decisions in complex environments with uncertainty."
+                               data-id="Bidang AI mencakup berbagai pendekatan dan teknik yang memungkinkan komputer melakukan tugas yang biasanya memerlukan kecerdasan manusia. Ini termasuk belajar dari pengalaman, mengenali pola, memahami bahasa alami, dan membuat keputusan dalam lingkungan kompleks dengan ketidakpastian.">
+                               The field of AI encompasses a range of approaches and techniques that enable computers to perform tasks that typically require human intelligence. These include learning from experience, recognizing patterns, understanding natural language, and making decisions in complex environments with uncertainty.
+                            </p>
                             
-                            <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Creative Coding Art Examples">
-                                <caption>Examples of generative art and creative coding projects showcasing algorithmic beauty</caption>
-                            </div>
-                            
-                            <p>Creative coding is democratizing art creation by providing tools that allow anyone to experiment with complex visual systems. The community around creative coding is vibrant and collaborative, sharing techniques, inspiring each other, and pushing the boundaries of what's possible when art and computation converge.</p>
-                        </article>
-                        
-                        <article id="generative" class="topic-article">
-                            <h2>Generative Art</h2>
-                            <p>Generative art represents perhaps the purest form of creative coding, where artists create systems and algorithms that generate artwork autonomously. Instead of directly creating the final piece, the artist designs the rules, parameters, and constraints that guide the creative process, allowing the computer to explore variations and possibilities.</p>
-                            
-                            <p>The fascination with generative art stems from its ability to produce infinite variations from finite rules. A single algorithm can create thousands of unique pieces, each following the same underlying logic but expressing different visual outcomes. This approach mirrors natural processes like crystal formation, plant growth, and fluid dynamics.</p>
-                            
-                            <p>Key techniques in generative art include procedural noise (Perlin noise, simplex noise), L-systems for organic growth patterns, cellular automata for emergent behaviors, and particle systems for dynamic simulations. These mathematical foundations become the building blocks for complex visual narratives.</p>
+                            <p data-en="My fascination with AI stems from its interdisciplinary nature, drawing from computer science, mathematics, linguistics, psychology, and philosophy. This convergence of disciplines creates a rich field of study with profound implications for the future of humanity."
+                               data-id="Ketertarikan saya pada AI berasal dari sifat interdisiplinernya, yang mengambil dari ilmu komputer, matematika, linguistik, psikologi, dan filsafat. Konvergensi disiplin ini menciptakan bidang studi yang kaya dengan implikasi mendalam untuk masa depan umat manusia.">
+                               My fascination with AI stems from its interdisciplinary nature, drawing from computer science, mathematics, linguistics, psychology, and philosophy. This convergence of disciplines creates a rich field of study with profound implications for the future of humanity.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Generative Art Process">
-                                <caption>The process of creating generative art from algorithm to final visual output</caption>
+                                <img src="/api/placeholder/600/300" alt="AI Concept Visualization">
+                                <caption data-en="Visual representation of AI concepts and their interconnections"
+                                        data-id="Representasi visual konsep AI dan keterkaitannya">
+                                        Visual representation of AI concepts and their interconnections
+                                </caption>
                             </div>
                             
-                            <p>Modern generative art often incorporates machine learning techniques, using neural networks to generate new artworks based on training data. This fusion of traditional algorithmic approaches with AI creates new possibilities for artistic expression, raising questions about authorship, creativity, and the nature of art itself.</p>
+                            <p data-en="Throughout this section, I explore various aspects of artificial intelligence, from technical foundations to philosophical considerations about consciousness and the nature of intelligence itself. I approach these topics both as a practitioner working with AI technologies and as a thoughtful observer contemplating their broader implications for society."
+                               data-id="Di seluruh bagian ini, saya mengeksplorasi berbagai aspek kecerdasan buatan, dari fondasi teknis hingga pertimbangan filosofis tentang kesadaran dan sifat kecerdasan itu sendiri. Saya mendekati topik-topik ini baik sebagai praktisi yang bekerja dengan teknologi AI maupun sebagai pengamat yang bijaksana yang merenungkan implikasinya yang lebih luas untuk masyarakat.">
+                               Throughout this section, I explore various aspects of artificial intelligence, from technical foundations to philosophical considerations about consciousness and the nature of intelligence itself. I approach these topics both as a practitioner working with AI technologies and as a thoughtful observer contemplating their broader implications for society.
+                            </p>
                         </article>
                         
-                        <article id="interactive" class="topic-article">
-                            <h2>Interactive Media</h2>
-                            <p>Interactive media in creative coding transforms passive viewers into active participants, creating responsive environments that react to user input, environmental data, or real-time information. These systems blur the line between artwork and interface, creating experiences that are unique to each interaction.</p>
+                        <article id="ml" class="topic-article">
+                            <h2 data-en="Machine Learning" data-id="Machine Learning">Machine Learning</h2>
                             
-                            <p>The challenge of interactive media lies in designing systems that are both technically robust and artistically meaningful. The interaction itself becomes part of the artistic statement, requiring careful consideration of how user agency affects the aesthetic experience and narrative flow.</p>
+                            <p data-en="Machine Learning represents the cornerstone of modern AI development, focusing on systems that can learn from data without being explicitly programmed. This paradigm shift has enabled remarkable advances in pattern recognition, prediction, and automation."
+                               data-id="Machine Learning merupakan landasan utama pengembangan AI modern, berfokus pada sistem yang dapat belajar dari data tanpa diprogram secara eksplisit. Pergeseran paradigma ini telah memungkinkan kemajuan luar biasa dalam pengenalan pola, prediksi, dan otomatisasi.">
+                               Machine Learning represents the cornerstone of modern AI development, focusing on systems that can learn from data without being explicitly programmed. This paradigm shift has enabled remarkable advances in pattern recognition, prediction, and automation.
+                            </p>
                             
-                            <p>Common input methods include mouse and keyboard interaction, touch and gesture recognition, computer vision for movement tracking, microphone input for sound responsiveness, and sensor data from environmental conditions. Each input method opens different possibilities for creative expression and user engagement.</p>
+                            <p data-en="The basic workflow of machine learning involves collecting data, training a model on that data, and then using the trained model to make predictions or decisions about new data. This seemingly straightforward process has been refined through decades of research into sophisticated approaches that can tackle increasingly complex problems."
+                               data-id="Alur kerja dasar machine learning melibatkan pengumpulan data, melatih model pada data tersebut, dan kemudian menggunakan model yang telah dilatih untuk membuat prediksi atau keputusan tentang data baru. Proses yang tampak sederhana ini telah disempurnakan melalui penelitian selama puluhan tahun menjadi pendekatan canggih yang dapat mengatasi masalah yang semakin kompleks.">
+                               The basic workflow of machine learning involves collecting data, training a model on that data, and then using the trained model to make predictions or decisions about new data. This seemingly straightforward process has been refined through decades of research into sophisticated approaches that can tackle increasingly complex problems.
+                            </p>
+                            
+                            <p data-en="Key areas of machine learning include supervised learning (learning from labeled examples), unsupervised learning (finding patterns in unlabeled data), and reinforcement learning (learning through trial and error interaction with an environment). Each approach has its strengths and applications, from image classification to strategic decision-making."
+                               data-id="Area kunci machine learning mencakup supervised learning (belajar dari contoh berlabel), unsupervised learning (menemukan pola dalam data tanpa label), dan reinforcement learning (belajar melalui interaksi trial and error dengan lingkungan). Setiap pendekatan memiliki kekuatan dan aplikasinya, dari klasifikasi gambar hingga pengambilan keputusan strategis.">
+                               Key areas of machine learning include supervised learning (learning from labeled examples), unsupervised learning (finding patterns in unlabeled data), and reinforcement learning (learning through trial and error interaction with an environment). Each approach has its strengths and applications, from image classification to strategic decision-making.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Interactive Media Installation">
-                                <caption>Interactive media installation responding to user presence and movement</caption>
+                                <img src="/api/placeholder/600/300" alt="Machine Learning Pipeline">
+                                <caption data-en="A typical machine learning pipeline from data collection to model deployment"
+                                        data-id="Pipeline machine learning tipikal dari pengumpulan data hingga deployment model">
+                                        A typical machine learning pipeline from data collection to model deployment
+                                </caption>
                             </div>
                             
-                            <p>Web-based interactive media has become increasingly sophisticated with modern browser capabilities, WebGL for 3D graphics, Web Audio API for real-time sound processing, and WebRTC for camera and microphone access. These technologies enable complex interactive experiences that can reach global audiences through web browsers.</p>
+                            <p data-en="Deep learning, a subset of machine learning based on artificial neural networks, has driven many recent breakthroughs. These systems, inspired by the structure of the human brain, have demonstrated remarkable capabilities in areas like language translation, image recognition, and game playing, sometimes exceeding human performance."
+                               data-id="Deep learning, subset dari machine learning yang berdasarkan jaringan saraf tiruan, telah mendorong banyak terobosan terbaru. Sistem ini, yang terinspirasi oleh struktur otak manusia, telah menunjukkan kemampuan luar biasa dalam bidang seperti terjemahan bahasa, pengenalan gambar, dan bermain game, terkadang melebihi kinerja manusia.">
+                               Deep learning, a subset of machine learning based on artificial neural networks, has driven many recent breakthroughs. These systems, inspired by the structure of the human brain, have demonstrated remarkable capabilities in areas like language translation, image recognition, and game playing, sometimes exceeding human performance.
+                            </p>
                         </article>
                         
-                        <article id="visualization" class="topic-article">
-                            <h2>Data Visualization</h2>
-                            <p>Data visualization in creative coding goes beyond traditional charts and graphs to create compelling visual narratives that make complex information accessible and engaging. This field combines statistical rigor with aesthetic sensibility to reveal patterns, trends, and stories hidden within data.</p>
+                        <article id="nlp" class="topic-article">
+                            <h2 data-en="Natural Language Processing" data-id="Pemrosesan Bahasa Alami">Natural Language Processing</h2>
                             
-                            <p>Creative data visualization often challenges conventional presentation methods, using artistic approaches to represent information in ways that are both informative and emotionally resonant. The goal is to create visualizations that not only communicate data accurately but also inspire curiosity and understanding.</p>
+                            <p data-en="Natural Language Processing (NLP) focuses on enabling computers to understand, interpret, and generate human language. This field sits at the intersection of linguistics, computer science, and artificial intelligence, working to bridge the gap between human communication and digital data processing."
+                               data-id="Natural Language Processing (NLP) berfokus pada memungkinkan komputer memahami, menginterpretasi, dan menghasilkan bahasa manusia. Bidang ini berada di persimpangan linguistik, ilmu komputer, dan kecerdasan buatan, bekerja untuk menjembatani kesenjangan antara komunikasi manusia dan pemrosesan data digital.">
+                               Natural Language Processing (NLP) focuses on enabling computers to understand, interpret, and generate human language. This field sits at the intersection of linguistics, computer science, and artificial intelligence, working to bridge the gap between human communication and digital data processing.
+                            </p>
                             
-                            <p>Effective data visualization requires understanding both the data being represented and the audience consuming it. This involves choosing appropriate visual encodings, considering color theory and accessibility, designing clear hierarchies, and creating smooth animations that guide the viewer's attention through complex information spaces.</p>
+                            <p data-en="Recent advances in NLP, particularly through transformer-based architectures like BERT, GPT, and T5, have revolutionized how machines process language. These models, trained on vast corpora of text, have demonstrated unprecedented capabilities in tasks ranging from translation and summarization to question answering and creative writing."
+                               data-id="Kemajuan terbaru dalam NLP, terutama melalui arsitektur berbasis transformer seperti BERT, GPT, dan T5, telah merevolusi cara mesin memproses bahasa. Model-model ini, yang dilatih pada korpus teks yang luas, telah menunjukkan kemampuan yang belum pernah ada sebelumnya dalam tugas-tugas mulai dari terjemahan dan ringkasan hingga menjawab pertanyaan dan penulisan kreatif.">
+                               Recent advances in NLP, particularly through transformer-based architectures like BERT, GPT, and T5, have revolutionized how machines process language. These models, trained on vast corpora of text, have demonstrated unprecedented capabilities in tasks ranging from translation and summarization to question answering and creative writing.
+                            </p>
+                            
+                            <p data-en="The challenges of NLP stem from the inherent complexity of human language: its ambiguity, contextual dependencies, cultural nuances, and constant evolution. Addressing these challenges requires models that can capture not just the statistical patterns of language but also its semantic and pragmatic dimensions."
+                               data-id="Tantangan NLP berasal dari kompleksitas inheren bahasa manusia: ambiguitas, ketergantungan kontekstual, nuansa budaya, dan evolusi yang konstan. Mengatasi tantangan ini memerlukan model yang dapat menangkap tidak hanya pola statistik bahasa tetapi juga dimensi semantik dan pragmatisnya.">
+                               The challenges of NLP stem from the inherent complexity of human language: its ambiguity, contextual dependencies, cultural nuances, and constant evolution. Addressing these challenges requires models that can capture not just the statistical patterns of language but also its semantic and pragmatic dimensions.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Creative Data Visualization">
-                                <caption>Creative approaches to data visualization blending information design with artistic expression</caption>
+                                <img src="/api/placeholder/600/300" alt="NLP Architecture">
+                                <caption data-en="Architecture of modern NLP systems showing the processing pipeline"
+                                        data-id="Arsitektur sistem NLP modern yang menunjukkan pipeline pemrosesan">
+                                        Architecture of modern NLP systems showing the processing pipeline
+                                </caption>
                             </div>
                             
-                            <p>Modern data visualization tools enable real-time updates, interactive exploration, and multi-dimensional representations. Techniques like particle systems for showing data flows, network diagrams for relationship visualization, and procedural generation for handling large datasets create new possibilities for understanding complex information through visual means.</p>
+                            <p data-en="My work in NLP has explored both technical innovations in model architecture and thoughtful applications that consider the social impact of language technologies. I'm particularly interested in how these systems can augment human capabilities while addressing concerns about bias, misinformation, and privacy."
+                               data-id="Pekerjaan saya dalam NLP telah mengeksplorasi baik inovasi teknis dalam arsitektur model maupun aplikasi yang bijaksana yang mempertimbangkan dampak sosial teknologi bahasa. Saya sangat tertarik pada bagaimana sistem ini dapat meningkatkan kemampuan manusia sambil mengatasi kekhawatiran tentang bias, misinformasi, dan privasi.">
+                               My work in NLP has explored both technical innovations in model architecture and thoughtful applications that consider the social impact of language technologies. I'm particularly interested in how these systems can augment human capabilities while addressing concerns about bias, misinformation, and privacy.
+                            </p>
                         </article>
                         
-                        <article id="tools" class="topic-article">
-                            <h2>Tools & Frameworks</h2>
-                            <p>The creative coding ecosystem offers a rich variety of tools and frameworks, each with its own strengths and aesthetic possibilities. Choosing the right tool depends on the project goals, technical requirements, and personal preferences, but mastering multiple platforms opens up different creative pathways.</p>
+                        <article id="cv" class="topic-article">
+                            <h2 data-en="Computer Vision" data-id="Computer Vision">Computer Vision</h2>
                             
-                            <p>Processing and p5.js remain foundational tools in creative coding, offering accessible entry points with extensive documentation and community support. These platforms prioritize ease of use and rapid prototyping, making them ideal for learning and experimentation while still being powerful enough for professional work.</p>
+                            <p data-en="Computer Vision enables machines to interpret and make decisions based on visual information, mirroring the human visual system's ability to understand the world through images and video. This field has seen remarkable progress with the advent of deep learning techniques."
+                               data-id="Computer Vision memungkinkan mesin menginterpretasi dan membuat keputusan berdasarkan informasi visual, mencerminkan kemampuan sistem visual manusia untuk memahami dunia melalui gambar dan video. Bidang ini telah mengalami kemajuan luar biasa dengan munculnya teknik deep learning.">
+                               Computer Vision enables machines to interpret and make decisions based on visual information, mirroring the human visual system's ability to understand the world through images and video. This field has seen remarkable progress with the advent of deep learning techniques.
+                            </p>
                             
-                            <p>For more complex projects, frameworks like openFrameworks, Cinder, and Unity provide deeper system access and performance optimization. Web-based tools like Three.js, D3.js, and Paper.js enable browser-based creative coding with increasing sophistication and performance capabilities.</p>
+                            <p data-en="Modern computer vision systems can perform tasks ranging from basic image classification to complex scene understanding, object detection, image generation, and real-time video analysis. These capabilities are transforming industries from healthcare and manufacturing to retail and entertainment."
+                               data-id="Sistem computer vision modern dapat melakukan tugas mulai dari klasifikasi gambar dasar hingga pemahaman scene yang kompleks, deteksi objek, generasi gambar, dan analisis video real-time. Kemampuan ini mengubah industri dari healthcare dan manufaktur hingga retail dan hiburan.">
+                               Modern computer vision systems can perform tasks ranging from basic image classification to complex scene understanding, object detection, image generation, and real-time video analysis. These capabilities are transforming industries from healthcare and manufacturing to retail and entertainment.
+                            </p>
+                            
+                            <p data-en="Convolutional Neural Networks (CNNs) have been the primary architectural innovation driving advances in computer vision. These networks, inspired by the organization of the animal visual cortex, are particularly adept at identifying patterns in visual data through specialized filters that detect features at different levels of abstraction."
+                               data-id="Convolutional Neural Networks (CNN) telah menjadi inovasi arsitektur utama yang mendorong kemajuan dalam computer vision. Jaringan ini, yang terinspirasi oleh organisasi korteks visual hewan, sangat mahir dalam mengidentifikasi pola dalam data visual melalui filter khusus yang mendeteksi fitur pada berbagai tingkat abstraksi.">
+                               Convolutional Neural Networks (CNNs) have been the primary architectural innovation driving advances in computer vision. These networks, inspired by the organization of the animal visual cortex, are particularly adept at identifying patterns in visual data through specialized filters that detect features at different levels of abstraction.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Creative Coding Tools">
-                                <caption>Overview of popular creative coding tools and frameworks with their strengths</caption>
+                                <img src="/api/placeholder/600/300" alt="Computer Vision Example">
+                                <caption data-en="Object detection and semantic segmentation in a complex visual scene"
+                                        data-id="Deteksi objek dan segmentasi semantik dalam scene visual yang kompleks">
+                                        Object detection and semantic segmentation in a complex visual scene
+                                </caption>
                             </div>
                             
-                            <p>Emerging tools are incorporating AI assistance, visual programming interfaces, and cloud-based collaboration features. The trend toward more accessible tools democratizes creative coding while advanced frameworks continue to push technical boundaries, ensuring that creators at all levels can find appropriate tools for their vision.</p>
+                            <p data-en="Recent developments in generative models have expanded the field beyond analysis to synthesis, with techniques like GANs and diffusion models enabling the creation of realistic images from text descriptions or other images. These generative capabilities raise fascinating questions about creativity, authenticity, and the future of visual media."
+                               data-id="Perkembangan terbaru dalam model generatif telah memperluas bidang ini melampaui analisis ke sintesis, dengan teknik seperti GAN dan diffusion model yang memungkinkan pembuatan gambar realistis dari deskripsi teks atau gambar lain. Kemampuan generatif ini menimbulkan pertanyaan menarik tentang kreativitas, keaslian, dan masa depan media visual.">
+                               Recent developments in generative models have expanded the field beyond analysis to synthesis, with techniques like GANs and diffusion models enabling the creation of realistic images from text descriptions or other images. These generative capabilities raise fascinating questions about creativity, authenticity, and the future of visual media.
+                            </p>
                         </article>
                         
-                        <article id="inspiration" class="topic-article">
-                            <h2>Creative Process</h2>
-                            <p>The creative process in coding-based art is unique, combining the iterative nature of programming with the intuitive aspects of artistic creation. This process involves cycles of experimentation, debugging, refinement, and serendipitous discovery that often lead to unexpected and beautiful results.</p>
+                        <article id="ethics" class="topic-article">
+                            <h2 data-en="AI Ethics" data-id="Etika AI">AI Ethics</h2>
                             
-                            <p>Inspiration for creative coding projects can come from many sources: natural patterns like cellular structures or weather systems, mathematical concepts like fractals or topology, cultural artifacts, music and sound, or abstract concepts like time and memory. The key is translating these inspirations into computational systems that can generate meaningful visual experiences.</p>
+                            <p data-en="As AI systems become more powerful and ubiquitous, the ethical dimensions of their development and deployment grow increasingly important. AI ethics encompasses issues of fairness, accountability, transparency, privacy, and the broader societal impact of artificial intelligence."
+                               data-id="Seiring sistem AI menjadi lebih kuat dan allAda di mana-mana, dimensi etis dari pengembangan dan deployment mereka menjadi semakin penting. Etika AI mencakup isu-isu keadilan, akuntabilitas, transparansi, privasi, dan dampak sosial yang lebih luas dari kecerdasan buatan.">
+                               As AI systems become more powerful and ubiquitous, the ethical dimensions of their development and deployment grow increasingly important. AI ethics encompasses issues of fairness, accountability, transparency, privacy, and the broader societal impact of artificial intelligence.
+                            </p>
                             
-                            <p>The iterative nature of creative coding means that projects often evolve significantly from their initial conception. What starts as a simple sketch might develop into a complex interactive system, or a technical experiment might reveal unexpected aesthetic possibilities that become the focus of the final work.</p>
+                            <p data-en="Algorithmic bias represents one of the central challenges in AI ethics. When systems are trained on data that reflects historical inequities or contains implicit biases, they risk perpetuating or amplifying these biases in their outputs. Addressing this requires not just technical solutions but also diverse perspectives in the development process."
+                               data-id="Bias algoritma merupakan salah satu tantangan utama dalam etika AI. Ketika sistem dilatih pada data yang mencerminkan ketidakadilan historis atau berisi bias implisit, mereka berisiko melestarikan atau memperkuat bias ini dalam output mereka. Mengatasi hal ini memerlukan tidak hanya solusi teknis tetapi juga perspektif yang beragam dalam proses pengembangan.">
+                               Algorithmic bias represents one of the central challenges in AI ethics. When systems are trained on data that reflects historical inequities or contains implicit biases, they risk perpetuating or amplifying these biases in their outputs. Addressing this requires not just technical solutions but also diverse perspectives in the development process.
+                            </p>
+                            
+                            <p data-en="Transparency and explainability present another crucial dimension of AI ethics. As AI systems make decisions that affect people's lives—from loan approvals to medical diagnoses—there's a growing recognition of the importance of understanding how these decisions are reached and ensuring they can be questioned and corrected when necessary."
+                               data-id="Transparansi dan explainability menghadirkan dimensi penting lain dari etika AI. Ketika sistem AI membuat keputusan yang mempengaruhi kehidupan orang—dari persetujuan pinjaman hingga diagnosis medis—ada pengakuan yang berkembang tentang pentingnya memahami bagaimana keputusan ini dicapai dan memastikan mereka dapat dipertanyakan dan diperbaiki bila perlu.">
+                               Transparency and explainability present another crucial dimension of AI ethics. As AI systems make decisions that affect people's lives—from loan approvals to medical diagnoses—there's a growing recognition of the importance of understanding how these decisions are reached and ensuring they can be questioned and corrected when necessary.
+                            </p>
                             
                             <div class="topic-image">
-                                <img src="/api/placeholder/600/300" alt="Creative Coding Process">
-                                <caption>The iterative creative process in coding art from initial concept to final implementation</caption>
+                                <img src="/api/placeholder/600/300" alt="AI Ethics Framework">
+                                <caption data-en="Conceptual framework for responsible AI development and governance"
+                                        data-id="Kerangka konseptual untuk pengembangan dan governance AI yang bertanggung jawab">
+                                        Conceptual framework for responsible AI development and governance
+                                </caption>
                             </div>
                             
-                            <p>Documentation and sharing are integral parts of the creative coding process. The community values transparency about techniques and processes, leading to a culture of learning and collaboration. This openness accelerates innovation and helps newcomers learn from experienced practitioners, continuing the cycle of creative and technical advancement.</p>
+                            <p data-en="The governance of AI technologies presents complex challenges that span technical, legal, economic, and social domains. Finding the right balance between innovation and regulation, between leveraging AI's benefits and mitigating its risks, requires thoughtful collaboration across disciplines, sectors, and national boundaries."
+                               data-id="Governance teknologi AI menghadirkan tantangan kompleks yang mencakup domain teknis, hukum, ekonomi, dan sosial. Menemukan keseimbangan yang tepat antara inovasi dan regulasi, antara memanfaatkan manfaat AI dan mitigasi risikonya, memerlukan kolaborasi yang bijaksana lintas disiplin, sektor, dan batas nasional.">
+                               The governance of AI technologies presents complex challenges that span technical, legal, economic, and social domains. Finding the right balance between innovation and regulation, between leveraging AI's benefits and mitigating its risks, requires thoughtful collaboration across disciplines, sectors, and national boundaries.
+                            </p>
                         </article>
                         
+                        <article id="future" class="topic-article">
+                            <h2 data-en="Future of AI" data-id="Masa Depan AI">Future of AI</h2>
+                            
+                            <p data-en="Predicting the future of artificial intelligence involves navigating between extraordinary possibilities and significant uncertainties. AI technologies continue to advance at a remarkable pace, opening new frontiers in human-machine collaboration and autonomous systems."
+                               data-id="Memprediksi masa depan kecerdasan buatan melibatkan navigasi antara kemungkinan luar biasa dan ketidakpastian yang signifikan. Teknologi AI terus berkembang dengan kecepatan yang luar biasa, membuka frontier baru dalam kolaborasi manusia-mesin dan sistem otonom.">
+                               Predicting the future of artificial intelligence involves navigating between extraordinary possibilities and significant uncertainties. AI technologies continue to advance at a remarkable pace, opening new frontiers in human-machine collaboration and autonomous systems.
+                            </p>
+                            
+                            <p data-en="Several key trends are shaping AI's evolution: the increase in model scale and computational resources, the integration of multiple modalities (text, image, audio, video), the development of more sample-efficient learning techniques, and the growing focus on aligning AI systems with human values and intentions."
+                               data-id="Beberapa tren kunci membentuk evolusi AI: peningkatan skala model dan sumber daya komputasi, integrasi berbagai modalitas (teks, gambar, audio, video), pengembangan teknik pembelajaran yang lebih efisien sampel, dan fokus yang berkembang pada penyelarasan sistem AI dengan nilai dan intensi manusia.">
+                               Several key trends are shaping AI's evolution: the increase in model scale and computational resources, the integration of multiple modalities (text, image, audio, video), the development of more sample-efficient learning techniques, and the growing focus on aligning AI systems with human values and intentions.
+                            </p>
+                            
+                            <p data-en="The concept of artificial general intelligence (AGI)—AI systems with the breadth and flexibility of human cognition—remains both a long-term research goal and a source of speculation about transformative impacts. Whether and when such systems might emerge remains an open question, but their development would raise profound questions about control, safety, and the nature of intelligence itself."
+                               data-id="Konsep artificial general intelligence (AGI)—sistem AI dengan keluasan dan fleksibilitas kognisi manusia—tetap menjadi tujuan penelitian jangka panjang dan sumber spekulasi tentang dampak transformatif. Apakah dan kapan sistem seperti itu mungkin muncul tetap menjadi pertanyaan terbuka, tetapi pengembangan mereka akan menimbulkan pertanyaan mendalam tentang kontrol, keamanan, dan sifat kecerdasan itu sendiri.">
+                               The concept of artificial general intelligence (AGI)—AI systems with the breadth and flexibility of human cognition—remains both a long-term research goal and a source of speculation about transformative impacts. Whether and when such systems might emerge remains an open question, but their development would raise profound questions about control, safety, and the nature of intelligence itself.
+                            </p>
+                            
+                            <div class="topic-image">
+                                <img src="/api/placeholder/600/300" alt="Future AI Concepts">
+                                <caption data-en="Conceptual visualization of future AI capabilities and applications"
+                                        data-id="Visualisasi konseptual kemampuan dan aplikasi AI masa depan">
+                                        Conceptual visualization of future AI capabilities and applications
+                                </caption>
+                            </div>
+                            
+                            <p  data-en="Beyond technical developments, the future of AI will be shaped by how societies choose to develop, deploy, and govern these technologies. The decisions made in the coming years about research priorities, regulatory frameworks, and international cooperation will play a crucial role in determining whether AI serves as a tool for broad human flourishing or exacerbates existing challenges and inequalities."
+                               data-id="Di luar perkembangan teknis, masa depan AI akan dibentuk oleh bagaimana masyarakat memilih untuk mengembangkan, deploy, dan">
+                                Beyond technical developments, the future of AI will be shaped by how societies choose to develop, deploy, and govern these technologies. The decisions made in the coming years about research priorities, regulatory frameworks, and international cooperation will play a crucial role in determining whether AI serves as a tool for broad human flourishing or exacerbates existing challenges and inequalities.
+                              </p>
+                        </article>
+
                         <!-- Comments Section -->
                         <div class="comments-section" id="comments-section">
                             <div class="comments-header">
@@ -326,5 +399,79 @@
     <script src="script.js"></script>
     <script src="topic-script.js"></script>
     <script src="comments.js"></script>
+
+    <script>
+        // Language Toggle Functionality
+        let currentLanguage = 'en';
+
+        function switchLanguage() {
+            const mainContent = document.querySelector('.topic-main-content');
+            mainContent.classList.add('content-switching');
+            
+            setTimeout(() => {
+                currentLanguage = currentLanguage === 'en' ? 'id' : 'en';
+                
+                // Update all elements with data attributes
+                const elements = document.querySelectorAll('[data-en][data-id]');
+                elements.forEach(element => {
+                    const text = element.getAttribute(`data-${currentLanguage}`);
+                    if (text) {
+                        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                            element.placeholder = text;
+                        } else {
+                            element.textContent = text;
+                        }
+                    }
+                });
+                
+                // Update language toggle button
+                const langText = document.querySelector('.lang-text');
+                const langSwitch = document.querySelector('.lang-switch');
+                langText.textContent = currentLanguage.toUpperCase();
+                langSwitch.textContent = currentLanguage === 'en' ? '→ ID' : '→ EN';
+                
+                // Update HTML lang attribute
+                document.documentElement.lang = currentLanguage;
+                
+                mainContent.classList.remove('content-switching');
+            }, 200);
+        }
+
+        // Add event listener to language toggle
+        document.getElementById('languageToggle').addEventListener('click', switchLanguage);
+
+        // Smooth scrolling enhancement for sidebar navigation
+        document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Update active state
+                    document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+                    this.parentElement.classList.add('active');
+                    
+                    // Update visible article
+                    document.querySelectorAll('.topic-article').forEach(article => article.classList.remove('active'));
+                    target.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language state
+            const langText = document.querySelector('.lang-text');
+            const langSwitch = document.querySelector('.lang-switch');
+            langText.textContent = 'EN';
+            langSwitch.textContent = '→ ID';
+        });
+    </script>
 </body>
 </html>
+
+
