@@ -713,7 +713,7 @@ footer {
     
     /* Adjust profile container for smaller screens */
     .profile-container {
-        margin-top: 210px;
+        margin-top: 170px;
         height: calc(100vh - 120px);
         padding: 0 15px;
         justify-content: flex-start;
