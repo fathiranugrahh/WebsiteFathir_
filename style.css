@@ -492,9 +492,9 @@ header::before {
 
 /* Topic specific styling - subtle variations */
 #ai-topic .topic-icon i { color: #7209b7; }
-#crypto-topic .topic-icon i { color: #f77f00; }
-#tech-trends-topic .topic-icon i { color: #06ffa5; }
-#creative-coding-topic .topic-icon i { color: #ff006e; }
+#crypto-topic .topic-icon i { color: #7300f7; }
+#tech-trends-topic .topic-icon i { color: #0648ff; }
+#creative-globe-topic .topic-icon i { color: #ff006e; }
 #digital-economy-topic .topic-icon i { color: #8338ec; }
 #smart-cities-topic .topic-icon i { color: #3a86ff; }
 
