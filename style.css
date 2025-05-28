@@ -566,6 +566,19 @@ footer {
         min-height: 100vh;
     }
     
+    /* Fix logo position on mobile - no empty space */
+    .logo-container {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 100;
+    }
+    
+    /* Hide scroll down indicator on mobile */
+    .scroll-down {
+        display: none;
+    }
+    
     /* Fix section heights on mobile */
     .section {
         min-height: auto;
@@ -576,6 +589,33 @@ footer {
     header.section {
         min-height: 100vh;
         height: 100vh;
+        /* Remove top padding since logo is hidden */
+        padding-top: 0;
+    }
+    
+    /* Header mobile - adjusted for full screen */
+    .profile-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        /* Force content to move down with margin-top */
+        padding: 0 15px;
+        margin-top: 150px;
+        height: calc(100vh - 150px);
+        justify-content: flex-start;
+    }
+    
+    .profile-image {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .profile-text h1 {
+        font-size: 2.2rem;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
     }
     
     /* My Mind section mobile layout */
@@ -621,27 +661,6 @@ footer {
         padding: 15px;
     }
     
-    /* Header mobile */
-    .profile-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-        padding: 40px 15px 0;
-    }
-    
-    .profile-image {
-        width: 200px;
-        height: 200px;
-    }
-    
-    .profile-text h1 {
-        font-size: 2.2rem;
-    }
-    
-    .tagline {
-        font-size: 1.1rem;
-    }
-    
     /* General mobile adjustments */
     .section-title {
         font-size: 2rem;
@@ -651,20 +670,22 @@ footer {
     .section-title-container {
         padding: 0 15px;
     }
-    
-    .logo-container {
-        position: relative;
-        top: 15px;
-        left: 15px;
-        margin-bottom: 10px;
-    }
-    
-    .logo {
-        font-size: 1.6rem;
-    }
 }
 
 @media (max-width: 480px) {
+    /* Keep logo visible on smaller screens */
+    .logo-container {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        z-index: 100;
+    }
+    
+    /* Ensure scroll indicator stays hidden */
+    .scroll-down {
+        display: none;
+    }
+    
     .mind-topics {
         padding: 0 10px;
     }
@@ -688,5 +709,13 @@ footer {
     
     .section-title {
         font-size: 1.8rem;
+    }
+    
+    /* Adjust profile container for smaller screens */
+    .profile-container {
+        margin-top: 170px;
+        height: calc(100vh - 120px);
+        padding: 0 15px;
+        justify-content: flex-start;
     }
 }
