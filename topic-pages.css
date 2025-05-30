@@ -1,4 +1,4 @@
-/* Topic Pages Specific Styles */
+/* Topic Pages Specific Styles - Optimized Version */
 
 /* Topic Header */
 .topic-header {
@@ -132,7 +132,7 @@
 
 .topic-article {
     display: none;
-    animation: fadeIn 0.5s ease forwards;
+    animation: fadeInFast 0.2s ease forwards; /* Animasi lebih cepat */
 }
 
 .topic-article.active {
@@ -188,16 +188,35 @@
     font-style: italic;
 }
 
-/* Animations */
-@keyframes fadeIn {
+/* Optimized Animations */
+@keyframes fadeInFast {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(8px); /* Gerakan lebih kecil */
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Alternative instant show for immediate content display */
+.topic-article.instant {
+    animation: none;
+    opacity: 1;
+    transform: none;
+}
+
+/* Quick fade for individual elements */
+.quick-fade {
+    opacity: 0;
+    transform: translateY(5px);
+    transition: all 0.15s ease;
+}
+
+.quick-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Responsive Styles */
@@ -214,6 +233,16 @@
     
     .topic-title {
         font-size: 2.5rem;
+    }
+    
+    /* Disable complex animations on mobile for better performance */
+    .topic-article {
+        animation: none;
+    }
+    
+    .topic-article.active {
+        opacity: 1;
+        transform: none;
     }
 }
 

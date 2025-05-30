@@ -1,4 +1,4 @@
-// Wait for DOM to be fully loaded
+// Optimized Topic Script for faster content loading
 document.addEventListener('DOMContentLoaded', function() {
     // Content navigation
     const navLinks = document.querySelectorAll('.sidebar-nav a');
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
         observeArticles();
     }
     
-    // Add animation effects to content
+    // Add animation effects to content - OPTIMIZED VERSION
     const fadeInElements = document.querySelectorAll('.topic-article p, .topic-article h2, .topic-image');
     
     const fadeObserver = new IntersectionObserver((entries) => {
@@ -72,13 +72,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, {
-        threshold: 0.1
+        threshold: 0.05, // Lebih sensitif - trigger lebih cepat
+        rootMargin: '50px 0px' // Mulai animasi sebelum element benar-benar terlihat
     });
     
     fadeInElements.forEach((element, index) => {
         element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        element.style.transform = 'translateY(10px)'; // Gerakan lebih kecil
+        // Delay yang jauh lebih singkat dan durasi lebih cepat
+        element.style.transition = `all 0.25s ease ${Math.min(index * 0.03, 0.15)}s`; // Max delay 0.15s
         fadeObserver.observe(element);
     });
     
