@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ketika Sejarah Berulang: Spiral Perang yang Tak Berujung - Wild Thoughts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #0a0a0a;
+            --bg-color-alt: #121212;
+            --bg-color-card: #1a1a1a;
+            --primary-color: #9d4edd;
+            --secondary-color: #7b2cbf;
+            --text-color: #f5f5f5;
+            --text-color-muted: #a0a0a0;
+            --text-color-subtle: #666666;
+            --accent-color: #ff006e;
+            --warning-color: #ff6700;
+            --border-color: rgba(157, 78, 221, 0.15);
+            --ai-color: #00d4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color-muted);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            color: var(--ai-color);
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(-2px);
+        }
+
+        .reading-progress {
+            width: 100px;
+            height: 3px;
+            background: rgba(0, 212, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--ai-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Article Header */
+        .article-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .article-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-color-muted);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-color-subtle);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        .content-text strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--text-color-muted);
+            font-style: italic;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(157, 78, 221, 0.05));
+            border-left: 4px solid var(--accent-color);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--accent-color);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            padding-left: 30px;
+        }
+
+        .quote-author {
+            font-size: 0.9rem;
+            color: var(--text-color-muted);
+            text-align: right;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(255, 103, 0, 0.08);
+            border: 1px solid rgba(255, 103, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+
+        .highlight-title {
+            color: var(--warning-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .scenario-box p,
+        .highlight-box p {
+            text-align: justify;
+        }
+
+        /* Opinion Tags */
+        .opinion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .opinion-tag {
+            background: rgba(255, 0, 110, 0.15);
+            color: var(--accent-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 0, 110, 0.3);
+        }
+
+        /* Navigation */
+        .article-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--bg-color-card);
+            color: var(--text-color-muted);
+            text-decoration: none;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-color);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            transform: none;
+        }
+
+        /* Scenario Box */
+        .scenario-box {
+            background: rgba(255, 0, 110, 0.05);
+            border: 1px solid rgba(255, 0, 110, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .scenario-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Historical Box */
+        .historical-box {
+            background: rgba(123, 44, 191, 0.08);
+            border: 1px solid rgba(123, 44, 191, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .historical-title {
+            color: var(--secondary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .historical-box p {
+            text-align: justify;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .main-content {
+                margin-top: 70px;
+                padding: 30px 15px;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+
+            .article-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/wild-thoughts" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Wild Thoughts</span>
+            </a>
+            <div class="reading-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <header class="article-header">
+            <i class="fas fa-fire article-icon"></i>
+            <h1 class="article-title">Ketika Sejarah Berulang: Spiral Perang yang Tak Berujung</h1>
+            <p class="article-subtitle">Analisis mendalam tentang konflik Israel-Iran dan bagaimana pola destruktif perang terus menghantui peradaban manusia dari masa ke masa.</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>20 Juni 2025</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>9 min read</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Dark Reality</span>
+                </div>
+            </div>
+        </header>
+
+        <article>
+            <div class="content-section">
+                <h2 class="section-title">Momen Ketika Dunia Menahan Napas</h2>
+                <div class="scenario-box">
+                    <div class="scenario-title">
+                        <i class="fas fa-bomb"></i>
+                        Current Reality Check
+                    </div>
+                    <p>Awal 2025 ini. Semua orang literally gak bisa berhenti ngomongin escalation Israel-Iran yang makin intens. Di kantor magang, di warung makan, pas lagi nongkrong - topik pembicaraannya cuma satu: <strong>"Bro, lu udah liat berita terbaru? Iran sama Israel udah mulai serius nih."</strong></p>
+                    <br>
+                    <p>Yang bikin semua orang nervous adalah how rapidly things are escalating. Millions of people di seluruh dunia sedang menahan napas, nunggu siapa yang bakal make the next move. Karena kita semua tau: <em>satu salah langkah, dan kita bakal nyaksiin World War III secara real-time di TikTok dan Twitter</em>.</p>
+                    <br>
+                    <p>Dan di tengah semua chaos ini, saya realize something that's both fascinating dan terrifying: kita masih hidup dalam siklus yang sama kayak nenek moyang kita 3000 tahun yang lalu. <strong>Violence begets violence. War begets war. Endless fucking cycle.</strong></p>
+                </div>
+                
+                <p class="content-text">
+                    Yang bikin saya speechless adalah betapa fragile-nya peradaban modern kita. We have smartphones, electric cars, AI yang bisa nulis puisi, tapi when it comes to resolving conflicts, kita masih stuck di <strong>caveman mentality</strong>. "You hurt us, we hurt you back, harder."
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Pattern Recognition: Déjà Vu Berdarah</h2>
+                <p class="content-text">
+                    Saya spent hours analyzing konflik Israel-Iran ini, dan yang bikin gue frustrated adalah <em>predictability</em>-nya. It's like watching a movie yang kamu udah tau ending-nya, tapi kamu gak bisa pause atau change the channel.
+                </p>
+                
+                <div class="historical-box">
+                    <div class="historical-title">
+                        <i class="fas fa-scroll"></i>
+                        Historical Pattern
+                    </div>
+                    <p><strong>Step 1:</strong> Initial provocation atau proxy attack (Hamas attack on October 7, 2023)</p>
+                    <br>
+                    <p><strong>Step 2:</strong> Disproportionate retaliation (Israel's brutal response in Gaza, 2023-2024)</p>
+                    <br>
+                    <p><strong>Step 3:</strong> Regional allies get involved (Iran's increasing involvement, 2024-2025)</p>
+                    <br>
+                    <p><strong>Step 4:</strong> Direct confrontation escalates (Current situation, early-mid 2025)</p>
+                    <br>
+                    <p><strong>Step 5:</strong> International community expresses "concern" but does jackshit</p>
+                    <br>
+                    <p><strong>Step 6:</strong> Either massive war atau temporary ceasefire - but underlying issues remain</p>
+                    <br>
+                    <p><strong>Step 7:</strong> Repeat cycle dalam beberapa tahun dengan intensity yang lebih tinggi</p>
+                </div>
+
+                <p class="content-text">
+                    This exact pattern udah terjadi berkali-kali: Arab-Israeli Wars (1948, 1967, 1973), Lebanon Wars, Intifadas, Gaza conflicts, dan sekarang kita witnessing iteration yang paling dangerous karena <strong>nuclear capabilities</strong> dan <strong>advanced weaponry</strong> yang involved.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">The Economics of Endless Hatred</h2>
+                <p class="content-text">
+                    Here's what really pisses me off: both Israel dan Iran are incredibly smart, technologically advanced nations. Israel punya tech industry yang world-class, Iran punya rich cultural heritage dan scientific capabilities. <strong>These are not primitive societies</strong>.
+                </p>
+                
+                <p class="content-text">
+                    Tapi liat resources yang mereka waste untuk saling destroy each other. Israel spends $24+ billion annually on defense. Iran allocates massive budget untuk proxy groups dan missile programs. Imagine kalau duit segitu dipake untuk <em>education, healthcare, climate solutions, atau space exploration</em>.
+                </p>
+                
+                <div class="quote-box">
+                    <p class="quote-text">We could have been colonizing Mars by now, but instead we're still figuring out how to not kill each other over the same piece of desert our ancestors fought over 2000 years ago.</p>
+                    <p class="quote-author">- The tragic irony of human progress</p>
+                </div>
+
+                <p class="content-text">
+                    Yang lebih tragic: both sides punya legitimate grievances. Israel has security concerns yang real, Iran feels threatened by Western sanctions dan regional isolation. But instead of finding diplomatic solutions, mereka choose <strong>mutual assured destruction</strong> as foreign policy.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Generational Trauma: Programming Kids for War</h2>
+                <p class="content-text">
+                    Ini yang paling heartbreaking buat saya. Anak-anak di both sides dibesarin dengan <em>institutionalized hatred</em>. Israeli kids grow up dengan drill sirens dan bomb shelters. Iranian kids diajarin bahwa Israel adalah "Little Satan" yang harus dimusnahkan.
+                </p>
+                
+                <div class="scenario-box">
+                    <div class="scenario-title">
+                        <i class="fas fa-child"></i>
+                        Cycle of Indoctrination
+                    </div>
+                    <p>Bayangkan kamu adalah 8-year-old kid di Gaza atau Lebanon. Kamu liat bombed buildings every day, temen-temen kamu mati, family members kamu hilang. Adults around you bilang: <strong>"This is because of the Jews. They are our eternal enemies."</strong></p>
+                    <br>
+                    <p>Sekarang bayangkan kamu adalah 8-year-old kid di Israel. Kamu hidup dengan constant threat of rocket attacks, parents kamu stress every time you go to school, dan adults bilang: <strong>"Iran wants to wipe us off the map. We must be strong."</strong></p>
+                    <br>
+                    <p>Both kids will grow up dengan the same conclusion: <em>the only way to survive is to be stronger and more violent than the other side</em>. And the cycle continues, generation after generation.</p>
+                </div>
+                
+                <p class="content-text">
+                    This is why perang itu gak pernah really "end." Even when formal conflicts stop, <strong>psychological warfare</strong> continues dalam bentuk education, media propaganda, dan cultural narrative. We're literally programming future generations untuk hate each other.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Modern Warfare: PlayStation Graphics, Real Deaths</h2>
+                <div class="highlight-box">
+                    <div class="highlight-title">
+                        <i class="fas fa-gamepad"></i>
+                        Disturbing Reality
+                    </div>
+                    <p>Yang paling fucked up tentang modern warfare adalah how <strong>gamified</strong> everything has become. Drone operators sit in air-conditioned rooms thousands of miles away, operating death machines dengan joysticks yang looks exactly like PlayStation controllers.</p>
+                </div>
+
+                <p class="content-text">
+                    Current Israel-Iran tensions involve sophisticated cyber warfare, precision drone strikes, dan satellite-guided missiles yang terlihat seperti real-life <em>Call of Duty</em> cutscene. High-tech precision strikes, real-time footage di social media. But behind those spectacular explosions are real people dengan families, dreams, dan fears.
+                </p>
+                
+                <p class="content-text">
+                    We've technologically sanitized violence to the point where war feels like entertainment. Politicians make decisions dari comfortable offices, military commanders plan strikes dari secure bunkers, dan public watches the destruction like it's <strong>Netflix content</strong>.
+                </p>
+                
+                <p class="content-text">
+                    The disconnect is terrifying. Decision makers are so removed dari actual consequences that they can authorize massive destruction dengan the same emotional investment as playing video games.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">The Domino Effect: Why This Shit Affects Everyone</h2>
+                <p class="content-text">
+                    "Ah, it's just Middle East problem, gak nyangkut ke kita." <strong>WRONG.</strong> Regional conflicts di era globalization adalah everyone's problem, whether you realize it or not.
+                </p>
+                
+                <p class="content-text">
+                    Oil prices spike → inflation everywhere. Shipping routes disrupted → supply chain chaos. Regional instability → refugee crisis. Military tensions → nuclear proliferation risks. It's all connected dalam ways yang most people don't understand.
+                </p>
+                
+                <div class="scenario-box">
+                    <div class="scenario-title">
+                        <i class="fas fa-globe"></i>
+                        Global Ripple Effects
+                    </div>
+                    <p>Setiap kali ada escalation Israel-Iran, dalam hitungan jam: stock markets become volatile, oil futures jump, European defense stocks rally, cryptocurrency markets react, dan airline companies adjust Middle East routes.</p>
+                    <br>
+                    <p>Your investments, your gas prices, your travel plans, your job security - semuanya affected by decisions made by old men dalam war rooms di Tehran dan Tel Aviv yang probably never met you dan don't give a shit about your life.</p>
+                </div>
+                
+                <p class="content-text">
+                    This is the cruel irony of modern interconnectedness. We're all <em>economically integrated</em> tapi still <em>politically fragmented</em>. Global prosperity depends on regional stability, but regional stability depends on solving conflicts yang has been ongoing for decades atau centuries.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Historical Perspective: We Never Learn</h2>
+                <p class="content-text">
+                    Saya reading history books sambil following current Israel-Iran tensions, dan yang striking adalah how <strong>nothing really changes</strong>. Methods evolve, weapons get more sophisticated, tapi underlying psychology remains the same.
+                </p>
+                
+                <div class="historical-box">
+                    <div class="historical-title">
+                        <i class="fas fa-book"></i>
+                        Historical Parallels
+                    </div>
+                    <p><strong>Peloponnesian War (431-404 BCE):</strong> Athens vs Sparta. Both Greek city-states, both advanced civilizations, both destroyed each other over power dan pride.</p>
+                    <br>
+                    <p><strong>World War I (1914-1918):</strong> Started dengan assassination of one person, escalated into global catastrophe yang killed 17 million people. "The war to end all wars" - spoiler alert: it didn't.</p>
+                    <br>
+                    <p><strong>Cold War (1947-1991):</strong> US vs USSR. Proxy wars di Vietnam, Afghanistan, Africa. Millions died while two superpowers played geopolitical chess.</p>
+                    <br>
+                    <p><strong>Russia-Ukraine (2022-present):</strong> Regional conflict yang affects global economy, energy, food supply. Same shit, different century.</p>
+                    <br>
+                    <p>Pattern yang sama: <em>pride, paranoia, dan power struggles leading to unnecessary destruction</em>.</p>
+                </div>
+
+                <p class="content-text">
+                    Every generation thinks they're smarter than the previous one, but we keep making the same fundamental mistakes. We have better technology, more information, broader education, tapi we still can't figure out how to resolve conflicts without violence.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">The Psychology of Perpetual Conflict</h2>
+                <p class="content-text">
+                    Why do smart people make stupid decisions when it comes to war? Saya think it's because conflict creates <strong>psychological addiction</strong>. War gives people sense of purpose, identity, dan moral clarity yang peacetime can't provide.
+                </p>
+                
+                <p class="content-text">
+                    Think about it: dalam peacetime, life is complicated, ambiguous, boring. Problems are nuanced, solutions are unclear, progress is slow. But dalam wartime, everything becomes <em>black and white</em>. Good vs evil, us vs them, survival vs destruction.
+                </p>
+                
+                <div class="quote-box">
+                    <p class="quote-text">War is the ultimate simplification of human existence. It reduces all complexity to a single question: kill or be killed.</p>
+                    <p class="quote-author">- The seductive clarity of violence</p>
+                </div>
+
+                <p class="content-text">
+                    That's why peace processes are so difficult. Peace requires compromise, nuance, patience, dan long-term thinking. War just requires hatred dan weapons. <strong>War is emotionally easier than peace</strong>, even though it's infinitely more destructive.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Social Media: The New Battlefield</h2>
+                <p class="content-text">
+                    Yang makes current conflicts different adalah <strong>social media warfare</strong>. Every missile launch, every casualty, every political statement langsung viral dalam hitungan menit. We're witnessing war in real-time dengan commentary dari millions of armchair generals.
+                </p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">
+                        <i class="fas fa-mobile-alt"></i>
+                        Digital Propaganda War
+                    </div>
+                    <p>TikTok videos of destruction, Twitter threads analyzing military strategies, Instagram posts showing casualties - war has become <strong>content</strong>. Both sides use social media untuk justify their actions dan demonize the enemy.</p>
+                    <br>
+                    <p>The scariest part? Public opinion sekarang shaped more by viral videos than actual facts. Misinformation spreads faster than missiles.</p>
+                </div>
+                
+                <p class="content-text">
+                    Everyone becomes a war expert after watching few YouTube videos. Complex geopolitical issues reduced to 280-character hot takes. <em>Nuance dies in the algorithm</em>.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">My Cynical Conclusion: We're Doomed to Repeat</h2>
+                <p class="content-text">
+                    After analyzing semua ini, saya come to a depressing realization: <strong>humans are fundamentally not evolved for large-scale peaceful coexistence</strong>. Our brains are wired for tribal survival, not global cooperation.
+                </p>
+                
+                <p class="content-text">
+                    We can send people to space, create artificial intelligence, cure diseases, tapi we can't stop killing each other over resources, territory, atau ideology. The Israel-Iran conflict is just the latest iteration of a pattern yang udah ongoing for millennia.
+                </p>
+                
+                <div class="highlight-box">
+                    <div class="highlight-title">
+                        <i class="fas fa-hourglass-end"></i>
+                        The Inevitable Cycle
+                    </div>
+                    <p>Current tensions will eventually de-escalate atau explode into something bigger. Politicians will declare victory atau defeat, media will move on to next crisis, people will get distracted by other things. But underlying issues won't be resolved.</p>
+                    <br>
+                    <p>In 5-10 years, similar conflict will resurface dengan new players, new weapons, new justifications, but same fundamental dynamics. And we'll all act surprised, as if we didn't see it coming.</p>
+                </div>
+                
+                <p class="content-text">
+                    Maybe I'm being too pessimistic. Maybe technology akan eventually make war obsolete. Maybe future generations will be smarter than us. But based on historical evidence dan current behavior, <em>I'm not holding my breath</em>.
+                </p>
+                
+                <p class="content-text">
+                    Until then, kita'll keep watching the same tragic movie on repeat, hoping each time that the ending will be different. But deep down, we all know how this story tends to end: dengan more blood, more tears, dan more parents burying their children.
+                </p>
+                
+                <p class="content-text">
+                    The conversations di kantor magang, di warung, pas nongkrong akan continue. "Lu udah denger berita terbaru?" akan menjadi opening line yang familiar. And we'll all pretend to be shocked ketika violence begets more violence.
+                </p>
+                
+                <p class="content-text">
+                    <strong>History doesn't repeat, but it sure as hell rhymes.</strong>
+                </p>
+            </div>
+
+            <div class="opinion-tags">
+                <span class="opinion-tag">War Analysis</span>
+                <span class="opinion-tag">Israel Iran Conflict</span>
+                <span class="opinion-tag">Historical Patterns</span>
+                <span class="opinion-tag">Human Psychology</span>
+                <span class="opinion-tag">Modern Warfare</span>
+                <span class="opinion-tag">Geopolitics</span>
+                <span class="opinion-tag">Dark Reality</span>
+            </div>
+        </article>
+
+        <nav class="article-nav">
+            <a href="/paradox/" class="nav-btn">
+                <i class="fas fa-chevron-left"></i>
+                <span>Previous: Paradox of Choices</span>
+            </a>
+            <a href="#" class="nav-btn disabled">
+                <span>Next Article</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </nav>
+    </main>
+
+    <script>
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+            const article = document.querySelector('article');
+            const scrollTop = window.pageYOffset;
+            const docHeight = article.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollPercentRounded = Math.round(scrollPercent * 100);
+            
+            document.getElementById('progressBar').style.width = scrollPercentRounded + '%';
+        });
+    </script>
+</body>
+</html>

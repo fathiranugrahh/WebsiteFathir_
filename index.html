@@ -21,17 +21,63 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="logo-container">
-        <div class="logo">!?</div>
+
+<nav class="desktop-navbar" id="desktopNavbar">
+    <div class="navbar-content">
+        <a href="#home" class="navbar-brand">24/12/2003</a>
+        
+        <ul class="navbar-nav">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#my-mind">Brainwaves</a></li>
+            <li><a href="wild-thoughts/" class="special-link" id="wildThoughtsDesktop">Wild Thoughts</a></li>
+        </ul>
+
+        <div class="hamburger-menu" id="hamburgerMenu">
+            <div class="hamburger-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
-    
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-menu" id="navMenu">
+    <div class="nav-menu-content">
+        <div class="nav-item">
+            <a href="#home" class="nav-link">Home</a>
+        </div>
+        <div class="nav-item">
+            <a href="#about" class="nav-link">About Me</a>
+        </div>
+        <div class="nav-item">
+            <a href="#my-mind" class="nav-link">Brainwaves</a>
+        </div>
+        <div class="nav-item">
+            <a href="wild-thoughts/" class="nav-link special" id="wildThoughtsLink">Wild Thoughts</a>
+        </div>
+    </div>
+</nav>
+
+<div class="modal-overlay" id="modalOverlay">
+    <div class="confirmation-modal">
+        <div class="modal-content">
+            <h3>Entering My Mind</h3>
+            <p>You're about to dive into my unfiltered thoughts on everything from chess strategies to viral social media takes, conspiracy theories, and random musings. Ready to explore?</p>
+            <div class="modal-buttons">
+                <button class="btn-cancel" id="modalCancel">Not Ready</button>
+                <button class="btn-continue" id="modalContinue">Let's Go</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="main-wrapper">
         <div class="container">
-            <!-- Header Section - Full width design -->
             <header id="home" class="section">
                 <div class="profile-container">
                     <div class="profile-image">
-                        <!-- Replace with your actual profile image -->
                         <img src="fatProfil2.jpg" alt="Profile Picture">
                     </div>
                     <div class="profile-text">
@@ -49,7 +95,6 @@
                 </div>
             </header>
 
-            <!-- About Me Section - Full width design -->
             <section id="about" class="section">
                 <div class="section-title-container">
                     <h2 class="section-title">About Me</h2>
@@ -108,7 +153,6 @@
                 </div>
             </section>
 
-            <!-- My Mind Section - Updated with 6 topics -->
             <section id="my-mind" class="section">
                 <div class="section-title-container">
                     <h2 class="section-title">Brainwaves</h2>
@@ -174,16 +218,15 @@
                         <div class="topic-icon">
                             <i class="fas fa-chess-king"></i>
                         </div>
-                        <h3>Logicall</h3>
+                        <h3>Logical</h3>
                         <div class="topic-content">
                             <p>Flanked by increasingly intelligent systems, we often forget one simple thing: sanity.</p>
-                            <a href="logicall/" class="read-more">Read More</a>
+                            <a href="logical/" class="read-more">Read More</a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Footer - Full width -->
             <footer>
                 <p>&copy; 2025 Fathir. All rights reserved.</p>
             </footer>

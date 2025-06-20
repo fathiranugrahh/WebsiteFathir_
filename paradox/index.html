@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradox of Choices - Wild Thoughts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #0a0a0a;
+            --bg-color-alt: #121212;
+            --bg-color-card: #1a1a1a;
+            --primary-color: #9d4edd;
+            --secondary-color: #7b2cbf;
+            --text-color: #f5f5f5;
+            --text-color-muted: #a0a0a0;
+            --text-color-subtle: #666666;
+            --accent-color: #ff006e;
+            --warning-color: #ff6700;
+            --border-color: rgba(157, 78, 221, 0.15);
+            --ai-color: #00d4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 40px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color-muted);
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            color: var(--ai-color);
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(-2px);
+        }
+
+        .reading-progress {
+            width: 100px;
+            height: 3px;
+            background: rgba(0, 212, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--ai-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Article Header */
+        .article-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .article-icon {
+            font-size: 3rem;
+            color: var(--ai-color);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .article-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .article-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-color-muted);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-color-subtle);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid var(--ai-color);
+        }
+
+        .content-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: var(--text-color);
+            text-align: justify; /* EDITED */
+        }
+
+        .content-text strong {
+            color: var(--ai-color);
+            font-weight: 600;
+        }
+
+        .content-text em {
+            color: var(--text-color-muted);
+            font-style: italic;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(157, 78, 221, 0.05));
+            border-left: 4px solid var(--ai-color);
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 12px 12px 0;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--ai-color);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .quote-text {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            padding-left: 30px;
+        }
+
+        .quote-author {
+            font-size: 0.9rem;
+            color: var(--text-color-muted);
+            text-align: right;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(255, 103, 0, 0.08);
+            border: 1px solid rgba(255, 103, 0, 0.2);
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+
+        .highlight-title {
+            color: var(--warning-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* EDITED: Added this block to justify text in scenario/highlight boxes */
+        .scenario-box p,
+        .highlight-box p {
+            text-align: justify;
+        }
+
+        /* Opinion Tags */
+        .opinion-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 30px 0;
+        }
+
+        .opinion-tag {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--ai-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        /* Navigation */
+        .article-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--bg-color-card);
+            color: var(--text-color-muted);
+            text-decoration: none;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-color);
+            border-color: var(--ai-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            transform: none;
+        }
+
+        /* Scenario Box */
+        .scenario-box {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .scenario-title {
+            color: var(--ai-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .main-content {
+                margin-top: 70px;
+                padding: 30px 15px;
+            }
+
+            .article-title {
+                font-size: 2rem;
+            }
+
+            .article-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .content-text {
+                font-size: 1rem;
+            }
+
+            .article-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--ai-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/wild-thoughts/" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Wild Thoughts</span>
+            </a>
+            <div class="reading-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <header class="article-header">
+            <i class="fas fa-brain article-icon"></i>
+            <h1 class="article-title">Paradox of Choices</h1>
+            <p class="article-subtitle">Eksperimen psikologi tentang kenapa having options bisa destroy happiness, dan hubungannya dengan masa depan manusia di era AI.</p>
+            
+            <div class="article-meta">
+                <div class="meta-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>18 Juni 2025</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-clock"></i>
+                    <span>7 min read</span>
+                </div>
+                <div class="meta-item">
+                    <i class="fas fa-fire"></i>
+                    <span>Mind-bending Theory</span>
+                </div>
+            </div>
+        </header>
+
+        <article>
+            <div class="content-section">
+                <h2 class="section-title">Eksperimen Gila: Dua Kehidupan Paralel</h2>
+                <div class="scenario-box">
+                    <div class="scenario-title">
+                        <i class="fas fa-magic"></i>
+                        Mental Experiment
+                    </div>
+                    <p>Bayangkan kamu dikasih pilihan sama alien super advanced. Mereka bilang: "Kita bisa transfer consciousness kamu ke dua timeline paralel yang berbeda. Kamu cuma bisa pilih satu sekarang, tapi <strong>selamanya gak akan tau apa yang terjadi di timeline satunya</strong>."</p>
+                    <br>
+                    <p><em>Timeline A:</em> Kamu jadi successful entrepreneur di bidang tech, punya startup unicorn senilai $2 miliar, tapi hidup sendirian sampai umur 40. Rich but lonely as hell.</p>
+                    <br>
+                    <p><em>Timeline B:</em> Kamu jadi guru SD di kampung, gaji pas-pasan, tapi punya keluarga yang warm banget, anak-anak yang cinta kamu, dan impact yang meaningful ke generasi muda.</p>
+                    <br>
+                    <p>Setelah mikir lama, kamu pilih Timeline B. Dan boom! Kamu hidup 15 tahun di timeline itu, bahagia dengan keluarga sederhana kamu. Sampai suatu hari, alien itu balik dan bilang: <strong>"Oh iya, di Timeline A, kamu udah jadi Jeff Bezos kedua dan baru aja nikah sama soulmate kamu yang perfect banget."</strong></p>
+                </div>
+                
+                <p class="content-text">
+                    Question: apa yang bakal terjadi sama level kebahagiaan kamu di Timeline B? Menurut psychological research, kamu bakal langsung <strong>miserable</strong>. Padahal literally nothing changed di hidup kamu yang sekarang. Family masih sama loving, job masih sama meaningful, tapi suddenly everything feels worthless.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">The Brain's Stupid Logic</h2>
+                <p class="content-text">
+                    Ini yang bikin saya fascinated sama human psychology. Otak kita itu <em>comparison machine</em> yang gak pernah bisa dimatiin. Kita bisa perfectly happy sampai ada informasi tentang "alternate reality" yang might be better. Terus suddenly, current reality jadi terasa kayak <strong>consolation prize</strong>.
+                </p>
+                
+                <div class="quote-box">
+                    <p class="quote-text">Happiness isn't about what we have. It's about not knowing what we're missing.</p>
+                    <p class="quote-author">- Paradox of modern psychology</p>
+                </div>
+
+                <p class="content-text">
+                    Real life example: dulu kamu puas banget sama iPhone 12 kamu. Lancar, camera bagus, everything works. Tapi begitu temen cerita tentang iPhone 15 Pro dengan AI features yang mind-blowing, suddenly iPhone 12 kamu berasa kayak <em>ancient technology</em>. Nothing changed about your phone, but everything changed about how you feel about it.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Selective Ignorance</h2>
+                <p class="content-text">
+                    Saya ada teknik personal yang mungkin kedengarannya counterintuitive: <strong>strategic ignorance</strong>. Sengaja gak research terlalu dalam tentang alternatives yang gak bisa saya afford atau access. Ignorance is bliss, literally.
+                </p>
+                
+                <p class="content-text">
+                    Contoh konkret: saya punya laptop gaming yang decent, bisa main semua game yang saya mau dengan setting medium-high. Saya <em>deliberately</em> gak baca review tentang RTX 4090 atau laptop gaming premium lainnya. Kenapa? Karena saya tau begitu saya tau seberapa amazing experience yang bisa saya dapet, laptop saya yang sekarang bakal instantly feel like garbage.
+                </p>
+                
+                <p class="content-text">
+                    It's like <strong>protecting my own happiness</strong> dari informasi yang unnecessary. Some people call it living in a bubble, saya call it <em>strategic contentment</em>.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Plot Twist: AI Revolution Connection</h2>
+                <div class="highlight-box">
+                    <div class="highlight-title">
+                        <i class="fas fa-robot"></i>
+                        Mind-Blown Alert
+                    </div>
+                    <p>Nah, ini dia connection yang bikin saya insomnia mikirin ini: <strong>Era AI adalah paradox of choices dalam skala planetary</strong>. Dan efeknya ke populasi dunia bakal lebih devastating dari yang kita kira.</p>
+                </div>
+
+                <p class="content-text">
+                    Think about it. Right now, manusia lagi experiencing massive choice paralysis. Di satu sisi, kita tau AI bisa solve almost everything - climate change, disease, poverty, bahkan aging. Di sisi lain, kita also aware bahwa AI bisa replace hampir semua pekerjaan yang ada sekarang.
+                </p>
+                
+                <p class="content-text">
+                    <strong>The result?</strong> Millions of people stuck dalam mental loop yang sama kayak alien timeline experiment tadi. Mereka tau ada potential future yang amazing (AI-assisted utopia), tapi mereka also tau ada potential future yang terrifying (mass unemployment, social collapse).
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Choice Paralysis = Reproductive Paralysis</h2>
+                <p class="content-text">
+                    Ini yang paling scary menurut saya. Ketika people are overwhelmed dengan uncertainty tentang masa depan, first thing yang mereka sacrifice adalah <em>long-term commitments</em>. Dan having kids adalah ultimate long-term commitment.
+                </p>
+                
+                <div class="scenario-box">
+                    <div class="scenario-title">
+                        <i class="fas fa-chart-line"></i>
+                        The Domino Effect
+                    </div>
+                    <p>Generation Z dan Alpha sekarang lagi experiencing this dalam skala massive. Mereka constantly aware of multiple possible futures: climate apocalypse, AI takeover, economic collapse, technological utopia. <strong>Too many scenarios, too much uncertainty</strong>.</p>
+                    <br>
+                    <p>Result? Mereka delay atau completely skip major life decisions. Marriage rates turun, birth rates plummet, people choose temporary pleasures over permanent commitments. Why invest in future generations kalau kamu gak yakin future-nya kayak apa?</p>
+                </div>
+                
+                <p class="content-text">
+                    It's the timeline experiment di scale global. People tau ada kemungkinan future yang amazing, tapi also ada kemungkinan future yang apocalyptic. So instead of choosing either path, mereka choose <strong>nothing</strong>. Paralyzed by possibilities.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">The Cruel Irony of Infinite Possibilities</h2>
+                <p class="content-text">
+                    Here's the mindfuck: teknologi seharusnya bikin hidup easier, more predictable, more secure. Tapi yang terjadi adalah sebaliknya. <strong>More options = more anxiety</strong>. More possibilities = more paralysis.
+                </p>
+                
+                <p class="content-text">
+                    Dulu, great-grandparents kita hidup dengan limited options. Kamu born as farmer, kamu jadi farmer. Kamu born in small town, kamu stay in small town. Marry your neighbor, have kids, repeat. <em>Simple, predictable, boring</em> - but also mentally manageable.
+                </p>
+                
+                <p class="content-text">
+                    Sekarang? Kamu bisa jadi anything, go anywhere, do anything. Sounds amazing, right? But psychological research shows that unlimited options create <strong>decision fatigue</strong> dan existential anxiety. We're literally too free for our own good.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-title">Solution: Embrace Strategic Stupidity</h2>
+                <p class="content-text">
+                    Saya punya controversial solution: sometimes, being <strong>strategically stupid</strong> is the smartest thing you can do. Stop consuming information about all possible futures. Pick one path yang reasonable dan commit to it, even if it's not the "optimal" choice.
+                </p>
+                
+                <p class="content-text">
+                    For AI era specifically: instead of constantly analyzing whether AI will replace your job atau wondering about perfect timing untuk have kids, just <em>live</em>. Make decisions based on current information, not hypothetical futures yang might never happen.
+                </p>
+                
+                <div class="quote-box">
+                    <p class="quote-text">The paralysis of infinite choice is worse than the regret of imperfect decisions.</p>
+                    <p class="quote-author">- My personal philosophy for sanity</p>
+                </div>
+                
+                <p class="content-text">
+                    Remember timeline experiment di awal? The person who chose Timeline B was <strong>actually happy</strong> for 15 years until they learned about the alternative. Those 15 years of genuine happiness are more valuable than a lifetime of wondering "what if."
+                </p>
+            </div>
+
+            <div class="opinion-tags">
+                <span class="opinion-tag">Paradox of Choices</span>
+                <span class="opinion-tag">AI Revolution</span>
+                <span class="opinion-tag">Psychology</span>
+                <span class="opinion-tag">Population Decline</span>
+                <span class="opinion-tag">Future Thinking</span>
+                <span class="opinion-tag">Personal Growth</span>
+            </div>
+        </article>
+
+        <nav class="article-nav">
+            <a href="#" class="nav-btn disabled">
+                <i class="fas fa-chevron-left"></i>
+                <span>Previous Article</span>
+            </a>
+            <a href="/war/" class="nav-btn">
+                <span>Next: War</span>
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </nav>
+    </main>
+
+    <script>
+        // Reading progress bar
+        window.addEventListener('scroll', () => {
+            const article = document.querySelector('article');
+            const scrollTop = window.pageYOffset;
+            const docHeight = article.offsetHeight;
+            const winHeight = window.innerHeight;
+            const scrollPercent = scrollTop / (docHeight - winHeight);
+            const scrollPercentRounded = Math.round(scrollPercent * 100);
+            
+            document.getElementById('progressBar').style.width = scrollPercentRounded + '%';
+        });
+    </script>
+</body>
+</html>
