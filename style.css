@@ -138,7 +138,7 @@ a:hover {
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: #af6ce6;
-    font-size: 1.1rem;
+    font-size: 1.6rem;
 }
 
 .navbar-nav {
@@ -883,7 +883,7 @@ footer {
     backdrop-filter: blur(18px) !important;
     -webkit-backdrop-filter: blur(18px) !important;
     border-bottom: 1px solid rgba(157, 78, 221, 0.2) !important;
-    height: 60px; /* Tinggi navbar yang pas untuk mobile */
+    height: 50px; /* Tinggi navbar yang pas untuk mobile */
     padding: 0; /* Padding diatur di .navbar-content */
   }
 
