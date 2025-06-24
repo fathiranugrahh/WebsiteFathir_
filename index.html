@@ -227,12 +227,88 @@
                 </div>
             </section>
 
+            <!-- Comments Section -->
+            <div class="comments-section" id="comments-section">
+                <div class="comments-header">
+                    <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
+                    <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan berinteraksi dengan konten">Share your thoughts and engage with the content</p>
+                </div>
+                <!-- Comment Form -->
+                <div class="comment-form-container">
+                    <form class="comment-form" id="comment-form">
+                        <div class="form-group">
+                            <div class="name-toggle">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="anonymous-toggle">
+                                    <span class="slider"></span>
+                                </label>
+                                <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar anonim">Comment anonymously</span>
+                            </div>
+                            <div class="name-input" id="name-input">
+                                <input type="text" id="commenter-name" data-en="Your name (optional)" data-id="Nama Anda (opsional)" placeholder="Your name (optional)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="comment-text" data-en="Share your thoughts, questions, or insights about this topic..." data-id="Bagikan pemikiran, pertanyaan, atau wawasan Anda tentang topik ini..." placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i>
+                                <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Comments List -->
+                <div class="comments-list" id="comments-list">
+                    <!-- Comments will be dynamically inserted here -->
+                </div>
+            </div>
+
             <footer>
-                <p>&copy; 2025 Fathir. All rights reserved.</p>
+                <p data-en="&copy; 2025 Fathir. All rights reserved." data-id="&copy; 2025 Fathir. Hak cipta dilindungi.">&copy; 2025 Fathir. All rights reserved.</p>
             </footer>
         </div>
     </div>
-
-    <script src="script.js"></script>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"></script>
+    <script src="/script.js"></script>
+    <script src="/topic-script.js"></script>
+    <script src="/comments.js"></script>
+    
+    <script>
+        // JavaScript code to handle comment submission and display
+        document.getElementById('comment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get the comment text and name (if provided)
+            const commentText = document.getElementById('comment-text').value;
+            const commenterName = document.getElementById('commenter-name').value;
+            const isAnonymous = document.getElementById('anonymous-toggle').checked;
+            
+            // Create a new comment element
+            const commentElement = document.createElement('div');
+            commentElement.classList.add('comment');
+            
+            // Add commenter name or anonymous label
+            const nameElement = document.createElement('span');
+            nameElement.classList.add('commenter-name');
+            nameElement.textContent = isAnonymous ? 'Anonymous' : commenterName;
+            commentElement.appendChild(nameElement);
+            
+            // Add comment text
+            const textElement = document.createElement('p');
+            textElement.classList.add('comment-text');
+            textElement.textContent = commentText;
+            commentElement.appendChild(textElement);
+            
+            // Add the new comment to the comments list
+            document.getElementById('comments-list').appendChild(commentElement);
+            
+            // Clear the form
+            document.getElementById('comment-form').reset();
+        });
+    </script>
 </body>
 </html>

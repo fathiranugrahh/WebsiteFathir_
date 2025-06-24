@@ -543,7 +543,11 @@
             <p>This section is currently being built. I'm preparing to unleash my unfiltered thoughts on the world. Stay tuned for some wild content that might just change how you think about things.</p>
         </div>
     </main>
-<script src="/firebase-comments.js"></script>
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js"></script>
+    <script type="module" src="/comments.js"></script>
+
     <script>
         function navigateToChess() {
             window.location.href = '/paradox';

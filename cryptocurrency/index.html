@@ -197,11 +197,11 @@
                         
                         <!-- Comment Toggle Button -->
                         <div class="comment-toggle-container">
-                            <button class="comment-toggle-btn" onclick="toggleComments()">
-                                <i class="fas fa-comments"></i>
-                                <span data-en="Comments" data-id="Komentar">Comments</span>
-                                <span class="comment-count" id="total-comments">0</span>
-                            </button>
+<button id="comment-toggle-button" class="comment-toggle-btn">
+    <i class="fas fa-comments"></i>
+    <span data-en="Comments" data-id="Komentar">Comments</span>
+    <span class="comment-count" id="total-comments">0</span>
+</button>
                         </div>
                     </aside>
 
@@ -350,7 +350,7 @@
                             <h1 data-en="💡 Why Blockchain is Called the Technology of the Future " data-id="💡 Kenapa Blockchain Dianggap Teknologi Masa Depan?">💡 Why Blockchain is Called the Technology of the Future </h1>
 
                             <p data-en="Because it completely disrupts traditional systems. Old systems rely on central authorities (banks, governments). Blockchain enables systems to operate without middlemen, more cheaply, securely, and transparently. That’s why many people say, “It’s like a technology from the future landing in our hands today.” Some even speculate that blockchain might have been designed by artificial intelligence or mysterious entities from the future."
-                               data-id="Karena dia bener-bener ngacak pola lama. Sistem lama bergantung sama otoritas (bank, pemerintah). Blockchain bikin sistem bisa jalan tanpa middleman, lebih murah, aman, dan transparan. Makanya, banyak orang bilang, “Ini kayak teknologi dari masa depan yang jatuh ke tangan kita sekarang.” Bahkan banyak yang spekulasi, teknologi blockchain mungkin dirancang oleh kecerdasan buatan atau entitas misterius dari masa depan.">
+                               data-id="Karena dia bener-bener ngacak pola lama. Sistem lama bergantung sama otoritas (bank, pemerintah). Blockchain enables systems to operate without middlemen, more cheaply, securely, and transparently. That’s why many people say, “It’s like a technology from the future landing in our hands today.” Some even speculate that blockchain might have been designed by artificial intelligence or mysterious entities from the future.">
                               Because it completely disrupts traditional systems. Old systems rely on central authorities (banks, governments). Blockchain enables systems to operate without middlemen, more cheaply, securely, and transparently. That’s why many people say, “It’s like a technology from the future landing in our hands today.” Some even speculate that blockchain might have been designed by artificial intelligence or mysterious entities from the future.
                             </p>
 
@@ -648,41 +648,23 @@
                                 <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
                                 <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan berinteraksi dengan konten">Share your thoughts and engage with the content</p>
                             </div>
-                            
                             <!-- Comment Form -->
                             <div class="comment-form-container">
-                                <form class="comment-form" id="comment-form">
-                                    <div class="form-group">
-                                        <div class="name-toggle">
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" id="anonymous-toggle">
-                                                <span class="slider"></span>
-                                            </label>
-                                            <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar anonim">Comment anonymously</span>
-                                        </div>
-                                        
-                                        <div class="name-input" id="name-input">
-                                            <input type="text" id="commenter-name" data-en="Your name (optional)" data-id="Nama Anda (opsional)" placeholder="Your name (optional)">
-                                        </div>
+                                <form id="comment-form">
+                                    <div id="name-input">
+                                        <input type="text" id="commenter-name" data-en="Your name (optional)" data-id="Nama Anda (opsional)" placeholder="Your name (optional)">
                                     </div>
-                                    
-                                    <div class="form-group">
-                                        <textarea id="comment-text" data-en="Share your thoughts, questions, or insights about this topic..." data-id="Bagikan pemikiran, pertanyaan, atau wawasan Anda tentang topik ini..." placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    <textarea id="comment-text" data-en="Share your thoughts, questions, or insights about this topic..." data-id="Bagikan pemikiran, pertanyaan, atau wawasan Anda tentang topik ini..." placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    <div>
+                                        <label>
+                                            <input type="checkbox" id="anonymous-toggle"> <span data-en="Comment anonymously" data-id="Komentar anonim">Comment anonymously</span>
+                                        </label>
                                     </div>
-                                    
-                                    <div class="form-actions">
-                                        <button type="submit" class="submit-btn">
-                                            <i class="fas fa-paper-plane"></i>
-                                            <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
-                                        </button>
-                                    </div>
+                                    <button type="submit"><i class="fas fa-paper-plane"></i> <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span></button>
                                 </form>
                             </div>
-                            
                             <!-- Comments List -->
-                            <div class="comments-list" id="comments-list">
-                                <!-- Comments will be dynamically inserted here -->
-                            </div>
+                            <div id="comments-list"></div>
                         </div>
                     </main>
                 </div>
@@ -694,11 +676,10 @@
             </footer>
         </div>
     </div>
-<script src="/firebase-comments.js"></script>
 
     <script src="/script.js"></script>
     <script src="/topic-script.js"></script>
-    <script src="/comments.js"></script>
+    <script type="module" src="/comments.js"></script>
     
     <script>
         // Language Toggle Functionality

@@ -143,11 +143,11 @@
                         
                         <!-- Comment Toggle Button -->
                         <div class="comment-toggle-container">
-                            <button class="comment-toggle-btn" onclick="toggleComments()">
-                                <i class="fas fa-comments"></i>
-                                <span data-en="Comments" data-id="Komentar">Comments</span>
-                                <span class="comment-count" id="total-comments">0</span>
-                            </button>
+<button id="comment-toggle-button" class="comment-toggle-btn">
+    <i class="fas fa-comments"></i>
+    <span data-en="Comments" data-id="Komentar">Comments</span>
+    <span class="comment-count" id="total-comments">0</span>
+</button>
                         </div>
                     </aside>
 
@@ -463,10 +463,10 @@
             </footer>
         </div>
     </div>
-
+<!-- Firebase SDK -->
     <script src="/script.js"></script>
     <script src="/topic-script.js"></script>
-    <script src="/comments.js"></script>
+    <script type="module" src="/comments.js"></script>
 
     <script>
         // Language Toggle Functionality

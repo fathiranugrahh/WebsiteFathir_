@@ -1,470 +1,336 @@
-// comments.js with Firebase Realtime Database
-(function() {
-  // Load Firebase CDN secara otomatis jika belum ada
-  function loadScript(src, cb) {
-    var s = document.createElement('script');
-    s.src = src;
-    s.onload = cb;
-    document.head.appendChild(s);
-  }
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
 
-  // Masukkan config Firebase project lu di sini:
-  var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDtGt8JxlkWUkJwY0mmFfS-09G-lRGX4_A",
     authDomain: "diskusi-5a10e.firebaseapp.com",
     databaseURL: "https://diskusi-5a10e-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "diskusi-5a10e",
-    storageBucket: "diskusi-5a10e.firebasestorage.app",
+    storageBucket: "diskusi-5a10e.appspot.com",
     messagingSenderId: "330276872342",
-    appId: "1:330276872342:web:9e4d7e76cf6960edc3a2b7",
-    measurementId: "G-8608F7R3NE"
-  };
+    appId: "1:330276872342:web:9241596c4df85e6ec3a2b7",
+    measurementId: "G-YB30TE09QW"
+};
 
-  loadScript("https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js", function() {
-    loadScript("https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js", function() {
-      if (!window.firebase?.apps?.length) firebase.initializeApp(firebaseConfig);
-      var db = firebase.database();
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-      // Owner mode config
-      const OWNER_PASSWORD = 'admin123';
-      const OWNER_SESSION_KEY = 'comments_owner_session';
-      var pageID = window.location.pathname.replace(/[\/\.]/g, "_");
+const OWNER_PASSWORD = 'admin123';
+const OWNER_SESSION_KEY = 'comments_owner_session';
 
-      // Utility functions
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-      function formatTimeAgo(date) {
-        const now = new Date();
-        const diffInSeconds = Math.floor((now - date) / 1000);
-        if (diffInSeconds < 60) return 'Just now';
-        else if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} min ago`;
-        else if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hour ago`;
-        else return date.toLocaleDateString();
-      }
-      function isOwnerMode() {
-        return localStorage.getItem(OWNER_SESSION_KEY) === 'active';
-      }
-      function showNotification(message, type = 'info') {
-        const existing = document.querySelector('.notification');
-        if (existing) existing.remove();
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.innerHTML = `
-          <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-          <span>${message}</span>
-        `;
-        notification.style.cssText = `
-          position: fixed; top: 20px; right: 20px;
-          background: ${type === 'success' ? 'linear-gradient(135deg, #4cc9f0, #7209b7)' : type === 'error' ? 'linear-gradient(135deg, #ff4757, #c44569)' : 'linear-gradient(135deg, #5f6368, #3c4043)'};
-          color: white; padding: 12px 20px; border-radius: 8px;
-          display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000;
-          transform: translateX(100%); transition: transform 0.3s ease; font-size: 0.95rem; font-weight: 500; max-width: 300px;
-        `;
-        document.body.appendChild(notification);
-        setTimeout(() => { notification.style.transform = 'translateX(0)'; }, 100);
-        setTimeout(() => { notification.style.transform = 'translateX(100%)'; setTimeout(() => { if (notification.parentNode) notification.parentNode.removeChild(notification); }, 300); }, 3000);
-      }
+function getCurrentPage() {
+    const path = window.location.pathname;
+    if (path.includes('artificial-intelligence')) return 'ai';
+    if (path.includes('cryptocurrency')) return 'crypto';
+    return 'default';
+}
 
-      // Owner mode & hidden shortcut
-      function setupHiddenOwnerMode() {
-        let keySequence = [];
-        const targetSequence = ['KeyO', 'KeyW', 'KeyN', 'KeyE', 'KeyR'];
-        document.addEventListener('keydown', function(e) {
-          if (keySequence.length > 0 && Date.now() - keySequence[keySequence.length - 1].time > 2000) keySequence = [];
-          keySequence.push({ code: e.code, time: Date.now() });
-          if (keySequence.length > 5) keySequence = keySequence.slice(-5);
-          if (keySequence.length === 5 && keySequence.every((key, idx) => key.code === targetSequence[idx])) { toggleOwnerMode(); keySequence = []; }
-        });
-        const footer = document.querySelector('footer');
-        if (footer) {
-          let clickCount = 0;
-          footer.addEventListener('click', function() {
-            clickCount++;
-            setTimeout(() => { clickCount = 0; }, 500);
-            if (clickCount === 3) { toggleOwnerMode(); clickCount = 0; }
-          });
+function generateCommentId() {
+    return 'comment_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+}
+
+function createUserSession() {
+    const session = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('user_session', session);
+    return session;
+}
+
+function generateAuthorId(name, isAnonymous) {
+    if (isAnonymous) return 'anon_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+    return btoa(name + '_' + navigator.userAgent + '_' + (localStorage.getItem('user_session') || createUserSession()));
+}
+
+function isOwnerMode() {
+    return localStorage.getItem(OWNER_SESSION_KEY) === 'active';
+}
+
+function isCommentOwner(comment) {
+    if (isOwnerMode()) return true;
+    const currentAuthorId = generateAuthorId(comment.author, comment.isAnonymous);
+    return comment.authorId === currentAuthorId;
+}
+
+function formatTimeAgo(date) {
+    const now = new Date();
+    const diffInSeconds = Math.floor((now - date) / 1000);
+    if (diffInSeconds < 60) return 'Just now';
+    const minutes = Math.floor(diffInSeconds / 60);
+    if (diffInSeconds < 3600) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    const hours = Math.floor(diffInSeconds / 3600);
+    if (diffInSeconds < 86400) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    const days = Math.floor(diffInSeconds / 86400);
+    if (diffInSeconds < 604800) return `${days} day${days > 1 ? 's' : ''} ago`;
+    return date.toLocaleDateString();
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function showNotification(message, type = 'info') {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> <span>${message}</span>`;
+    notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${type === 'success' ? 'linear-gradient(135deg, #4cc9f0, #7209b7)' : type === 'error' ? 'linear-gradient(135deg, #ff4757, #c44569)' : 'linear-gradient(135deg, #5f6368, #3c4043)'}; color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000; transform: translateX(120%); transition: transform 0.3s ease; font-size: 0.95rem; font-weight: 500; max-width: 300px;`;
+    document.body.appendChild(notification);
+    setTimeout(() => { notification.style.transform = 'translateX(0)'; }, 100);
+    setTimeout(() => {
+        notification.style.transform = 'translateX(120%)';
+        setTimeout(() => { if (notification.parentNode) notification.parentNode.removeChild(notification); }, 300);
+    }, 3000);
+}
+
+function showEmptyState() {
+    const commentsList = document.getElementById('comments-list');
+    if (commentsList) commentsList.innerHTML = `<div class="comments-empty"><i class="fas fa-comments"></i><h4>No comments yet</h4><p>Be the first to share your thoughts!</p></div>`;
+}
+
+function updateCommentCountUI(count) {
+    document.querySelectorAll('.comment-count').forEach(el => el.textContent = count);
+}
+
+function showReplyForm(commentId) {
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.style.display = 'block';
+        replyForm.querySelector('textarea')?.focus();
+    }
+}
+
+function hideReplyForm(commentId) {
+    const replyForm = document.getElementById(`reply-form-${commentId}`);
+    if (replyForm) {
+        replyForm.style.display = 'none';
+        const form = replyForm.querySelector('form');
+        if (form) {
+            form.reset();
+            form.querySelector('.name-input')?.classList.add('hidden');
         }
-        // Konami code
-        let konamiSequence = [];
-        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight'];
-        document.addEventListener('keydown', function(e) {
-          konamiSequence.push(e.code);
-          if (konamiSequence.length > 8) konamiSequence = konamiSequence.slice(-8);
-          if (konamiSequence.length === 8 && konamiSequence.every((k, i) => k === konamiCode[i])) { toggleOwnerMode(); konamiSequence = []; }
-        });
-      }
+    }
+}
 
-      function toggleOwnerMode() {
-        if (isOwnerMode()) {
-          localStorage.removeItem(OWNER_SESSION_KEY);
-          showNotification('Owner mode disabled', 'info');
-          loadComments();
-        } else {
-          const password = prompt('Enter owner password:');
-          if (password === OWNER_PASSWORD) {
-            localStorage.setItem(OWNER_SESSION_KEY, 'active');
-            showNotification('Owner mode enabled - You can now delete any comment', 'success');
-            loadComments();
-          } else if (password !== null) {
-            showNotification('Incorrect password', 'error');
-          }
-        }
-      }
+function createCommentElement(comment, isReply = false) {
+    const commentDiv = document.createElement('div');
+    commentDiv.className = `comment-item ${isReply ? 'comment-reply' : ''}`;
+    commentDiv.setAttribute('data-comment-id', comment.id);
 
-      // Main comment system
-      document.addEventListener('DOMContentLoaded', function() {
-        ensureCommentSectionStructure();
-        setupHiddenOwnerMode();
-        loadComments();
-        setupCommentForm();
-        setupAnonymousToggle();
-      });
+    const initial = comment.author.charAt(0).toUpperCase();
+    const timeAgo = formatTimeAgo(new Date(comment.timestamp));
+    const canDelete = isCommentOwner(comment);
 
-      // Ensure required HTML structure exists for comments
-      function ensureCommentSectionStructure() {
-        let section = document.getElementById('comments-section');
-        if (!section) {
-          section = document.createElement('div');
-          section.id = 'comments-section';
-          section.className = 'comments-section';
-          // Insert before end of <body>
-          document.body.appendChild(section);
-        }
-        // Form container
-        let formContainer = section.querySelector('.comment-form-container');
-        if (!formContainer) {
-          formContainer = document.createElement('div');
-          formContainer.className = 'comment-form-container';
-          section.appendChild(formContainer);
-        }
-        // Comment form
-        if (!document.getElementById('comment-form')) {
-          formContainer.innerHTML = `
-            <form id="comment-form">
-              <div id="name-input">
-                <input type="text" id="commenter-name" placeholder="Your name (optional)">
-              </div>
-              <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
-              <div>
-                <label>
-                  <input type="checkbox" id="anonymous-toggle"> Comment anonymously
-                </label>
-              </div>
-              <button type="submit">Post Comment</button>
+    let actionButtons = '';
+    if (!isReply) {
+        actionButtons += `<button class="reply-btn" data-action="reply" data-comment-id="${comment.id}"><i class="fas fa-reply"></i> Reply</button>`;
+    }
+    if (canDelete) {
+        actionButtons += `<button class="delete-btn" data-action="delete" data-comment-id="${comment.id}"><i class="fas fa-trash"></i> Delete</button>`;
+    }
+
+    commentDiv.innerHTML = `
+        <div class="comment-header">
+            <div class="comment-author">
+                <div class="author-avatar">${initial}</div>
+                <span class="author-name">${escapeHtml(comment.author)}</span>
+                ${isOwnerMode() && canDelete ? `<span class="owner-badge">Owner</span>` : ''}
+            </div>
+            <span class="comment-time">${timeAgo}</span>
+        </div>
+        <div class="comment-content">${escapeHtml(comment.content).replace(/\n/g, '<br>')}</div>
+        <div class="comment-actions">${actionButtons}</div>
+        <div class="reply-form-container" id="reply-form-${comment.id}" style="display: none;">
+            <form class="reply-form" data-action="submit-reply" data-parent-id="${comment.id}">
+                <div class="form-group">
+                    <div class="name-toggle"><label class="toggle-switch"><input type="checkbox" class="reply-anonymous-toggle"><span class="slider"></span></label><span class="toggle-label">Reply anonymously</span></div>
+                    <div class="name-input hidden"><input type="text" class="reply-name" placeholder="Your name (optional)"></div>
+                </div>
+                <div class="form-group"><textarea class="reply-text" placeholder="Write your reply..." rows="3" required></textarea></div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" data-action="cancel-reply" data-comment-id="${comment.id}">Cancel</button>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Post Reply</button>
+                </div>
             </form>
-          `;
-        }
-        // Comments list
-        if (!document.getElementById('comments-list')) {
-          const listDiv = document.createElement('div');
-          listDiv.id = 'comments-list';
-          section.appendChild(listDiv);
-        }
-        // Total comments count (optional)
-        if (!document.getElementById('total-comments')) {
-          const countSpan = document.createElement('span');
-          countSpan.id = 'total-comments';
-          countSpan.style.display = 'none';
-          section.appendChild(countSpan);
-        }
-      }
+        </div>
+    `;
 
-      function setupAnonymousToggle() {
-        const anonymousToggle = document.getElementById('anonymous-toggle');
-        const nameInput = document.getElementById('name-input');
-        const commenterName = document.getElementById('commenter-name');
-        if (anonymousToggle && nameInput) {
-          anonymousToggle.addEventListener('change', function() {
-            if (this.checked) {
-              nameInput.classList.add('hidden');
-              commenterName.required = false;
-              commenterName.value = '';
-            } else {
-              nameInput.classList.remove('hidden');
-              commenterName.required = false;
-            }
-          });
-        }
-      }
+    if (comment.replies && Object.keys(comment.replies).length > 0) {
+        const repliesContainer = document.createElement('div');
+        repliesContainer.className = 'replies-container';
+        const replies = Object.values(comment.replies).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        replies.forEach(reply => repliesContainer.appendChild(createCommentElement(reply, true)));
+        commentDiv.appendChild(repliesContainer);
+    }
+    return commentDiv;
+}
 
-      function setupCommentForm() {
-        const commentForm = document.getElementById('comment-form');
-        if (commentForm) {
-          commentForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            submitComment();
-          });
-        }
-      }
+function submitComment(page) {
+    const commenterName = document.getElementById('commenter-name').value.trim();
+    const commentText = document.getElementById('comment-text').value.trim();
+    const isAnonymous = document.getElementById('anonymous-toggle').checked;
 
-      // ----- FIREBASE COMMENT -----
-      function submitComment() {
-        const anonymousToggle = document.getElementById('anonymous-toggle');
-        const commenterName = document.getElementById('commenter-name');
-        const commentText = document.getElementById('comment-text');
-        const isAnonymous = anonymousToggle && anonymousToggle.checked;
-        const name = isAnonymous ? 'Anonymous' : (commenterName && commenterName.value.trim() || "Anonymous");
-        const text = commentText && commentText.value.trim();
-        if (!text) { showNotification('Please enter a comment', 'error'); return; }
-        const commentObj = {
-          author: name,
-          content: text,
-          timestamp: new Date().toISOString(),
-          isAnonymous: isAnonymous,
-          replies: []
-        };
-        db.ref('comments/' + pageID).push(commentObj, function(err){
-          if (!err) {
-            if(commentText) commentText.value = '';
-            if(commenterName && !isAnonymous) commenterName.value = '';
+    if (!commentText) return showNotification('Please enter a comment', 'error');
+
+    const name = isAnonymous ? 'Anonymous' : (commenterName || 'Anonymous');
+    const comment = {
+        author: name,
+        content: commentText,
+        timestamp: new Date().toISOString(),
+        isAnonymous: isAnonymous,
+        authorId: generateAuthorId(name, isAnonymous),
+        replies: {}
+    };
+
+    push(ref(db, `comments/${page}`), comment)
+        .then(() => {
             showNotification('Comment posted successfully!', 'success');
-          } else showNotification('Failed to post comment', 'error');
-        });
-      }
+            document.getElementById('comment-form').reset();
+            document.getElementById('name-input').classList.remove('hidden');
+        })
+        .catch(error => showNotification('Failed to post comment.', 'error'));
+}
 
-      // REPLY SUBMIT
-      window.handleReplySubmit = function(event, parentId) {
-        event.preventDefault();
-        const isAnonymous = document.getElementById(`reply-anonymous-${parentId}`).checked;
-        const name = isAnonymous ? 'Anonymous' : (document.getElementById(`reply-name-${parentId}`).value.trim() || 'Anonymous');
-        const content = document.getElementById(`reply-text-${parentId}`).value.trim();
-        if (!content) { showNotification('Please enter a reply', 'error'); return; }
-        const replyData = {
-          author: name,
-          content: content,
-          isAnonymous: isAnonymous,
-          timestamp: new Date().toISOString()
-        };
-        // Get parent, add reply
-        db.ref(`comments/${pageID}/${parentId}/replies`).once('value', function(snapshot){
-          let replies = snapshot.val() || [];
-          replies.push(replyData);
-          db.ref(`comments/${pageID}/${parentId}/replies`).set(replies, function(err){
-            if(!err) showNotification('Reply posted successfully!', 'success');
-          });
-        });
-        hideReplyForm(parentId);
-      };
+function submitReply(page, parentId, replyData) {
+    const reply = {
+        id: generateCommentId(),
+        ...replyData,
+        timestamp: new Date().toISOString(),
+        authorId: generateAuthorId(replyData.author, replyData.isAnonymous),
+        parentId: parentId
+    };
 
-      // DELETE COMMENT
-      window.confirmDeleteComment = function(commentId) {
-        if (confirm('Are you sure you want to delete this comment? This action cannot be undone.')) {
-          db.ref(`comments/${pageID}/${commentId}`).remove(function(err){
-            if(!err) showNotification('Comment deleted successfully!', 'success');
-            else showNotification('Failed to delete comment', 'error');
-          });
-        }
-      };
+    push(ref(db, `comments/${page}/${parentId}/replies`), reply)
+        .then(() => showNotification('Reply posted successfully!', 'success'))
+        .catch(error => showNotification('Failed to post reply.', 'error'));
+}
 
-      // LOAD COMMENTS
-      function loadComments() {
+function deleteComment(page, commentId) {
+    remove(ref(db, `comments/${page}/${commentId}`))
+        .then(() => showNotification('Comment deleted successfully!', 'success'))
+        .catch(error => showNotification('Failed to delete comment.', 'error'));
+}
+
+function listenToComments(page) {
+    const commentsRef = ref(db, `comments/${page}`);
+    onValue(commentsRef, (snapshot) => {
         const commentsList = document.getElementById('comments-list');
         if (!commentsList) return;
-        db.ref('comments/' + pageID).on('value', function(snapshot){
-          const val = snapshot.val();
-          if (!val) {
+
+        commentsList.innerHTML = '';
+        const commentsData = snapshot.val();
+
+        if (!commentsData) {
             showEmptyState();
-            updateCommentCount(0);
+            updateCommentCountUI(0);
             return;
-          }
-          let comments = [];
-          Object.entries(val).forEach(([id, comment]) => {
-            comments.push({...comment, id: id});
-          });
-          // Sort newest first
-          comments = comments.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
-          commentsList.innerHTML = '';
-          comments.forEach(comment => {
-            addCommentToDisplay(comment, false);
-          });
-          updateCommentCount(comments.length + comments.reduce((a,c) => a + (c.replies ? c.replies.length : 0), 0));
+        }
+
+        const comments = Object.entries(commentsData).map(([id, data]) => ({ id, ...data }));
+        comments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        
+        let totalComments = 0;
+        comments.forEach(comment => {
+            totalComments++;
+            if (comment.replies) totalComments += Object.keys(comment.replies).length;
+            const commentElement = createCommentElement(comment);
+            commentsList.appendChild(commentElement);
         });
-      }
+        
+        updateCommentCountUI(totalComments);
+    }, { onlyOnce: false });
+}
 
-      // Display comments + replies
-      function addCommentToDisplay(comment, animate = true, isReply = false) {
-        const commentsList = document.getElementById('comments-list');
-        if (!commentsList) return;
-        // Remove empty state if exists
-        const emptyState = commentsList.querySelector('.comments-empty');
-        if (emptyState) emptyState.remove();
-
-        // Create comment element
-        const commentDiv = document.createElement('div');
-        commentDiv.className = `comment-item ${isReply ? 'comment-reply' : ''}`;
-        commentDiv.style.opacity = '0';
-        commentDiv.style.transform = 'translateY(20px)';
-        commentDiv.style.transition = 'all 0.5s ease';
-        commentDiv.setAttribute('data-comment-id', comment.id);
-
-        // Get author initial for avatar
-        const initial = comment.author ? comment.author.charAt(0).toUpperCase() : "?";
-        const timeAgo = formatTimeAgo(new Date(comment.timestamp));
-        // Owner mode
-        const canDelete = isOwnerMode();
-        let actionButtons = '';
-        if (!isReply) {
-          actionButtons += `<button class="reply-btn" onclick="showReplyForm('${comment.id}')"><i class="fas fa-reply"></i> Reply</button>`;
+function toggleOwnerMode() {
+    if (isOwnerMode()) {
+        localStorage.removeItem(OWNER_SESSION_KEY);
+        showNotification('Owner mode disabled', 'info');
+    } else {
+        const password = prompt('Enter owner password:');
+        if (password === OWNER_PASSWORD) {
+            localStorage.setItem(OWNER_SESSION_KEY, 'active');
+            showNotification('Owner mode enabled', 'success');
+        } else if (password !== null) {
+            showNotification('Incorrect password', 'error');
         }
-        if (canDelete) {
-          actionButtons += `<button class="delete-btn" onclick="confirmDeleteComment('${comment.id}')"><i class="fas fa-trash"></i> Delete</button>`;
-        }
-        commentDiv.innerHTML = `
-          <div class="comment-header">
-              <div class="comment-author">
-                  <div class="author-avatar">${initial}</div>
-                  <span class="author-name">${escapeHtml(comment.author)}</span>
-                  ${isOwnerMode() ? `<span class="owner-badge">Owner</span>` : ''}
-              </div>
-              <span class="comment-time">${timeAgo}</span>
-          </div>
-          <div class="comment-content">
-              ${escapeHtml(comment.content).replace(/\n/g, '<br>')}
-          </div>
-          <div class="comment-actions">
-              ${actionButtons}
-          </div>
-          <div class="reply-form-container" id="reply-form-${comment.id}" style="display: none;">
-              <form class="reply-form" onsubmit="handleReplySubmit(event, '${comment.id}')">
-                  <div class="form-group">
-                      <div class="name-toggle">
-                          <label class="toggle-switch">
-                              <input type="checkbox" id="reply-anonymous-${comment.id}">
-                              <span class="slider"></span>
-                          </label>
-                          <span class="toggle-label">Reply anonymously</span>
-                      </div>
-                      <div class="name-input" id="reply-name-input-${comment.id}">
-                          <input type="text" id="reply-name-${comment.id}" placeholder="Your name (optional)">
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <textarea id="reply-text-${comment.id}" placeholder="Write your reply..." rows="3" required></textarea>
-                  </div>
-                  <div class="form-actions">
-                      <button type="button" class="cancel-btn" onclick="hideReplyForm('${comment.id}')">Cancel</button>
-                      <button type="submit" class="submit-btn">
-                          <i class="fas fa-paper-plane"></i> Post Reply
-                      </button>
-                  </div>
-              </form>
-          </div>
-        `;
-        // Render replies
-        if (comment.replies && comment.replies.length > 0) {
-          const repliesContainer = document.createElement('div');
-          repliesContainer.className = 'replies-container';
-          comment.replies.forEach((reply, i) => {
-            // Biar unique, tambahin ID gabungan
-            reply.id = comment.id + '_reply_' + i;
-            const replyElement = createReplyElement(reply);
-            repliesContainer.appendChild(replyElement);
-          });
-          commentDiv.appendChild(repliesContainer);
-        }
-        setTimeout(() => {
-          commentDiv.style.opacity = '1';
-          commentDiv.style.transform = 'translateY(0)';
-        }, 50);
-        commentsList.appendChild(commentDiv);
-        // Setup reply form toggle
-        setTimeout(() => {
-          const replyToggle = commentDiv.querySelector(`#reply-anonymous-${comment.id}`);
-          const replyNameInput = commentDiv.querySelector(`#reply-name-input-${comment.id}`);
-          if (replyToggle && replyNameInput) {
-            replyToggle.addEventListener('change', function() {
-              if (this.checked) replyNameInput.classList.add('hidden');
-              else replyNameInput.classList.remove('hidden');
-            });
-          }
-        }, 100);
-      }
+    }
+    listenToComments(getCurrentPage());
+}
 
-      function createReplyElement(reply) {
-        const replyDiv = document.createElement('div');
-        replyDiv.className = 'comment-item comment-reply';
-        replyDiv.style.opacity = '1';
-        replyDiv.style.transform = 'translateY(0)';
-        // Format
-        const initial = reply.author ? reply.author.charAt(0).toUpperCase() : "?";
-        const timeAgo = formatTimeAgo(new Date(reply.timestamp));
-        replyDiv.innerHTML = `
-          <div class="comment-header">
-              <div class="comment-author">
-                  <div class="author-avatar">${initial}</div>
-                  <span class="author-name">${escapeHtml(reply.author)}</span>
-              </div>
-              <span class="comment-time">${timeAgo}</span>
-          </div>
-          <div class="comment-content">
-              ${escapeHtml(reply.content).replace(/\n/g, '<br>')}
-          </div>
-        `;
-        return replyDiv;
-      }
+function initializeAppAndListeners() {
+    const page = getCurrentPage();
+    
+    listenToComments(page);
 
-      // Show/hide reply form
-      window.showReplyForm = function(commentId) {
-        const replyForm = document.getElementById(`reply-form-${commentId}`);
-        if (replyForm) {
-          replyForm.style.display = 'block';
-          const textarea = replyForm.querySelector('textarea');
-          if (textarea) textarea.focus();
-        }
-      };
-      window.hideReplyForm = function(commentId) {
-        const replyForm = document.getElementById(`reply-form-${commentId}`);
-        if (replyForm) {
-          replyForm.style.display = 'none';
-          const form = replyForm.querySelector('form');
-          if (form) form.reset();
-        }
-      };
-
-      // Empty state
-      function showEmptyState() {
-        const commentsList = document.getElementById('comments-list');
-        if (!commentsList) return;
-        commentsList.innerHTML = `
-          <div class="comments-empty">
-            <i class="fas fa-comments"></i>
-            <h4>No comments yet</h4>
-            <p>Be the first to share your thoughts on this topic!</p>
-          </div>
-        `;
-      }
-
-      // Update comment count
-      function updateCommentCount(count) {
-        const countElement = document.getElementById('total-comments');
-        if (countElement) countElement.textContent = count;
-      }
-
-      // Toggle comments section (optional, dari HTML logic kamu)
-      window.toggleComments = function() {
-        const commentsSection = document.getElementById('comments-section');
-        const toggleBtn = document.querySelector('.comment-toggle-btn');
-        if (commentsSection.classList.contains('active')) {
-          commentsSection.classList.remove('active');
-          toggleBtn.innerHTML = `
-            <i class="fas fa-comments"></i>
-            <span>Comments</span>
-            <span class="comment-count" id="total-comments"></span>
-          `;
-        } else {
-          commentsSection.classList.add('active');
-          toggleBtn.innerHTML = `
-            <i class="fas fa-times"></i>
-            <span>Hide Comments</span>
-            <span class="comment-count" id="total-comments"></span>
-          `;
-          setTimeout(() => { commentsSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
-        }
-      };
-
+    document.getElementById('comment-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        submitComment(page);
     });
-  });
-})();
+
+    document.getElementById('anonymous-toggle')?.addEventListener('change', function() {
+        document.getElementById('name-input')?.classList.toggle('hidden', this.checked);
+    });
+
+    document.getElementById('comment-toggle-button')?.addEventListener('click', () => {
+        const commentsSection = document.getElementById('comments-section');
+        const toggleBtn = document.getElementById('comment-toggle-button');
+        commentsSection.classList.toggle('active');
+        if(commentsSection.classList.contains('active')) {
+            toggleBtn.innerHTML = `<i class="fas fa-times"></i> <span>Hide Comments</span> <span class="comment-count">0</span>`;
+            setTimeout(() => commentsSection.scrollIntoView({ behavior: 'smooth' }), 300);
+        } else {
+            toggleBtn.innerHTML = `<i class="fas fa-comments"></i> <span>Comments</span> <span class="comment-count">0</span>`;
+        }
+        listenToComments(page);
+    });
+
+    document.getElementById('comments-list')?.addEventListener('click', (e) => {
+        const button = e.target.closest('button');
+        if (!button) return;
+
+        const action = button.dataset.action;
+        const commentId = button.dataset.commentId;
+
+        if (action === 'reply') showReplyForm(commentId);
+        if (action === 'cancel-reply') hideReplyForm(commentId);
+        if (action === 'delete') {
+            if (confirm('Are you sure you want to delete this comment?')) {
+                deleteComment(page, commentId);
+            }
+        }
+    });
+
+    document.getElementById('comments-list')?.addEventListener('submit', (e) => {
+        if (e.target.dataset.action === 'submit-reply') {
+            e.preventDefault();
+            const form = e.target;
+            const parentId = form.dataset.parentId;
+            const content = form.querySelector('.reply-text').value.trim();
+            if (!content) return showNotification('Please enter a reply', 'error');
+            const isAnonymous = form.querySelector('.reply-anonymous-toggle').checked;
+            const author = isAnonymous ? 'Anonymous' : (form.querySelector('.reply-name').value.trim() || 'Anonymous');
+            submitReply(page, parentId, { author, content, isAnonymous });
+            hideReplyForm(parentId);
+        }
+    });
+
+    document.getElementById('comments-list')?.addEventListener('change', (e) => {
+        if(e.target.classList.contains('reply-anonymous-toggle')) {
+            const form = e.target.closest('form');
+            form.querySelector('.name-input').classList.toggle('hidden', e.target.checked);
+        }
+    });
+
+    let keySequence = [];
+    const targetSequence = ['KeyO', 'KeyW', 'KeyN', 'KeyE', 'KeyR'];
+    document.addEventListener('keydown', (e) => {
+        keySequence.push(e.code);
+        keySequence = keySequence.slice(-5);
+        if(keySequence.join('') === targetSequence.join('')) {
+            toggleOwnerMode();
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', initializeAppAndListeners);
