@@ -18,8 +18,8 @@
     measurementId: "G-8608F7R3NE"
   };
 
-  loadScript("https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js", function() {
-    loadScript("https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js", function() {
+  loadScript("https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js", function() {
+    loadScript("https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js", function() {
       if (!window.firebase?.apps?.length) firebase.initializeApp(firebaseConfig);
       var db = firebase.database();
 
