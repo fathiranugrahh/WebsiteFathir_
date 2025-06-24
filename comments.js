@@ -116,11 +116,61 @@
 
       // Main comment system
       document.addEventListener('DOMContentLoaded', function() {
+        ensureCommentSectionStructure();
         setupHiddenOwnerMode();
         loadComments();
         setupCommentForm();
         setupAnonymousToggle();
       });
+
+      // Ensure required HTML structure exists for comments
+      function ensureCommentSectionStructure() {
+        let section = document.getElementById('comments-section');
+        if (!section) {
+          section = document.createElement('div');
+          section.id = 'comments-section';
+          section.className = 'comments-section';
+          // Insert before end of <body>
+          document.body.appendChild(section);
+        }
+        // Form container
+        let formContainer = section.querySelector('.comment-form-container');
+        if (!formContainer) {
+          formContainer = document.createElement('div');
+          formContainer.className = 'comment-form-container';
+          section.appendChild(formContainer);
+        }
+        // Comment form
+        if (!document.getElementById('comment-form')) {
+          formContainer.innerHTML = `
+            <form id="comment-form">
+              <div id="name-input">
+                <input type="text" id="commenter-name" placeholder="Your name (optional)">
+              </div>
+              <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
+              <div>
+                <label>
+                  <input type="checkbox" id="anonymous-toggle"> Comment anonymously
+                </label>
+              </div>
+              <button type="submit">Post Comment</button>
+            </form>
+          `;
+        }
+        // Comments list
+        if (!document.getElementById('comments-list')) {
+          const listDiv = document.createElement('div');
+          listDiv.id = 'comments-list';
+          section.appendChild(listDiv);
+        }
+        // Total comments count (optional)
+        if (!document.getElementById('total-comments')) {
+          const countSpan = document.createElement('span');
+          countSpan.id = 'total-comments';
+          countSpan.style.display = 'none';
+          section.appendChild(countSpan);
+        }
+      }
 
       function setupAnonymousToggle() {
         const anonymousToggle = document.getElementById('anonymous-toggle');
