@@ -444,7 +444,7 @@
 
         <!-- Topics Grid -->
         <div class="topics-grid">
-           <div class="topic-card" onclick="navigateToChess()">
+           <div class="topic-card" onclick="navigateToParadox()">
                 <div class="topic-header">
                     <div class="topic-icon">
                         <i class="fas fa-brain"></i>
@@ -475,18 +475,18 @@
                 </div>
             </div>
 
-            <div class="topic-card" onclick="alert('Coming Soon! Akan diisi jika ada topik yang menurut saya menarik.')">
+            <div class="topic-card" onclick="navigateToChess()">
                 <div class="topic-header">
                     <div class="topic-icon">
-                        <i class="fas fa-clock"></i>
+                        <i class="fas fa-chess"></i>
                     </div>
-                    <h3 class="topic-title">Coming Soon: Wild Take </h3>
+                    <h3 class="topic-title">Catur</h3>
                 </div>
-                <p class="topic-description">Slot untuk topik spontan yang akan muncul sewaktu-waktu. Akan diisi jika ada topik yang menurut saya menarik.</p>
+                <p class="topic-description">Chess pieces don't bleed, tapi real war does.64 kotak hitam-putih, deep dive tentang strategy, Magnus Carlsen, dan cost of violence.</p>
                 <div class="topic-tags">
-                    <span class="tag">Coming Soon</span>
-                    <span class="tag">Random Topic</span>
-                    <span class="tag">Spontaneous</span>
+                    <span class="tag">Chess Strategy</span>
+                    <span class="tag">Magnus Carlsen</span>
+                    <span class="tag">Strategic Thinking</span>
                 </div>
             </div>
 
@@ -549,11 +549,14 @@
     <script type="module" src="/comments.js"></script>
 
     <script>
-        function navigateToChess() {
+        function navigateToParadox() {
             window.location.href = '/paradox';
         }
         function navigateToWar() {
             window.location.href = '/war';
+        }
+        function navigateToChess() {
+            window.location.href = '/chess';
         }
     </script>
 </body>

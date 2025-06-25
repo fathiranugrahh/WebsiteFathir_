@@ -362,41 +362,40 @@
                         </article>
 
                         <!-- Comments Section -->
-                        <div class="comments-section" id="comments-section">
-                            <div class="comments-header">
-                                <h3><i class="fas fa-comments"></i> Discussion</h3>
-                                <p>Share your thoughts and engage with the content</p>
-                            </div>
-                            
-                            <!-- Comment Form -->
-                            <div class="comment-form-container">
-                                <form class="comment-form" id="comment-form">
-                                    <div class="form-group">
-                                        <div class="name-toggle">
-                                            <label class="toggle-switch">
-                                                <input type="checkbox" id="anonymous-toggle">
-                                                <span class="slider"></span>
-                                            </label>
-                                            <span class="toggle-label">Comment anonymously</span>
-                                        </div>
-                                        
-                                        <div class="name-input" id="name-input">
-                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
-                                    </div>
-                                    
-                                    <div class="form-actions">
-                                        <button type="submit" class="submit-btn">
-                                            <i class="fas fa-paper-plane"></i>
-                                            Post Comment
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+ <div class="comments-section" id="comments-section">
+    <div class="comments-header">
+        <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
+        <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan terlibat dalam konten">Share your thoughts and engage with the content</p>
+    </div>
+    
+    <div class="comment-form-container">
+        <form class="comment-form" id="comment-form">
+            <div class="form-group">
+                <div class="name-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="anonymous-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar secara anonim">Comment anonymously</span>
+                </div>
+                
+                <div class="name-input" id="name-input">
+                    <input type="text" id="commenter-name" placeholder="Your name (optional)" data-en-placeholder="Your name (optional)" data-id-placeholder="Nama Anda (opsional)">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights..." data-en-placeholder="Share your thoughts, questions, or insights..." data-id-placeholder="Bagikan pemikiran, pertanyaan, atau wawasan Anda..." rows="4" required></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
+                </button>
+            </div>
+        </form>
+    </div>
                             
                             <!-- Comments List -->
                             <div class="comments-list" id="comments-list">

@@ -26,6 +26,13 @@ function getCurrentPage() {
     const path = window.location.pathname;
     if (path.includes('artificial-intelligence')) return 'ai';
     if (path.includes('cryptocurrency')) return 'crypto';
+    if (path.includes('futures-tech-trends')) return 'futures-tech-trends';
+    if (path.includes('macroeconomy')) return 'macroeconomy';
+    if (path.includes('digitaleconomy')) return 'digitaleconomy';
+    if (path.includes('logical')) return 'logical';
+    // fallback: gunakan nama folder terakhir sebagai key unik
+    const match = path.match(/\/([^\/]+)\/?$/);
+    if (match) return match[1];
     return 'default';
 }
 

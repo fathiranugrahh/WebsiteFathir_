@@ -145,16 +145,16 @@
                         
                         <!-- Comment Toggle Button -->
                         <div class="comment-toggle-container">
-<button id="comment-toggle-button" class="comment-toggle-btn">
-    <i class="fas fa-comments"></i>
-    <span data-en="Comments" data-id="Komentar">Comments</span>
-    <span class="comment-count" id="total-comments">0</span>
-</button>
+                            <button class="comment-toggle-btn" onclick="toggleComments()">
+                                <i class="fas fa-comments"></i>
+                                <span data-en="Comments" data-id="Komentar">Comments</span>
+                                <span class="comment-count" id="total-comments">0</span>
+                            </button>
                         </div>
                     </aside>
 
                     <!-- Main Content Area -->
-                    <section class="topic-main-content">
+                    <main class="topic-main-content">
                      <!-- Introduction to AI Section -->
 <article id="intro" class="topic-article active">
     <h2 data-en="Introduction to AI" data-id="Pengenalan Kecerdasan Buatan">Introduction to AI</h2>
@@ -461,55 +461,61 @@
 </article>
 
                         <!-- Comments Section -->
-<div class="comments-section" id="comments-section">
-    <div class="comments-header">
-        <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
-        <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan terlibat dalam konten">Share your thoughts and engage with the content</p>
-    </div>
-    
-    <div class="comment-form-container">
-        <form class="comment-form" id="comment-form">
-            <div class="form-group">
-                <div class="name-toggle">
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="anonymous-toggle">
-                        <span class="slider"></span>
-                    </label>
-                    <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar secara anonim">Comment anonymously</span>
+                        <div class="comments-section" id="comments-section">
+                            <div class="comments-header">
+                                <h3><i class="fas fa-comments"></i> Discussion</h3>
+                                <p>Share your thoughts and engage with the content</p>
+                            </div>
+                            
+                            <!-- Comment Form -->
+                            <div class="comment-form-container">
+                                <form class="comment-form" id="comment-form">
+                                    <div class="form-group">
+                                        <div class="name-toggle">
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="anonymous-toggle">
+                                                <span class="slider"></span>
+                                            </label>
+                                            <span class="toggle-label">Comment anonymously</span>
+                                        </div>
+                                        
+                                        <div class="name-input" id="name-input">
+                                            <input type="text" id="commenter-name" placeholder="Your name (optional)">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="submit-btn">
+                                            <i class="fas fa-paper-plane"></i>
+                                            Post Comment
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <!-- Comments List -->
+                            <div class="comments-list" id="comments-list">
+                                <!-- Comments will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </main>
                 </div>
-                
-                <div class="name-input" id="name-input">
-                    <input type="text" id="commenter-name" placeholder="Your name (optional)" data-en-placeholder="Your name (optional)" data-id-placeholder="Nama Anda (opsional)">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights..." data-en-placeholder="Share your thoughts, questions, or insights..." data-id-placeholder="Bagikan pemikiran, pertanyaan, atau wawasan Anda..." rows="4" required></textarea>
-            </div>
-            
-            <div class="form-actions">
-                <button type="submit" class="submit-btn">
-                    <i class="fas fa-paper-plane"></i>
-                    <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
-                </button>
-            </div>
-        </form>
-    </div>
-    
-    <div class="comments-list" id="comments-list">
+            </section>
         </div>
-</div>
-</section> 
+    </div>
 
-            <footer>
-                 <p data-en="&copy; 2025 Fathir. All rights reserved." data-id="&copy; 2025 Fathir. Hak cipta dilindungi.">&copy; 2025 Fathir. All rights reserved.</p>
-            </footer>
-        </div>
-    </div>
+    <!-- Footer dipindah ke luar main-wrapper agar tidak terdorong flex/grid -->
+    <footer>
+         <p data-en="&copy; 2025 Fathir. All rights reserved." data-id="&copy; 2025 Fathir. Hak cipta dilindungi.">&copy; 2025 Fathir. All rights reserved.</p>
+    </footer>
 
     <script src="/script.js"></script>
     <script src="/topic-script.js"></script>
-    <script type="module" src="/comments.js"></script>
+    <script src="/comments.js"></script>
 
     <script>
         // Language Toggle Functionality
@@ -543,10 +549,7 @@
                 
                 // Update HTML lang attribute
                 document.documentElement.lang = currentLanguage;
-            
-                if (window.updateCommentsLanguage) {
-                window.updateCommentsLanguage();
-                }
+                
                 mainContent.classList.remove('content-switching');
             }, 200);
         }
