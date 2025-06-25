@@ -196,12 +196,12 @@
                         </nav>
                         
                         <!-- Comment Toggle Button -->
-                        <div class="comment-toggle-container">
-<button id="comment-toggle-button" class="comment-toggle-btn">
-    <i class="fas fa-comments"></i>
-    <span data-en="Comments" data-id="Komentar">Comments</span>
-    <span class="comment-count" id="total-comments">0</span>
-</button>
+                  <div class="comment-toggle-container">
+    <button id="comment-toggle-button" class="comment-toggle-btn">
+        <i class="fas fa-comments"></i>
+        <span data-en="Comments" data-id="Komentar">Comments</span>
+        <span class="comment-count" id="total-comments">0</span>
+    </button>
                         </div>
                     </aside>
 
@@ -642,34 +642,45 @@
 
 
                         
-                        <!-- Comments Section -->
-                        <div class="comments-section" id="comments-section">
-                            <div class="comments-header">
-                                <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
-                                <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan berinteraksi dengan konten">Share your thoughts and engage with the content</p>
-                            </div>
-                            <!-- Comment Form -->
-                            <div class="comment-form-container">
-                                <form id="comment-form">
-                                    <div id="name-input">
-                                        <input type="text" id="commenter-name" data-en="Your name (optional)" data-id="Nama Anda (opsional)" placeholder="Your name (optional)">
-                                    </div>
-                                    <textarea id="comment-text" data-en="Share your thoughts, questions, or insights about this topic..." data-id="Bagikan pemikiran, pertanyaan, atau wawasan Anda tentang topik ini..." placeholder="Share your thoughts, questions, or insights about this topic..." rows="4" required></textarea>
-                                    <div>
-                                        <label>
-                                            <input type="checkbox" id="anonymous-toggle"> <span data-en="Comment anonymously" data-id="Komentar anonim">Comment anonymously</span>
-                                        </label>
-                                    </div>
-                                    <button type="submit"><i class="fas fa-paper-plane"></i> <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span></button>
-                                </form>
-                            </div>
-                            <!-- Comments List -->
-                            <div id="comments-list"></div>
-                        </div>
-                    </main>
+     <div class="comments-section" id="comments-section">
+    <div class="comments-header">
+        <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
+        <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan terlibat dalam konten">Share your thoughts and engage with the content</p>
+    </div>
+    
+    <div class="comment-form-container">
+        <form class="comment-form" id="comment-form">
+            <div class="form-group">
+                <div class="name-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="anonymous-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar secara anonim">Comment anonymously</span>
                 </div>
-            </section>
-
+                
+                <div class="name-input" id="name-input">
+                    <input type="text" id="commenter-name" placeholder="Your name (optional)" data-en-placeholder="Your name (optional)" data-id-placeholder="Nama Anda (opsional)">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights..." data-en-placeholder="Share your thoughts, questions, or insights..." data-id-placeholder="Bagikan pemikiran, pertanyaan, atau wawasan Anda..." rows="4" required></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="comments-list" id="comments-list">
+        </div>
+</div>
+</section>
             <!-- Footer -->
             <footer>
                 <p data-en="&copy; 2025 Fathir. All rights reserved." data-id="&copy; 2025 Fathir. Hak cipta dilindungi.">&copy; 2025 Fathir. All rights reserved.</p>

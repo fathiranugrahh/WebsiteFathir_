@@ -154,7 +154,7 @@
                     </aside>
 
                     <!-- Main Content Area -->
-                    <main class="topic-main-content">
+                    <section class="topic-main-content">
                      <!-- Introduction to AI Section -->
 <article id="intro" class="topic-article active">
     <h2 data-en="Introduction to AI" data-id="Pengenalan Kecerdasan Buatan">Introduction to AI</h2>
@@ -461,34 +461,46 @@
 </article>
 
                         <!-- Comments Section -->
-                        <div class="comments-section" id="comments-section">
-                            <div class="comments-header">
-                                <h3><i class="fas fa-comments"></i> Discussion</h3>
-                                <p>Share your thoughts and engage with the content</p>
-                            </div>
-                            <!-- Comment Form -->
-                            <div class="comment-form-container">
-                                <form id="comment-form">
-                                    <div id="name-input">
-                                        <input type="text" id="commenter-name" placeholder="Your name (optional)">
-                                    </div>
-                                    <textarea id="comment-text" placeholder="Write your comment..." required></textarea>
-                                    <div>
-                                        <label>
-                                            <input type="checkbox" id="anonymous-toggle"> Comment anonymously
-                                        </label>
-                                    </div>
-                                    <button type="submit">Post Comment</button>
-                                </form>
-                            </div>
-                            <!-- Comments List -->
-                            <div id="comments-list"></div>
-                        </div>
-                    </main>
+<div class="comments-section" id="comments-section">
+    <div class="comments-header">
+        <h3><i class="fas fa-comments"></i> <span data-en="Discussion" data-id="Diskusi">Discussion</span></h3>
+        <p data-en="Share your thoughts and engage with the content" data-id="Bagikan pemikiran Anda dan terlibat dalam konten">Share your thoughts and engage with the content</p>
+    </div>
+    
+    <div class="comment-form-container">
+        <form class="comment-form" id="comment-form">
+            <div class="form-group">
+                <div class="name-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="anonymous-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label" data-en="Comment anonymously" data-id="Komentar secara anonim">Comment anonymously</span>
                 </div>
-            </section>
+                
+                <div class="name-input" id="name-input">
+                    <input type="text" id="commenter-name" placeholder="Your name (optional)" data-en-placeholder="Your name (optional)" data-id-placeholder="Nama Anda (opsional)">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="comment-text" placeholder="Share your thoughts, questions, or insights..." data-en-placeholder="Share your thoughts, questions, or insights..." data-id-placeholder="Bagikan pemikiran, pertanyaan, atau wawasan Anda..." rows="4" required></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-en="Post Comment" data-id="Kirim Komentar">Post Comment</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="comments-list" id="comments-list">
+        </div>
+</div>
+</section> 
 
-            <!-- Footer -->
             <footer>
                  <p data-en="&copy; 2025 Fathir. All rights reserved." data-id="&copy; 2025 Fathir. Hak cipta dilindungi.">&copy; 2025 Fathir. All rights reserved.</p>
             </footer>
@@ -531,7 +543,10 @@
                 
                 // Update HTML lang attribute
                 document.documentElement.lang = currentLanguage;
-                
+            
+                if (window.updateCommentsLanguage) {
+                window.updateCommentsLanguage();
+                }
                 mainContent.classList.remove('content-switching');
             }, 200);
         }

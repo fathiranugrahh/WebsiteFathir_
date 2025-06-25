@@ -1,6 +1,9 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
-import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+// comments.js (Versi Perbaikan)
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+import { getDatabase, ref, push, onValue, remove, query, orderByChild } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+
+// Konfigurasi Firebase Anda (tetap sama)
 const firebaseConfig = {
     apiKey: "AIzaSyDtGt8JxlkWUkJwY0mmFfS-09G-lRGX4_A",
     authDomain: "diskusi-5a10e.firebaseapp.com",
@@ -18,6 +21,7 @@ const db = getDatabase(app);
 const OWNER_PASSWORD = 'admin123';
 const OWNER_SESSION_KEY = 'comments_owner_session';
 
+// --- Fungsi Helper (Tidak ada perubahan signifikan di sini, tetap sama) ---
 function getCurrentPage() {
     const path = window.location.pathname;
     if (path.includes('artificial-intelligence')) return 'ai';
@@ -30,14 +34,18 @@ function generateCommentId() {
 }
 
 function createUserSession() {
-    const session = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    localStorage.setItem('user_session', session);
+    let session = localStorage.getItem('user_session');
+    if (!session) {
+        session = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('user_session', session);
+    }
     return session;
 }
 
 function generateAuthorId(name, isAnonymous) {
     if (isAnonymous) return 'anon_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
-    return btoa(name + '_' + navigator.userAgent + '_' + (localStorage.getItem('user_session') || createUserSession()));
+    // Menggunakan btoa untuk obfuscation sederhana, bukan keamanan
+    return btoa(name.trim().toLowerCase() + '_' + (localStorage.getItem('user_session') || createUserSession()));
 }
 
 function isOwnerMode() {
@@ -46,21 +54,25 @@ function isOwnerMode() {
 
 function isCommentOwner(comment) {
     if (isOwnerMode()) return true;
-    const currentAuthorId = generateAuthorId(comment.author, comment.isAnonymous);
+    const commenterNameInput = document.getElementById('commenter-name');
+    const name = commenterNameInput ? commenterNameInput.value : '';
+    const currentAuthorId = generateAuthorId(name, comment.isAnonymous);
     return comment.authorId === currentAuthorId;
 }
 
 function formatTimeAgo(date) {
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
-    if (diffInSeconds < 60) return 'Just now';
-    const minutes = Math.floor(diffInSeconds / 60);
-    if (diffInSeconds < 3600) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
-    const hours = Math.floor(diffInSeconds / 3600);
-    if (diffInSeconds < 86400) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
-    const days = Math.floor(diffInSeconds / 86400);
-    if (diffInSeconds < 604800) return `${days} day${days > 1 ? 's' : ''} ago`;
-    return date.toLocaleDateString();
+
+    const lang = document.documentElement.lang || 'en';
+    const rtf = new Intl.RelativeTimeFormat(lang, { numeric: 'auto' });
+
+    if (diffInSeconds < 60) return rtf.format(-diffInSeconds, 'second');
+    if (diffInSeconds < 3600) return rtf.format(-Math.floor(diffInSeconds / 60), 'minute');
+    if (diffInSeconds < 86400) return rtf.format(-Math.floor(diffInSeconds / 3600), 'hour');
+    if (diffInSeconds < 2592000) return rtf.format(-Math.floor(diffInSeconds / 86400), 'day');
+    if (diffInSeconds < 31536000) return rtf.format(-Math.floor(diffInSeconds / 2592000), 'month');
+    return rtf.format(-Math.floor(diffInSeconds / 31536000), 'year');
 }
 
 function escapeHtml(text) {
@@ -75,7 +87,7 @@ function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i> <span>${message}</span>`;
-    notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${type === 'success' ? 'linear-gradient(135deg, #4cc9f0, #7209b7)' : type === 'error' ? 'linear-gradient(135deg, #ff4757, #c44569)' : 'linear-gradient(135deg, #5f6368, #3c4043)'}; color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1000; transform: translateX(120%); transition: transform 0.3s ease; font-size: 0.95rem; font-weight: 500; max-width: 300px;`;
+    notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${type === 'success' ? 'linear-gradient(135deg, #4cc9f0, #7209b7)' : type === 'error' ? 'linear-gradient(135deg, #ff4757, #c44569)' : 'linear-gradient(135deg, #5f6368, #3c4043)'}; color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 1001; transform: translateX(120%); transition: transform 0.3s ease; font-size: 0.95rem; font-weight: 500; max-width: 300px;`;
     document.body.appendChild(notification);
     setTimeout(() => { notification.style.transform = 'translateX(0)'; }, 100);
     setTimeout(() => {
@@ -84,16 +96,105 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
+// --- Fungsi UI (Beberapa perubahan di sini) ---
 function showEmptyState() {
     const commentsList = document.getElementById('comments-list');
-    if (commentsList) commentsList.innerHTML = `<div class="comments-empty"><i class="fas fa-comments"></i><h4>No comments yet</h4><p>Be the first to share your thoughts!</p></div>`;
+    const lang = document.documentElement.lang || 'en';
+    const emptyText = {
+        en: { title: 'No comments yet', subtitle: 'Be the first to share your thoughts!' },
+        id: { title: 'Belum ada komentar', subtitle: 'Jadilah yang pertama membagikan pemikiran Anda!' }
+    };
+    if (commentsList) commentsList.innerHTML = `<div class="comments-empty"><i class="fas fa-comments"></i><h4>${emptyText[lang].title}</h4><p>${emptyText[lang].subtitle}</p></div>`;
 }
 
 function updateCommentCountUI(count) {
     document.querySelectorAll('.comment-count').forEach(el => el.textContent = count);
 }
 
+function createCommentElement(comment, isReply = false) {
+    const commentDiv = document.createElement('div');
+    commentDiv.className = `comment-item ${isReply ? 'comment-reply' : ''}`;
+    commentDiv.setAttribute('data-comment-id', comment.id);
+
+    const initial = comment.author.charAt(0).toUpperCase();
+    const timeAgo = formatTimeAgo(new Date(comment.timestamp));
+    const canDelete = isCommentOwner(comment);
+    
+    const lang = document.documentElement.lang || 'en';
+    const translations = {
+        reply: { en: 'Reply', id: 'Balas' },
+        delete: { en: 'Delete', id: 'Hapus' },
+        owner: { en: 'Owner', id: 'Pemilik' },
+        replyAnon: { en: 'Reply anonymously', id: 'Balas secara anonim' },
+        yourName: { en: 'Your name (optional)', id: 'Nama Anda (opsional)' },
+        writeReply: { en: 'Write your reply...', id: 'Tulis balasan Anda...' },
+        cancel: { en: 'Cancel', id: 'Batal' },
+        postReply: { en: 'Post Reply', id: 'Kirim Balasan' }
+    };
+
+    let actionButtons = '';
+    if (!isReply) {
+        actionButtons += `<button class="reply-btn" data-action="reply" data-comment-id="${comment.id}"><i class="fas fa-reply"></i> ${translations.reply[lang]}</button>`;
+    }
+    if (canDelete) {
+        actionButtons += `<button class="delete-btn" data-action="delete" data-comment-id="${comment.id}"><i class="fas fa-trash"></i> ${translations.delete[lang]}</button>`;
+    }
+    
+    // Create Reply Form dynamically with correct language
+    const replyFormHTML = `
+        <div class="reply-form-container" id="reply-form-${comment.id}" style="display: none;">
+            <form class="reply-form" data-action="submit-reply" data-parent-id="${comment.id}">
+                <div class="form-group">
+                    <div class="name-toggle">
+                        <label class="toggle-switch"><input type="checkbox" class="reply-anonymous-toggle"><span class="slider"></span></label>
+                        <span class="toggle-label">${translations.replyAnon[lang]}</span>
+                    </div>
+                    <div class="name-input hidden">
+                        <input type="text" class="reply-name" placeholder="${translations.yourName[lang]}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="reply-text" placeholder="${translations.writeReply[lang]}" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn" data-action="cancel-reply" data-comment-id="${comment.id}">${translations.cancel[lang]}</button>
+                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> ${translations.postReply[lang]}</button>
+                </div>
+            </form>
+        </div>
+    `;
+
+    commentDiv.innerHTML = `
+        <div class="comment-header">
+            <div class="comment-author">
+                <div class="author-avatar">${initial}</div>
+                <span class="author-name">${escapeHtml(comment.author)}</span>
+                ${isOwnerMode() && canDelete ? `<span class="owner-badge">${translations.owner[lang]}</span>` : ''}
+            </div>
+            <span class="comment-time">${timeAgo}</span>
+        </div>
+        <div class="comment-content">${escapeHtml(comment.content).replace(/\n/g, '<br>')}</div>
+        <div class="comment-actions">${actionButtons}</div>
+        ${!isReply ? replyFormHTML : ''}
+    `;
+
+    if (comment.replies && Object.keys(comment.replies).length > 0) {
+        const repliesContainer = document.createElement('div');
+        repliesContainer.className = 'replies-container';
+        // Menggunakan key sebagai id reply
+        const replies = Object.entries(comment.replies)
+            .map(([id, data]) => ({ id, ...data }))
+            .sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+
+        replies.forEach(reply => repliesContainer.appendChild(createCommentElement(reply, true)));
+        commentDiv.appendChild(repliesContainer);
+    }
+    return commentDiv;
+}
+
 function showReplyForm(commentId) {
+    // Sembunyikan semua form balasan lain terlebih dahulu
+    document.querySelectorAll('.reply-form-container').forEach(form => form.style.display = 'none');
     const replyForm = document.getElementById(`reply-form-${commentId}`);
     if (replyForm) {
         replyForm.style.display = 'block';
@@ -108,64 +209,15 @@ function hideReplyForm(commentId) {
         const form = replyForm.querySelector('form');
         if (form) {
             form.reset();
-            form.querySelector('.name-input')?.classList.add('hidden');
+            const nameInput = form.querySelector('.name-input');
+            if (nameInput) {
+                nameInput.classList.add('hidden');
+            }
         }
     }
 }
 
-function createCommentElement(comment, isReply = false) {
-    const commentDiv = document.createElement('div');
-    commentDiv.className = `comment-item ${isReply ? 'comment-reply' : ''}`;
-    commentDiv.setAttribute('data-comment-id', comment.id);
-
-    const initial = comment.author.charAt(0).toUpperCase();
-    const timeAgo = formatTimeAgo(new Date(comment.timestamp));
-    const canDelete = isCommentOwner(comment);
-
-    let actionButtons = '';
-    if (!isReply) {
-        actionButtons += `<button class="reply-btn" data-action="reply" data-comment-id="${comment.id}"><i class="fas fa-reply"></i> Reply</button>`;
-    }
-    if (canDelete) {
-        actionButtons += `<button class="delete-btn" data-action="delete" data-comment-id="${comment.id}"><i class="fas fa-trash"></i> Delete</button>`;
-    }
-
-    commentDiv.innerHTML = `
-        <div class="comment-header">
-            <div class="comment-author">
-                <div class="author-avatar">${initial}</div>
-                <span class="author-name">${escapeHtml(comment.author)}</span>
-                ${isOwnerMode() && canDelete ? `<span class="owner-badge">Owner</span>` : ''}
-            </div>
-            <span class="comment-time">${timeAgo}</span>
-        </div>
-        <div class="comment-content">${escapeHtml(comment.content).replace(/\n/g, '<br>')}</div>
-        <div class="comment-actions">${actionButtons}</div>
-        <div class="reply-form-container" id="reply-form-${comment.id}" style="display: none;">
-            <form class="reply-form" data-action="submit-reply" data-parent-id="${comment.id}">
-                <div class="form-group">
-                    <div class="name-toggle"><label class="toggle-switch"><input type="checkbox" class="reply-anonymous-toggle"><span class="slider"></span></label><span class="toggle-label">Reply anonymously</span></div>
-                    <div class="name-input hidden"><input type="text" class="reply-name" placeholder="Your name (optional)"></div>
-                </div>
-                <div class="form-group"><textarea class="reply-text" placeholder="Write your reply..." rows="3" required></textarea></div>
-                <div class="form-actions">
-                    <button type="button" class="cancel-btn" data-action="cancel-reply" data-comment-id="${comment.id}">Cancel</button>
-                    <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Post Reply</button>
-                </div>
-            </form>
-        </div>
-    `;
-
-    if (comment.replies && Object.keys(comment.replies).length > 0) {
-        const repliesContainer = document.createElement('div');
-        repliesContainer.className = 'replies-container';
-        const replies = Object.values(comment.replies).sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
-        replies.forEach(reply => repliesContainer.appendChild(createCommentElement(reply, true)));
-        commentDiv.appendChild(repliesContainer);
-    }
-    return commentDiv;
-}
-
+// --- Fungsi Database (Firebase) ---
 function submitComment(page) {
     const commenterName = document.getElementById('commenter-name').value.trim();
     const commentText = document.getElementById('comment-text').value.trim();
@@ -189,32 +241,44 @@ function submitComment(page) {
             document.getElementById('comment-form').reset();
             document.getElementById('name-input').classList.remove('hidden');
         })
-        .catch(error => showNotification('Failed to post comment.', 'error'));
+        .catch(error => showNotification(`Failed to post comment: ${error.message}`, 'error'));
 }
 
 function submitReply(page, parentId, replyData) {
-    const reply = {
-        id: generateCommentId(),
+    const replyRef = ref(db, `comments/${page}/${parentId}/replies`);
+    
+    // Gunakan push untuk mendapatkan ID unik dari Firebase
+    push(replyRef, {
         ...replyData,
         timestamp: new Date().toISOString(),
         authorId: generateAuthorId(replyData.author, replyData.isAnonymous),
         parentId: parentId
-    };
-
-    push(ref(db, `comments/${page}/${parentId}/replies`), reply)
-        .then(() => showNotification('Reply posted successfully!', 'success'))
-        .catch(error => showNotification('Failed to post reply.', 'error'));
+    })
+    .then(() => {
+        showNotification('Reply posted successfully!', 'success');
+        hideReplyForm(parentId);
+    })
+    .catch(error => showNotification(`Failed to post reply: ${error.message}`, 'error'));
 }
 
-function deleteComment(page, commentId) {
-    remove(ref(db, `comments/${page}/${commentId}`))
+function deleteComment(page, commentId, isReply = false, parentId = null) {
+    let commentRef;
+    if (isReply && parentId) {
+        commentRef = ref(db, `comments/${page}/${parentId}/replies/${commentId}`);
+    } else {
+        commentRef = ref(db, `comments/${page}/${commentId}`);
+    }
+
+    remove(commentRef)
         .then(() => showNotification('Comment deleted successfully!', 'success'))
-        .catch(error => showNotification('Failed to delete comment.', 'error'));
+        .catch(error => showNotification(`Failed to delete comment: ${error.message}`, 'error'));
 }
+
 
 function listenToComments(page) {
-    const commentsRef = ref(db, `comments/${page}`);
-    onValue(commentsRef, (snapshot) => {
+    const commentsQuery = query(ref(db, `comments/${page}`), orderByChild('timestamp'));
+    
+    onValue(commentsQuery, (snapshot) => {
         const commentsList = document.getElementById('comments-list');
         if (!commentsList) return;
 
@@ -227,13 +291,17 @@ function listenToComments(page) {
             return;
         }
 
+        // Ubah objek menjadi array dan tambahkan ID dari key
         const comments = Object.entries(commentsData).map(([id, data]) => ({ id, ...data }));
+        // Urutkan dari yang terbaru ke terlama
         comments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         
         let totalComments = 0;
         comments.forEach(comment => {
             totalComments++;
-            if (comment.replies) totalComments += Object.keys(comment.replies).length;
+            if (comment.replies) {
+                totalComments += Object.keys(comment.replies).length;
+            }
             const commentElement = createCommentElement(comment);
             commentsList.appendChild(commentElement);
         });
@@ -242,25 +310,10 @@ function listenToComments(page) {
     }, { onlyOnce: false });
 }
 
-function toggleOwnerMode() {
-    if (isOwnerMode()) {
-        localStorage.removeItem(OWNER_SESSION_KEY);
-        showNotification('Owner mode disabled', 'info');
-    } else {
-        const password = prompt('Enter owner password:');
-        if (password === OWNER_PASSWORD) {
-            localStorage.setItem(OWNER_SESSION_KEY, 'active');
-            showNotification('Owner mode enabled', 'success');
-        } else if (password !== null) {
-            showNotification('Incorrect password', 'error');
-        }
-    }
-    listenToComments(getCurrentPage());
-}
-
+// --- Inisialisasi Aplikasi ---
 function initializeAppAndListeners() {
+    createUserSession(); // Pastikan session user ada
     const page = getCurrentPage();
-    
     listenToComments(page);
 
     document.getElementById('comment-form')?.addEventListener('submit', (e) => {
@@ -274,15 +327,10 @@ function initializeAppAndListeners() {
 
     document.getElementById('comment-toggle-button')?.addEventListener('click', () => {
         const commentsSection = document.getElementById('comments-section');
-        const toggleBtn = document.getElementById('comment-toggle-button');
         commentsSection.classList.toggle('active');
-        if(commentsSection.classList.contains('active')) {
-            toggleBtn.innerHTML = `<i class="fas fa-times"></i> <span>Hide Comments</span> <span class="comment-count">0</span>`;
+        if (commentsSection.classList.contains('active')) {
             setTimeout(() => commentsSection.scrollIntoView({ behavior: 'smooth' }), 300);
-        } else {
-            toggleBtn.innerHTML = `<i class="fas fa-comments"></i> <span>Comments</span> <span class="comment-count">0</span>`;
         }
-        listenToComments(page);
     });
 
     document.getElementById('comments-list')?.addEventListener('click', (e) => {
@@ -295,8 +343,13 @@ function initializeAppAndListeners() {
         if (action === 'reply') showReplyForm(commentId);
         if (action === 'cancel-reply') hideReplyForm(commentId);
         if (action === 'delete') {
-            if (confirm('Are you sure you want to delete this comment?')) {
-                deleteComment(page, commentId);
+            const commentItem = button.closest('.comment-item');
+            const isReply = commentItem.classList.contains('comment-reply');
+            const parentItem = commentItem.closest('.replies-container')?.closest('.comment-item');
+            const parentId = parentItem ? parentItem.dataset.commentId : null;
+
+            if (confirm('Are you sure you want to delete this comment? This action cannot be undone.')) {
+                deleteComment(page, commentId, isReply, parentId);
             }
         }
     });
@@ -310,8 +363,8 @@ function initializeAppAndListeners() {
             if (!content) return showNotification('Please enter a reply', 'error');
             const isAnonymous = form.querySelector('.reply-anonymous-toggle').checked;
             const author = isAnonymous ? 'Anonymous' : (form.querySelector('.reply-name').value.trim() || 'Anonymous');
+            
             submitReply(page, parentId, { author, content, isAnonymous });
-            hideReplyForm(parentId);
         }
     });
 
@@ -321,16 +374,40 @@ function initializeAppAndListeners() {
             form.querySelector('.name-input').classList.toggle('hidden', e.target.checked);
         }
     });
-
-    let keySequence = [];
-    const targetSequence = ['KeyO', 'KeyW', 'KeyN', 'KeyE', 'KeyR'];
-    document.addEventListener('keydown', (e) => {
-        keySequence.push(e.code);
-        keySequence = keySequence.slice(-5);
-        if(keySequence.join('') === targetSequence.join('')) {
-            toggleOwnerMode();
-        }
-    });
 }
 
-document.addEventListener('DOMContentLoaded', initializeAppAndListeners);
+// **PERBAIKAN UTAMA**: Fungsi untuk menangani perubahan bahasa
+function updateCommentsLanguage() {
+    const lang = document.documentElement.lang || 'en';
+    
+    // Perbarui elemen statis di dalam comments-section
+    const staticElements = document.querySelectorAll('#comments-section [data-en], #comments-section [data-id]');
+    staticElements.forEach(element => {
+        const text = element.getAttribute(`data-${lang}`);
+        if (text) {
+            element.textContent = text;
+        }
+    });
+
+    // Perbarui placeholder
+    const placeholderElements = document.querySelectorAll('#comments-section [data-en-placeholder], #comments-section [data-id-placeholder]');
+    placeholderElements.forEach(element => {
+        const text = element.getAttribute(`data-${lang}-placeholder`);
+        if (text) {
+            element.placeholder = text;
+        }
+    });
+    
+    // Muat ulang daftar komentar untuk memperbarui teks dinamis (seperti 'Reply', 'Delete', 'time ago')
+    listenToComments(getCurrentPage());
+}
+
+// Menjadikan fungsi ini global agar bisa diakses dari script di HTML
+window.updateCommentsLanguage = updateCommentsLanguage;
+
+// **PERBAIKAN UTAMA**: Menghapus blok `innerHTML` yang merusak
+document.addEventListener('DOMContentLoaded', () => {
+    // Blok kode yang merusak struktur HTML telah dihapus dari sini.
+    // Sekarang kita hanya memanggil inisialisasi.
+    initializeAppAndListeners();
+});
